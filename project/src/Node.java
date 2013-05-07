@@ -1,13 +1,23 @@
 import java.util.LinkedList;
 
-/* Node class */
+/* Node class defining a single box */
 public class Node {
 
 	/* Class Constants defined here */
+	// number inside the box
 	private static int number;
+	// a list for the 3x3 boxes
 	private static LinkedList<Node> box;
+	// a list for the column
 	private static LinkedList<Node> column;
+	// a list for the row
 	private static LinkedList<Node> row;
+	
+	/* Constructor */
+	public Node (int aNumber) { 
+		
+		number = aNumber;
+	}
 	
 	/* Getters */
 	public int getNumber() {
