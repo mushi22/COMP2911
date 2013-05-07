@@ -3,52 +3,48 @@ import java.util.LinkedList;
 /* Node class */
 public class Node {
 
+   public Node (int number){
+      this.number = number;
+   }
+   
 	/* Class Constants defined here */
-	private static int number;
-	private static LinkedList<Node> box;
-	private static LinkedList<Node> column;
-	private static LinkedList<Node> row;
+	private int number;
+	private LinkedList<Edge> box;
+	private LinkedList<Edge> column;
+	private LinkedList<Edge> row;
 	
 	/* Getters */
 	public int getNumber() {
-		
 		return number;
 	}
 	
-	public LinkedList<Node> getRow() { 
-		
+	public LinkedList<Edge> getRow() { 
 		return row;
 	}
 	
-	public LinkedList<Node> getColumn() { 
-		
+	public LinkedList<Edge> getColumn() { 
 		return column;
 	}
 	
-	public LinkedList<Node> getBox() { 
-		
+	public LinkedList<Edge> getBox() { 
 		return box;
 	}
 		
 	/* Setters */
-	public static void setNumber(int number) {
-		
-		Node.number = number;
+	public void setNumber(int aNumber) {
+		number = aNumber;
 	}
 
-	public static void setBox(LinkedList<Node> box) {
-		
-		Node.box = box;
+	public void setBox(LinkedList<Edge> aBox) {
+		box = aBox;
 	}
 
-	public static void setColumn(LinkedList<Node> column) {
-		
-		Node.column = column;
+	public void setColumn(LinkedList<Edge> aColumn) {
+		column = aColumn;
 	}
 
-	public static void setRow(LinkedList<Node> row) {
-		
-		Node.row = row;
+	public void setRow(LinkedList<Edge> aRow) {
+		row = aRow;
 	}
 	
 }
