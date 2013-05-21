@@ -16,45 +16,77 @@ public class Node {
 	}
 	
 	/* Getters */
+	/**
+	 * Gets the number associated with the node
+	 * @return number in the box
+	 */
 	public int getNumber() {
 		
 		return number;
 	}
 	
+	/**
+	 * Gets the row associated with the node
+	 * @return the 8 numbers in the row of the intial box
+	 */
 	public LinkedList<Edge> getRow() { 
 		
 		return row;
 	}
 	
+	/**
+	 * Gets the column associated with the node
+	 * @return the 8 numbers in the column of the initial box
+	 */
 	public LinkedList<Edge> getColumn() { 
 		
 		return column;
 	}
 	
+	/**
+	 * Gets the box associated with the node
+	 * @return the 8 numbers surrounding the initial box
+	 */
 	public LinkedList<Edge> getBox() { 
 		
 		return box;
 	}
 		
 	/* Setters */
+	/**
+	 * Sets the number in the specific box 
+	 * @param aNumber
+	 */
 	public void setNumber(int aNumber) {
 		
 		number = aNumber;
 	}
 
-	public void setBox(LinkedList<Edge> aBox) {
+	/**	
+	 * Sets the numbers in the row for the specific box
+	 * @param aRow
+	 */
+	public void setRow(LinkedList<Edge> aRow) {
 		
-		box = aBox;
+		row = aRow;
 	}
-
+	
+	/**
+	 * Sets the numbers in the column for the specific box
+	 * @param aColumn
+	 */
 	public void setColumn(LinkedList<Edge> aColumn) {
 		
 		column = aColumn;
 	}
-
-	public void setRow(LinkedList<Edge> aRow) {
+	
+	/**
+	 * Sets numbers in the surrounding box for the specific box
+	 * @param aBox
+	 */
+	public void setBox(LinkedList<Edge> aBox) {
 		
-		row = aRow;
+		box = aBox;
 	}
 	
 }

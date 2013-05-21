@@ -13,7 +13,7 @@ public class Edge {
 		
 	}
 	
-	/* Methods */
+	/* Getters */
 	/**
 	 * Gets the start node of the edge
 	 * @return the start node
@@ -32,6 +32,7 @@ public class Edge {
 		return this.end;
 	}
 
+	/* Setters */
 	/**
 	 * Sets the start of the edge to the given start node
 	 * @param start
@@ -50,4 +51,5 @@ public class Edge {
 		this.end = end;
 	}
 	
+	/* Methods */
 }
