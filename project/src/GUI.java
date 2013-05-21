@@ -44,13 +44,13 @@ public class GUI {
 	 */
 	private static void initialise() { 
 		
-		// creates the boundaries of the window 
+		// creates the boundaries of the window (where the window appears x, and y, height of window, width of window)
 		frame.setBounds(0, 0, 1200, 600);
 		
 		// creates a new layout
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		
-		// sets layout of frame to be of gbl
+		// sets layout of frame to be of GridBagLayout
 		frame.setLayout(gridBagLayout);
 		
 		// create a "Original" label and position it correctly in the pane
