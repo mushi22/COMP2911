@@ -1,6 +1,8 @@
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -51,9 +53,9 @@ public class GUI {
 		// creates the boundaries of the window (where the window appears x, and y, height of window, width of window)
 		// frame.setBounds(0, 0, 1200, 600);
 		
-		//pane.setBounds(0, 0, 1200, 600);
+		pane.setBounds(0, 0, 1200, 600);
 		
-		pane.setSize(1200, 1200);
+		//pane.setSize(1200, 1000);
 		
 		// creates a new layout
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -64,7 +66,6 @@ public class GUI {
 		// create a "Original" label and position it correctly in the pane
 		JLabel original = new JLabel("Original");
 		GridBagConstraints gbc_originalLabel = new GridBagConstraints();
-		//gbc_originalLabel.anchor = GridBagConstraints.NORTHWEST;
 		gbc_originalLabel.gridx = 0;
 		gbc_originalLabel.gridy = 0;
 		gbc_originalLabel.ipadx = 600;
@@ -73,7 +74,6 @@ public class GUI {
 		// create a "Solved" label and position it correctly in the pane
 		JLabel solved = new JLabel("Solved");
 		GridBagConstraints gbc_solvedLabel = new GridBagConstraints();
-		//gbc_solvedLabel.anchor = GridBagConstraints.NORTH;
 		gbc_solvedLabel.gridx = 600;
 		gbc_solvedLabel.gridy = 0;
 		gbc_solvedLabel.ipadx = 600;
@@ -83,18 +83,23 @@ public class GUI {
 		// create a solve button and position it correctly in the pane
 		JButton solve = new JButton("Solve");
 		GridBagConstraints gbc_solveButton = new GridBagConstraints();
-		//gbc_solveButton.anchor = GridBagConstraints.SOUTH;
 		gbc_solveButton.gridx = 100;
-		gbc_solveButton.gridy = 300;
+		gbc_solveButton.gridy = 100;
 		pane.add(solve, gbc_solveButton);
-		
+	
 		// create an exit button and position it correctly in the pane
 		JButton exit = new JButton("Exit");
+		exit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt){ 
+				System.exit(0);
+			}
+		});
 		GridBagConstraints gbc_exitButton = new GridBagConstraints();
-		//gbc_exitButton.anchor = GridBagConstraints.SOUTH;
-		gbc_exitButton.gridx = 1100;
+		gbc_exitButton.gridx = 500;
 		gbc_exitButton.gridy = 100;
 		pane.add(exit, gbc_exitButton);
+		
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(pane);
