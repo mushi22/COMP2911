@@ -4,7 +4,7 @@ import java.util.Queue;
 
 public class Graph {
 	
-	/* Constants delcared here for clarity */
+	/* Constants declared here for clarity */
 	
 	/* Constructor */
 	public Graph () {

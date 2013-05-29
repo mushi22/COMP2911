@@ -89,10 +89,10 @@ public class GUI {
 	
 		// create an exit button and position it correctly in the pane
 		JButton exit = new JButton("Exit");
-		exit.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent evt){ 
-				System.exit(0);
+		exit.addMouseListener(new MouseAdapter() {			// exit button's functionality 
+			@Override				
+			public void mouseClicked(MouseEvent evt){		// on mouse click 
+				System.exit(0);								// system exit
 			}
 		});
 		GridBagConstraints gbc_exitButton = new GridBagConstraints();

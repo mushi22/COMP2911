@@ -1,20 +1,22 @@
 
 public class AdjacencyList {
 
+	/* Constants defined here for clarity */
 	private int vertnumb;
 	private int vertweight;
 	
-	
+	/* Constructor */
 	public AdjacencyList(int vn,int vw){
 		vertnumb = vn;
 		vertweight = vw;
 	}
 	
-	public int getvertnum(){
+	/* Methods */
+	public int getVertNum(){
 		return vertnumb;
 	}
 	
-	public void setvertnumb(int vn){
+	public void setVertNumb(int vn){
 		vertnumb = vn;
 	}
 	
