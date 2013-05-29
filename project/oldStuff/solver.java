@@ -1,5 +1,6 @@
-/* This class defines methods to solving the sudoku board */
-public class Solver {
+
+
+public class solver {
 
 	private Board solvedboard;
 	
@@ -7,7 +8,7 @@ public class Solver {
 	 * initliased board
 	 * @param solvedboard
 	 */
-	public Solver(Board solvedboard){
+	public solver(Board solvedboard){
 		this.solvedboard = solvedboard;
 	}
 	
@@ -32,12 +33,7 @@ public class Solver {
 		return true;
 	}
 	
-	/**
-	 * Guesses if a value is correct or not for an empty box 
-	 * @param row
-	 * @param column
-	 * @return
-	 */
+	
 	public boolean guessvalue(int row, int column){
 		int nColumn = (column + 1) % solvedboard.cubesize;
 		int nRow    = (nColumn == 0 ) ? row + 1 : row;

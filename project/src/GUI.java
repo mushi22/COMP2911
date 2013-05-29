@@ -79,7 +79,6 @@ public class GUI {
 		gbc_solvedLabel.ipadx = 600;
 		pane.add(solved, gbc_solvedLabel);
 
-		
 		// create a solve button and position it correctly in the pane
 		JButton solve = new JButton("Solve");
 		GridBagConstraints gbc_solveButton = new GridBagConstraints();
