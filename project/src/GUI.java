@@ -134,7 +134,7 @@ public class GUI {
 //			}
 //	}
 	
-	public static JPanel createLeft9x9() { 
+	public  JPanel createLeft9x9() { 
 		
 		JPanel inner = null;
 		JPanel outer =  new JPanel(new GridLayout(3,3));
@@ -149,7 +149,7 @@ public class GUI {
 			inner.setBorder(BorderFactory.createLineBorder(Color.black));
 			for(int j = 0; j <= 8; j++) {
 				int cellValue = 0;							// create an int 
-				cellValue = board[i][j];					// to store the board number
+				cellValue = board[3*(i / 3) + j/3][3*(i % 3) + j%3];					// to store the board number
 				Integer newInt = new Integer(cellValue);	// change the type to an Integer
 				String stringCellValue = newInt.toString();	// allowing us to convert it to a string
 				inner.add(new JTextField(stringCellValue));	// add the string value 
