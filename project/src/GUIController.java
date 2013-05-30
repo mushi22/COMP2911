@@ -2,7 +2,7 @@
 public class GUIController {
 
 	/* Constants defined here for clarity */
-	private static int board[][];
+	private int board[][];
 	
 	/* Constructor */
 	public GUIController() { 

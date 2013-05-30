@@ -19,22 +19,15 @@ import javax.swing.JTextField;
 public class GUI {
 
 	/* Constants defined here for clarity */
-	private static JFrame frame = new JFrame("Sudoku Solver"); 
-	private static Container pane = new Container();
-	private static Dimension frameSize = new Dimension(800, 500);
-	private static Insets gridInsets = new Insets(10, 10, 10, 10);
+	private JFrame frame = new JFrame("Sudoku Solver"); 
+	private Container pane = new Container();
+	private Dimension frameSize = new Dimension(800, 500);
+	private Insets gridInsets = new Insets(10, 10, 10, 10);
 	
 	
-	/**
-	 * Launches the application
-	 */
-	public static void main(String[] args) { 
+	/* Constructors */
+	public GUI() { 
 		
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() { 
-				initialise();
-			}
-		});
 	}
 	
 	/**
@@ -42,13 +35,15 @@ public class GUI {
 	 */
 	private static void initialise() { 
 		
-		frame.setSize(frameSize);
+		GUI gui = new GUI();
+		
+		gui.frame.setSize(gui.frameSize);
 		
 		// creates a new layout
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		
 		// sets layout of frame to be of GridBagLayout
-		pane.setLayout(gridBagLayout);
+		gui.pane.setLayout(gridBagLayout);
 		
 		// create a "Original" label and position it correctly in the pane
 		JLabel original = new JLabel("Original");
@@ -57,29 +52,29 @@ public class GUI {
 		gbc_originalLabel.gridy = 0;
 		gbc_originalLabel.fill = gbc_originalLabel.HORIZONTAL;
 //		gbc_originalLabel.
-		pane.add(original, gbc_originalLabel);
+		gui.pane.add(original, gbc_originalLabel);
 	
 		// create a 9x9 grid on the left panel under the Original label
 		GridBagConstraints gbc_leftNineByNine = new GridBagConstraints();
 		gbc_leftNineByNine.gridx = 0;
 		gbc_leftNineByNine.gridy = 1;
 		gbc_leftNineByNine.fill = GridBagConstraints.BOTH;
-		pane.add(createLeft9x9(), gbc_leftNineByNine);
+		gui.pane.add(gui.createLeft9x9(), gbc_leftNineByNine);
 		
 		// create a "Solved" label and position it correctly in the pane
 		JLabel solved = new JLabel("Solved");
 		GridBagConstraints gbc_solvedLabel = new GridBagConstraints();
 		gbc_solvedLabel.gridx = 600;
 		gbc_solvedLabel.gridy = 0;
-		gbc_solvedLabel.insets = gridInsets;
-		pane.add(solved, gbc_solvedLabel);
+		gbc_solvedLabel.insets = gui.gridInsets;
+		gui.pane.add(solved, gbc_solvedLabel);
 		
 		// create a 9x9 grid on the right panel under the Solved label
 		GridBagConstraints gbc_rightNineByNine = new GridBagConstraints();
 		gbc_rightNineByNine.gridx = 600;
 		gbc_rightNineByNine.gridy = 1;
 		gbc_rightNineByNine.fill = GridBagConstraints.BOTH;
-		pane.add(createRight9x9(), gbc_rightNineByNine);
+		gui.pane.add(gui.createRight9x9(), gbc_rightNineByNine);
 
 		// create a solve button and position it correctly in the pane
 		JButton solve = new JButton("Solve");
@@ -92,7 +87,7 @@ public class GUI {
 		GridBagConstraints gbc_solveButton = new GridBagConstraints();
 		gbc_solveButton.gridx = 400;
 		gbc_solveButton.gridy = 100;
-		pane.add(solve, gbc_solveButton);
+		gui.pane.add(solve, gbc_solveButton);
 	
 		// create an exit button and position it correctly in the pane
 		JButton exit = new JButton("Exit");
@@ -106,11 +101,11 @@ public class GUI {
 		gbc_exitButton.gridx = 400;
 		gbc_exitButton.gridy = 200;
 		gbc_exitButton.fill = GridBagConstraints.BOTH;
-		pane.add(exit, gbc_exitButton);
+		gui.pane.add(exit, gbc_exitButton);
 		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(pane);
-		frame.setVisible(true);
+		gui.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		gui.frame.add(gui.pane);
+		gui.frame.setVisible(true);
 
 	}
 	
@@ -168,7 +163,7 @@ public class GUI {
 		return outer;
 	}
 	
-	public static JPanel createRight9x9() { 
+	public JPanel createRight9x9() { 
 		
 		JPanel inner = null;
 		JPanel outer =  new JPanel(new GridLayout(3,3));
