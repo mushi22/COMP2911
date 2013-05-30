@@ -83,6 +83,12 @@ public class GUI {
 
 		// create a solve button and position it correctly in the pane
 		JButton solve = new JButton("Solve");
+		solve.addMouseListener(new MouseAdapter() {
+		   @Override
+		   public void mouseClicked(MouseEvent evt){
+		      
+		   }
+		});
 		GridBagConstraints gbc_solveButton = new GridBagConstraints();
 		gbc_solveButton.gridx = 400;
 		gbc_solveButton.gridy = 100;

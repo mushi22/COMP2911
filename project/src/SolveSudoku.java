@@ -5,4 +5,7 @@ public class SolveSudoku {
 	//		 if it doesn't work do it in the SudokuFileReader and i'll just rename the class
 	//		 daniel feel free to do some work
 	
+   
+   
+   
 }
