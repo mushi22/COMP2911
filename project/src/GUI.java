@@ -33,7 +33,7 @@ public class GUI {
 	/**
 	 * Initialise the elements of the frame 
 	 */
-	private static void initialise() { 
+	public void initialise() { 
 		
 		GUI gui = new GUI();
 		

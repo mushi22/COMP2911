@@ -9,6 +9,13 @@ public class GUIController {
 		
 	}
 	
+   public static void main(String[] args)
+   {
+      // TODO Auto-generated method stub
+      GUI g = new GUI();
+      g.initialise();
+   }
+	
 	/* Methods */
 	/**
 	 * Gets the read in numbers as a 2D array

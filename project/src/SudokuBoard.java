@@ -9,19 +9,9 @@ public class SudokuBoard {
 	
 	/* Constructor */
 	public SudokuBoard () { 
-		
 		// initialising the board
 		this.board = new int[8][8];
 		
-	}
-	
-	public void addValueToNewBoard (int valueToAdd) { 
-		
-		for (int i = 0; i < MAX_NUM_ROWS; i++) {
-			for (int j = 0; j < MAX_NUM_COLUMNS; j++) {
-				board[i][j] = valueToAdd;
-			}
-		}
 	}
 	
 	public void printBoard () {
@@ -33,5 +23,4 @@ public class SudokuBoard {
 			}
 		}
 	}
-	
 }
