@@ -63,8 +63,6 @@ public class GUI {
 		// creates a new layout
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		
-		//GridLayout gridLayout = new GridLayout(10, 10);
-		
 		// sets layout of frame to be of GridBagLayout
 		pane.setLayout(gridBagLayout);
 		
@@ -74,10 +72,12 @@ public class GUI {
 		gbc_originalLabel.gridx = 0;
 		gbc_originalLabel.gridy = 0;
 		gbc_originalLabel.fill = gbc_originalLabel.HORIZONTAL;
+//		gbc_originalLabel.
 		pane.add(original, gbc_originalLabel);
 	
+		// create a 9x9 grid on the left panel under the Original label
 		GridBagConstraints gbc_leftNineByNine = new GridBagConstraints();
-		gbc_leftNineByNine.gridx = 2;
+		gbc_leftNineByNine.gridx = 0;
 		gbc_leftNineByNine.gridy = 1;
 		gbc_leftNineByNine.fill = GridBagConstraints.BOTH;
 		pane.add(create9x9(), gbc_leftNineByNine);
@@ -90,17 +90,18 @@ public class GUI {
 		gbc_solvedLabel.insets = gridInsets;
 		pane.add(solved, gbc_solvedLabel);
 		
+		// create a 9x9 grid on the right panel under the Solved label
 		GridBagConstraints gbc_rightNineByNine = new GridBagConstraints();
-		gbc_rightNineByNine.gridx = 700;
+		gbc_rightNineByNine.gridx = 600;
 		gbc_rightNineByNine.gridy = 1;
-	//	gbc_rightNineByNine.fill = GridBagConstraints.BOTH;
+		gbc_rightNineByNine.fill = GridBagConstraints.BOTH;
 		pane.add(create9x9(), gbc_rightNineByNine);
 
 		// create a solve button and position it correctly in the pane
 		JButton solve = new JButton("Solve");
 		GridBagConstraints gbc_solveButton = new GridBagConstraints();
-		gbc_solveButton.gridx = 150;
-		gbc_solveButton.gridy = 500;
+		gbc_solveButton.gridx = 400;
+		gbc_solveButton.gridy = 100;
 		pane.add(solve, gbc_solveButton);
 	
 		// create an exit button and position it correctly in the pane
@@ -112,8 +113,8 @@ public class GUI {
 			}
 		});
 		GridBagConstraints gbc_exitButton = new GridBagConstraints();
-		gbc_exitButton.gridx = 500;
-		gbc_exitButton.gridy = 500;
+		gbc_exitButton.gridx = 400;
+		gbc_exitButton.gridy = 200;
 		gbc_exitButton.fill = GridBagConstraints.BOTH;
 		pane.add(exit, gbc_exitButton);
 		
