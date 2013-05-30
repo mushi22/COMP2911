@@ -6,6 +6,14 @@ public class SolveSudoku {
 	//		 daniel feel free to do some work
 	
    
-   
+   public int[][] recursiveBruteForceSolver(int[][] board)
+   {
+      
+      
+      
+      
+      
+      
+   }
    
 }
