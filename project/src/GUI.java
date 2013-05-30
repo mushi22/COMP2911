@@ -20,9 +20,9 @@ public class GUI {
 
 	/* Constants defined here for clarity */
 	private static JFrame frame = new JFrame("Sudoku Solver"); 
-	private static Container pane = new Container ();
-	private static Dimension frameSize = new Dimension (800, 500);
-	private static Insets gridInsets = new Insets (10, 10, 10, 10);
+	private static Container pane = new Container();
+	private static Dimension frameSize = new Dimension(800, 500);
+	private static Insets gridInsets = new Insets(10, 10, 10, 10);
 	
 	
 	/**
@@ -32,25 +32,9 @@ public class GUI {
 		
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() { 
-				//createAndShow();
 				initialise();
 			}
 		});
-	}
-
-	/**
-	 * Creates and show the window
-	 */
-	private static void createAndShow() { 
-		
-		// forces the application to close when the program is exited.
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//frame.add(pane);
-		
-		frame.pack();
-		// shows the window 
-		frame.setVisible(true);
-		
 	}
 	
 	/**
@@ -80,7 +64,7 @@ public class GUI {
 		gbc_leftNineByNine.gridx = 0;
 		gbc_leftNineByNine.gridy = 1;
 		gbc_leftNineByNine.fill = GridBagConstraints.BOTH;
-		pane.add(create9x9(), gbc_leftNineByNine);
+		pane.add(createLeft9x9(), gbc_leftNineByNine);
 		
 		// create a "Solved" label and position it correctly in the pane
 		JLabel solved = new JLabel("Solved");
@@ -95,7 +79,7 @@ public class GUI {
 		gbc_rightNineByNine.gridx = 600;
 		gbc_rightNineByNine.gridy = 1;
 		gbc_rightNineByNine.fill = GridBagConstraints.BOTH;
-		pane.add(create9x9(), gbc_rightNineByNine);
+		pane.add(createRight9x9(), gbc_rightNineByNine);
 
 		// create a solve button and position it correctly in the pane
 		JButton solve = new JButton("Solve");
@@ -124,15 +108,75 @@ public class GUI {
 
 	}
 	
-	public static JPanel create9x9() { 
+//	private static void reDoArray() { 
+//		
+//		GUIController guiController = new GUIController();
+//		int board[][] = guiController.getBoardArray();
+//		int topLeft[][] = new int[3][3];
+//		int reShuffled[][] = new int[9][9];
+//		
+//		for (int i = 0; i < 3; i++) {
+//			for (int j = 0; j < 3; j++) {
+//				topLeft[i][j] = board[i][j];
+//			}
+//		}
+//		for (int i = 0; i < 1; i++) {
+//			
+//		}
+//		
+//		
+//			for (int i = 0; i < topLeft.length; i++) {
+//				for (int j = 0; j < topLeft[i].length; j++) {
+//					System.out.print(topLeft[i][j]);
+//					System.out.print(" ");
+//				}
+//				System.out.println("");
+//			}
+//	}
+	
+	public static JPanel createLeft9x9() { 
 		
 		JPanel inner = null;
 		JPanel outer =  new JPanel(new GridLayout(3,3));
-		for (int k =0; k<9; k++) {
+	//	JTextField[][] numbers = new JTextField[3][3];
+		Dimension dimSize = new Dimension (100, 100);
+		
+		GUIController guiController = new GUIController();
+		int board[][] = guiController.getBoardArray();
+		
+		for (int i = 0; i < 9; i++) {	
+			inner = new JPanel(new GridLayout(3, 3));
+			inner.setBorder(BorderFactory.createLineBorder(Color.black));
+			for(int j = 0; j <= 8; j++) {
+				int cellValue = 0;							// create an int 
+				cellValue = board[i][j];					// to store the board number
+				Integer newInt = new Integer(cellValue);	// change the type to an Integer
+				String stringCellValue = newInt.toString();	// allowing us to convert it to a string
+				inner.add(new JTextField(stringCellValue));	// add the string value 
+				inner.setPreferredSize(dimSize);			// set the size 
+			}
+			for(int k = 0; k <=8; k++) {		// add the 3x3 into the big pane
+				outer.add(inner);
+			}
+		}
+		return outer;
+	}
+	
+	public static JPanel createRight9x9() { 
+		
+		JPanel inner = null;
+		JPanel outer =  new JPanel(new GridLayout(3,3));
+		JTextField[][] numbers = new JTextField[9][9];
+		Dimension dimSize = new Dimension (100, 100);
+		
+		for (int k = 0; k < 9; k++) {
 			inner = new JPanel(new GridLayout(3,3));
 			inner.setBorder(BorderFactory.createLineBorder(Color.black));
-			for(int i =0; i <=8; i++){
-				inner.add(new JTextField(1));
+			for(int i = 0; i <= 8; i++){
+//				inner.add(new JTextField(1));
+				numbers[i][k] = new JTextField();
+				inner.add(numbers[i][k]);
+				inner.setPreferredSize(dimSize);
 			}
 			for(int i = 0; i <=8; i++){
 				outer.add(inner);
@@ -140,6 +184,4 @@ public class GUI {
 		}
 		return outer;
 	}
-	
-	
 }

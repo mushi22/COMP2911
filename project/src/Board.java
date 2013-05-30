@@ -7,7 +7,6 @@ public class Board {
 	
 	private int[][] board;
 	
-	
 	/**
 	 * Create empty board
 	 * @param sizeofboard
@@ -54,7 +53,7 @@ public class Board {
 	/**
 	 * Prints the board
 	 */
-	public void printBoard () {
+	public void printBoard() {
 		
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board[i].length; j++) {
@@ -64,5 +63,4 @@ public class Board {
 			System.out.println("");
 		}
 	}
-	
 }

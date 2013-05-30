@@ -25,7 +25,7 @@ public class SudokuFileReader {
 	private static final int MAX_NUM_ROWS = 8;
 	
 	/* Main file to scan in file and parse numbers for each cell */
-	public static void main(String [] args) { 
+	public int[][] readInFile() { 
 		
 		Scanner sc = null;
 		board = new int[9][9];
@@ -43,7 +43,7 @@ public class SudokuFileReader {
 			}
 		} catch (FileNotFoundException e) {}
 		  catch (NoSuchElementException e) {}
-		Board newBoard = new Board(board);
-		newBoard.printBoard();
+		
+		return board;
 	}
 }
