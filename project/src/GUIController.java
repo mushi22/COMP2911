@@ -9,11 +9,10 @@ public class GUIController {
 	}
 	
 	/* Main */
-	public static void main (String[] args) { 
+	public static void main(String[] args) {
 		
-		GUI gui = new GUI();
-		gui.initialise();
-		
+		GUI g = new GUI();
+		g.initialise();
 	}
 	
 	/* Methods */

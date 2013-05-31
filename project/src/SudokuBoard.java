@@ -8,6 +8,7 @@ public class SudokuBoard {
 	private static final int MAX_NUM_ROWS = 8;
 	
 	/* Constructor */
+<<<<<<< HEAD
 	/*
 	 * This one creates a new board
 	 */
@@ -29,6 +30,15 @@ public class SudokuBoard {
 	 * Prints the sudoku board
 	 */
 	public void printBoard() {
+=======
+	public SudokuBoard () { 
+		// initialising the board
+		this.board = new int[8][8];
+		
+	}
+	
+	public void printBoard () {
+>>>>>>> 63e0989f94848d3b6767a2dc70973d86cdf2d323
 		
 		for (int i = 0; i < sBoard.length; i++) {
 			for (int j = 0; j < sBoard[i].length; j++) {
@@ -37,6 +47,7 @@ public class SudokuBoard {
 			}
 		}
 	}
+<<<<<<< HEAD
 	
 	public int[][] getBoard() { 
 		
@@ -44,4 +55,6 @@ public class SudokuBoard {
 	}
 	
 	
+=======
+>>>>>>> 63e0989f94848d3b6767a2dc70973d86cdf2d323
 }
