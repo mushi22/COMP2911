@@ -20,15 +20,15 @@ import java.util.Scanner;
 public class SudokuFileReader {
 	
 	/* Constants defined here for clarity */
-	private static int board[][];
-	private static final int MAX_NUM_COLUMNS = 8;
-	private static final int MAX_NUM_ROWS = 8;
+	private int board[][];
+	private final int MAX_NUM_COLUMNS = 9;
+	private final int MAX_NUM_ROWS = 9;
 	
 	/* Main file to scan in file and parse numbers for each cell */
-	public int[][] readInFile() { 
+	public SudokuBoard readInFile() { 
 		
 		Scanner sc = null;
-		board = new int[9][9];
+		board = new int[MAX_NUM_ROWS][MAX_NUM_COLUMNS];
 		int nextNumber = 0;
 		
 		try { 
@@ -44,6 +44,8 @@ public class SudokuFileReader {
 		} catch (FileNotFoundException e) {}
 		  catch (NoSuchElementException e) {}
 		
-		return board;
+		SudokuBoard sBoard = new SudokuBoard(board);
+		
+		return sBoard;
 	}
 }

@@ -33,7 +33,7 @@ public class GUI {
 	/**
 	 * Initialise the elements of the frame 
 	 */
-	private static void initialise() { 
+	public void initialise() { 
 		
 		GUI gui = new GUI();
 		
@@ -109,41 +109,14 @@ public class GUI {
 
 	}
 	
-//	private static void reDoArray() { 
-//		
-//		GUIController guiController = new GUIController();
-//		int board[][] = guiController.getBoardArray();
-//		int topLeft[][] = new int[3][3];
-//		int reShuffled[][] = new int[9][9];
-//		
-//		for (int i = 0; i < 3; i++) {
-//			for (int j = 0; j < 3; j++) {
-//				topLeft[i][j] = board[i][j];
-//			}
-//		}
-//		for (int i = 0; i < 1; i++) {
-//			
-//		}
-//		
-//		
-//			for (int i = 0; i < topLeft.length; i++) {
-//				for (int j = 0; j < topLeft[i].length; j++) {
-//					System.out.print(topLeft[i][j]);
-//					System.out.print(" ");
-//				}
-//				System.out.println("");
-//			}
-//	}
-	
-	public  JPanel createLeft9x9() { 
+	public JPanel createLeft9x9() { 
 		
 		JPanel inner = null;
 		JPanel outer =  new JPanel(new GridLayout(3,3));
-	//	JTextField[][] numbers = new JTextField[3][3];
 		Dimension dimSize = new Dimension (100, 100);
 		
 		GUIController guiController = new GUIController();
-		int board[][] = guiController.getBoardArray();
+		int[][] board = guiController.getBoardArray().getBoard();
 		
 		for (int i = 0; i < 9; i++) {	
 			inner = new JPanel(new GridLayout(3, 3));
