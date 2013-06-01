@@ -29,13 +29,14 @@ public class SudokuBoard {
 	 * Prints the sudoku board
 	 */
 	public void printBoard () {
-		
 		for (int i = 0; i < sBoard.length; i++) {
 			for (int j = 0; j < sBoard[i].length; j++) {
 				System.out.print(sBoard[i][j]);
-				System.out.println(" ");
+				System.out.print(" ");
 			}
+			System.out.print("\n");
 		}
+      System.out.print("\n");
 	}
 	
 	public int[][] getBoard() { 

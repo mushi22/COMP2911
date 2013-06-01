@@ -25,6 +25,7 @@ public class SolveSudoku {
                for (Integer k : getPossibilities(i, j))
                {
                   sBoard.setCellNum(k.intValue(), i, j);
+                  sBoard.printBoard();
                   sBoard = recursiveBruteForceSolver();
                   if (isComplete() && isLegalBoard()) {
                      return sBoard;
