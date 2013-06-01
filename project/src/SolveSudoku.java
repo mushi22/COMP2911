@@ -41,19 +41,21 @@ public class SolveSudoku {
       }
       for (Integer k : possibilities)
       {
-         System.out.print("1\n");
          sBoard.setCellNum(k.intValue(), i, j);
-         System.out.print("2\n");
          sBoard.printBoard();
          SudokuBoard temp = copy(sBoard);
-         System.out.print("3\n");
          temp = recursiveBruteForceSolver(temp);
-         System.out.print("4\n");
-         if (isValid(temp) && isComplete(temp)) {
-            System.out.print("5\n");
-            return temp;
+         if (isComplete(temp)) {
+            System.out.print("full board\n");
+            if (isValid(temp)) {
+               System.out.print("valid \n");
+               return temp;
+            }
+            System.out.print("not valid \n");
          }
-         System.out.print("not valid \n");
+         
+        
+
       } 
 
       return null;
@@ -307,8 +309,9 @@ public class SolveSudoku {
             if (sBoard == null) {
                return false;
             }*/
-            System.out.print(i + ", " + j + "\n");
+            System.out.print(i + "," + j + ":");
             System.out.print(sBoard.getBoard()[i][j]);
+            System.out.print("\n");
             if (sBoard.getBoard()[i][j] == 0) {
                return false;
             }
