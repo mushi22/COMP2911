@@ -60,14 +60,14 @@ public class SolveSudoku {
     * @param column
     * @return
     */
-   private boolean legalboard(int number, int row, int column){
+   private boolean isLegalBoard(int number, int row, int column){
 	   int boardrow = (row/SMALLBOX_SIZE) * SMALLBOX_SIZE;
 	   int boardcolumn = (row/SMALLBOX_SIZE) * SMALLBOX_SIZE;
 	   
 	   for (int  i = 0; i < 9; i++){
-		   if(sBoard.getcellnum(row, i)== number ||
-			  sBoard.getcellnum(i, column) == number ||
-			  sBoard.getcellnum(boardrow + (i % SMALLBOX_SIZE), boardcolumn + (i / SMALLBOX_SIZE) ) == number){
+		   if(sBoard.getCellNum(row, i)== number ||
+			  sBoard.getCellNum(i, column) == number ||
+			  sBoard.getCellNum(boardrow + (i % SMALLBOX_SIZE), boardcolumn + (i / SMALLBOX_SIZE) ) == number){
 			   return false;
 		   }
 			   
@@ -81,8 +81,9 @@ public class SolveSudoku {
       {
          for (int j = 0; j < 9; j++)
          {
-            if (board.getBoard()[i][j] == 0)
+            if (board.getBoard()[i][j] == 0) {
                return false;
+            }
          }
       }
       return true;

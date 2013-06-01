@@ -44,11 +44,11 @@ public class SudokuBoard {
 	}
 	/**
 	 */
-	public int getcellnum(int row, int column){
+	public int getCellNum(int row, int column){
 		return sBoard[row][column];
 	}
 	
-	public void changecellnum(int newnum, int row, int column){
+	public void setCellNum(int newnum, int row, int column){
 		sBoard[row][column] = newnum;
 	}
 }
