@@ -1,5 +1,12 @@
+import static org.junit.Assert.*;
+import org.junit.Test;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
 
 /* This class is where we solve the sudoku */
 public class SolveSudoku {
@@ -14,6 +21,31 @@ public class SolveSudoku {
 	
 	public SolveSudoku(){
 		//this.sBoard = sBoard;
+	   testIsValid();
+	}
+	
+	private void testIsValid(){
+	     
+      Scanner sc = null;
+      int[][] board = new int[9][9];
+      int nextNumber = 0;
+      
+      try { 
+         sc = new Scanner (new FileReader ("resources/input2"));
+         while (sc.hasNext()) { 
+            for (int row = 0; row < board.length; row++) {
+               for (int column = 0; column < board[row].length; column++) {
+                  nextNumber = sc.nextInt();
+                  board[row][column] = nextNumber;
+               }
+            }
+         }
+      } catch (FileNotFoundException e) {}
+        catch (NoSuchElementException e) {}
+      
+      SudokuBoard sBoard = new SudokuBoard(board);
+      assertTrue(isValid(sBoard));
+     
 	}
 	
 	public SudokuBoard recursiveBruteForceSolver(SudokuBoard sBoard) {
@@ -37,7 +69,6 @@ public class SolveSudoku {
       System.out.print("}\n");
       if (possibilities.size() == 0) {
          System.out.print("no possibilities\n");
-         return null;
       }
       for (Integer k : possibilities)
       {
@@ -95,6 +126,7 @@ public class SolveSudoku {
             numbers.remove(new Integer(sBoard.getBoard()[j][column]));
          }
       }
+      
       int subGridRow = row - (row % 3);
       int subGridColumn = column - (column % 3);
       
@@ -301,9 +333,9 @@ public class SolveSudoku {
       {
          for (int j = 0; j < 9; j++)
          {
-            System.out.print(i + "," + j + ":");
+            /*System.out.print(i + "," + j + ":");
             System.out.print(sBoard.getBoard()[i][j]);
-            System.out.print("\n");
+            System.out.print("\n");*/
             if (sBoard.getBoard()[i][j] == 0) {
                return false;
             }
