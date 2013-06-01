@@ -26,7 +26,7 @@ public class GUIController {
 		SudokuFileReader sudokuFileReader = new SudokuFileReader();
 		SudokuBoard board = new SudokuBoard();
 		board = sudokuFileReader.readInFile();
-		board.printBoard();
+		//board.printBoard();
 		return board;
 	}
 	

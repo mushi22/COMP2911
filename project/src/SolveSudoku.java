@@ -44,6 +44,7 @@ public class SolveSudoku {
         catch (NoSuchElementException e) {}
       
       SudokuBoard sBoard = new SudokuBoard(board);
+      sBoard.printBoard();
       assertTrue(isValid(sBoard));
      
 	}
@@ -143,25 +144,16 @@ public class SolveSudoku {
    }
    
    public static boolean isValid(SudokuBoard sBoard){
-	   
-	   
 	   for(int i = 0; i < 9; i ++){
-		   if(!isValidRow(sBoard, i, 9)){
-			   //row has repetitions
+		   if(!isValidRow(sBoard, i) || !isValidColumn(sBoard, i)){
+			   //row or column has repetitions
 			   return false;
 			   }
 	   }   
-	   for(int i = 0; i < 9; i++){
-		   if(!isValidColumn(sBoard, i, 9)){
-			   // columns has repetitions
-			   return false;
-		   }
-	   }   
-	   
 	   for(int i = 0; i < 9; i+=3){
 	      for(int j = 0; j < 9; j+=3){
 	        if(!isValidSubGrid(sBoard, i, j)){
-	            // columns has repetitions
+	            // subGrid has repetitions
 	            return false;
 	         }
 	      }
@@ -171,12 +163,12 @@ public class SolveSudoku {
    
    private static boolean isValidSubGrid(SudokuBoard sBoard, int row, int column){
       int subGridRow = row - (row % 3);
-      int subGridColumn = column- (column % 3);
+      int subGridColumn = column - (column % 3);
       for(int i = subGridRow; i < subGridRow + 3; i++){
          for(int j = subGridColumn; j < subGridColumn + 3; j++){
-            for(int k = subGridRow+1; k < subGridRow + 3; k++){
-               for(int l = subGridColumn+1; l < subGridColumn + 3; l++){
-                  if(sBoard.getBoard()[i][j] == sBoard.getBoard()[k][l]){
+            for(int k = subGridRow; k < subGridRow + 3; k++){
+               for(int l = subGridColumn; l < subGridColumn + 3; l++){
+                  if ((i!=k || j!=l) && sBoard.getBoard()[i][j] == sBoard.getBoard()[k][l]) {
                      return false;
                   }
                }
@@ -186,7 +178,7 @@ public class SolveSudoku {
       return true;
    }
    
-   private static boolean isValidColumn(SudokuBoard sBoard, int column, int height){
+   private static boolean isValidColumn(SudokuBoard sBoard, int column){
 	   for(int i = 0; i < 9; i++){
 		   for(int j = i + 1; j < 9; j++){
 			   if(sBoard.getBoard()[i][column] == sBoard.getBoard()[j][column]){
@@ -197,7 +189,7 @@ public class SolveSudoku {
 	   return true;
    }
    
-   private static boolean isValidRow(SudokuBoard sBoard, int row, int width){
+   private static boolean isValidRow(SudokuBoard sBoard, int row){
 	   for(int i = 0; i < 9; i++){
 		   for(int j = i + 1; j < 9; j++){
 			   if(sBoard.getBoard()[row][i] == sBoard.getBoard()[row][j]){
