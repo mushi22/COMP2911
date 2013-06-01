@@ -59,27 +59,27 @@ public class SolveSudoku {
       if (i == -1 || j == -1) {
          return sBoard;
       }
-      System.out.print("Modifying cell ("+ i+","+j+")\n");
+     // System.out.print("Modifying cell ("+ i+","+j+")\n");
       LinkedList<Integer> possibilities= getPossibilities(i, j, sBoard);
-      System.out.print("possible values:{");
+      //System.out.print("possible values:{");
       for (Integer k : possibilities)
       {
-         System.out.print(k.intValue());
-         System.out.print(" ");
+        // System.out.print(k.intValue());
+         //System.out.print(" ");
       }
-      System.out.print("}\n");
+     // System.out.print("}\n");
       if (possibilities.size() == 0) {
-         System.out.print("no possibilities\n");
+       //  System.out.print("no possibilities\n");
       }
       for (Integer k : possibilities)
       {
-         System.out.print("Trying:" + k.intValue()+ " for cell ("+ i+","+j+")\n");
+        // System.out.print("Trying:" + k.intValue()+ " for cell ("+ i+","+j+")\n");
          sBoard.setCellNum(k.intValue(), i, j);
          sBoard.printBoard();
          SudokuBoard temp = copy(sBoard);
          temp = recursiveBruteForceSolver(temp);
          if (temp == null) {
-            System.out.print("wrong branch\n");
+          //  System.out.print("wrong branch\n");
          } else {
             //if (isComplete(temp)) {
             //System.out.print("full board\n");

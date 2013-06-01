@@ -140,22 +140,31 @@ public class GUI {
 		
 		JPanel inner = null;
 		JPanel outer =  new JPanel(new GridLayout(3,3));
-		JTextField[][] numbers = new JTextField[9][9];
 		Dimension dimSize = new Dimension (100, 100);
-		
-		for (int k = 0; k < 9; k++) {
-			inner = new JPanel(new GridLayout(3,3));
+		SudokuFileReader sudokuFileReader = new SudokuFileReader();
+      SudokuBoard Board = new SudokuBoard();
+      Board = sudokuFileReader.readInFile();
+      SolveSudoku tester = new SolveSudoku();
+      Board = tester.recursiveBruteForceSolver(Board);
+		GUIController guiController = new GUIController();
+		int[][] board = guiController.getBoardArray().getBoard();
+		board = Board.getBoard();
+		for (int i = 0; i < 9; i++) {	
+			inner = new JPanel(new GridLayout(3, 3));
 			inner.setBorder(BorderFactory.createLineBorder(Color.black));
-			for(int i = 0; i <= 8; i++){
-//				inner.add(new JTextField(1));
-				numbers[i][k] = new JTextField();
-				inner.add(numbers[i][k]);
-				inner.setPreferredSize(dimSize);
+			for(int j = 0; j <= 8; j++) {
+				int cellValue = 0;							// create an int 
+				cellValue = board[3*(i / 3) + j/3][3*(i % 3) + j%3];					// to store the board number
+				Integer newInt = new Integer(cellValue);	// change the type to an Integer
+				String stringCellValue = newInt.toString();	// allowing us to convert it to a string
+				inner.add(new JTextField(stringCellValue));	// add the string value 
+				inner.setPreferredSize(dimSize);			// set the size 
 			}
-			for(int i = 0; i <=8; i++){
+			for(int k = 0; k <=8; k++) {		// add the 3x3 into the big pane
 				outer.add(inner);
 			}
 		}
 		return outer;
-	}
+		}
+		
 }

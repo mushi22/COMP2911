@@ -37,8 +37,8 @@ public class GUIController {
       board = sudokuFileReader.readInFile();
       SolveSudoku tester = new SolveSudoku();
       board = tester.recursiveBruteForceSolver(board);
-      System.out.print("solved\n");
-      board.printBoard();
+      //System.out.print("solved\n");
+      //board.printBoard();
    }
 
 
