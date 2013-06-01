@@ -16,7 +16,7 @@ public class SolveSudoku {
 		//this.sBoard = sBoard;
 	}
 	
-   public SudokuBoard recursiveBruteForceSolver(SudokuBoard sBoard) {
+	public SudokuBoard recursiveBruteForceSolver(SudokuBoard sBoard) {
       int i, j;
       int[] emptyCell = findEmptyCell(sBoard);
       i = emptyCell[0];
@@ -24,15 +24,31 @@ public class SolveSudoku {
       if (i == -1 || j == -1) {
          return sBoard;
       }
-      for (Integer k : getPossibilities(j, i, sBoard))
+      System.out.print("Modifying cell ("+ i+","+j+")\n");
+      LinkedList<Integer> possibilities= getPossibilities(i, j, sBoard);
+      System.out.print("possible values:{");
+      for (Integer k : possibilities)
       {
-         sBoard.setCellNum(k.intValue(), j, i);
+         System.out.print(k.intValue());
+         System.out.print(" ");
+      }
+      System.out.print("}\n");
+      if (possibilities.size() == 0) return sBoard;
+      for (Integer k : possibilities)
+      {
+         System.out.print("1\n");
+         sBoard.setCellNum(k.intValue(), i, j);
+         System.out.print("2\n");
          sBoard.printBoard();
          SudokuBoard temp = copy(sBoard);
+         System.out.print("3\n");
          temp = recursiveBruteForceSolver(temp);
+         System.out.print("4\n");
          if (isLegalBoard(temp) && isComplete(temp)) {
+            System.out.print("5\n");
             return temp;
          }
+         System.out.print("not valid \n");
       } 
 
       return null;
@@ -40,7 +56,6 @@ public class SolveSudoku {
    
    private int[] findEmptyCell(SudokuBoard sBoard)
    {
-      //int[] emptyCell = new int[2];
       int[] emptyCell = {-1, -1};
       for (int i = 0; i < 9; i++)
       {
@@ -62,7 +77,7 @@ public class SolveSudoku {
       {
          numbers.add(i);
       }
-      ListIterator<Integer> it = numbers.listIterator();
+      //ListIterator<Integer> it = numbers.listIterator();
       /*
       for (Integer i: numbers)
       {
@@ -74,16 +89,31 @@ public class SolveSudoku {
             }
          }
       }*/
-      if (it.hasNext()){
+      //while (it.hasNext()){
+         for (int j = 0; j < 9; j++)
+         {
+            //Integer temp = it.next();
+            //System.out.print(temp.intValue() + " " +sBoard.getBoard()[row][j]+" \n");
+            //if (sBoard.getBoard()[row][j] == temp.intValue()) {
+            if (numbers.contains(new Integer(sBoard.getBoard()[row][j]))) {
+               numbers.remove(new Integer(sBoard.getBoard()[row][j]));
+            }
+            if (numbers.contains(new Integer(sBoard.getBoard()[j][column]))) {
+               numbers.remove(new Integer(sBoard.getBoard()[j][column]));
+            }
+         }
+      //}
+      /*
+      while (it.hasNext()){
          for (int j = 0; j < 9; j++)
          {
             Integer temp = it.next();
-            if (sBoard.getBoard()[row][j] == temp.intValue() ||
-                sBoard.getBoard()[j][column] == temp.intValue()) {
+            System.out.print(temp.intValue() + " "+ sBoard.getBoard()[j][column] +" \n");
+            if (sBoard.getBoard()[j][column] == temp.intValue()) {
                numbers.remove(it);
             }
          }
-      }
+      }*/
          
       return numbers;
    }
