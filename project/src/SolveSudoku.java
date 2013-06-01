@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 /* This class is where we solve the sudoku */
 public class SolveSudoku {
 	
@@ -27,10 +29,29 @@ public class SolveSudoku {
       return null;
    }
 
-   private int[] getPossibilities(int row, int column)
+   private LinkedList<Integer> getPossibilities(int row, int column,SudokuBoard board)
    {
-      int[] numbers = {1,2,3,4,5,6,7,8,9};
-      
+      LinkedList<Integer> numbers = new LinkedList<Integer>();
+      numbers.add(1);
+      numbers.add(2);
+      numbers.add(3);
+      numbers.add(4);
+      numbers.add(5);
+      numbers.add(6);
+      numbers.add(7);
+      numbers.add(8);
+      numbers.add(9);
+      for (Integer i: numbers)
+      {
+         for (int j = 0; j < 9; j++)
+         {
+            if (board.getBoard()[row][j] == i.intValue() ||
+                board.getBoard()[j][column] == i.intValue()) {
+               numbers.remove(i);
+            }
+         }
+      }
+      return numbers;
    }
    /**
     * checks if board is legal and according to laws of Sudoku

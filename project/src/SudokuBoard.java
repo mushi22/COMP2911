@@ -4,8 +4,8 @@ public class SudokuBoard {
 
 	/* Constants defined here for clarity */
 	private int sBoard[][];		// this represents the 9x9 board
-	private static final int MAX_NUM_COLUMNS = 8;
-	private static final int MAX_NUM_ROWS = 8;
+	//private static final int MAX_NUM_COLUMNS = 8;
+	//private static final int MAX_NUM_ROWS = 8;
 
 	/* Constructor */
 	/*
