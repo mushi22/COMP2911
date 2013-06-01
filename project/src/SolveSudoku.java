@@ -18,14 +18,14 @@ public class SolveSudoku {
 	}
 	
    public SudokuBoard recursiveBruteForceSolver() {
-      for (int i = 0; i < sBoard.getBoard().length; i++)
+      for (int i = 0; i < 9; i++)
       {
-         for (int j = 0; i < sBoard.getBoard()[i].length; i++)
+         for (int j = 0; i < 9; i++)
          {
-            if (sBoard.getBoard()[i][j]==0) {
-               for (Integer k : getPossibilities(i, j))
+            if (sBoard.getBoard()[j][i]==0) {
+               for (Integer k : getPossibilities(j, i))
                {
-                  sBoard.setCellNum(k.intValue(), i, j);
+                  sBoard.setCellNum(k.intValue(), j, i);
                   sBoard.printBoard();
                   sBoard = recursiveBruteForceSolver();
                   if (isComplete() && isLegalBoard()) {
@@ -198,6 +198,12 @@ public class SolveSudoku {
       {
          for (int j = 0; j < 9; j++)
          {
+            /*
+            if (sBoard == null) {
+               return false;
+            }*/
+            System.out.print(i + ", " + j + "\n");
+            System.out.print(sBoard.getBoard()[i][j]);
             if (sBoard.getBoard()[i][j] == 0) {
                return false;
             }
