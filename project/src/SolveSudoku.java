@@ -21,7 +21,7 @@ public class SolveSudoku {
 	
 	public SolveSudoku(){
 		//this.sBoard = sBoard;
-	   testIsValid();
+	   //testIsValid();
 	}
 	
 	private void testIsValid(){
@@ -55,6 +55,7 @@ public class SolveSudoku {
       int[] emptyCell = findEmptyCell(sBoard);
       i = emptyCell[0];
       j = emptyCell[1];
+      
       if (i == -1 || j == -1) {
          return sBoard;
       }
@@ -80,14 +81,14 @@ public class SolveSudoku {
          if (temp == null) {
             System.out.print("wrong branch\n");
          } else {
-            if (isComplete(temp)) {
-               System.out.print("full board\n");
+            //if (isComplete(temp)) {
+               //System.out.print("full board\n");
                if (isValid(temp)) {
                   System.out.print("valid \n");
                   return temp;
                }
                System.out.print("not valid \n");
-            }
+            //}
          }
       } 
       return null;
@@ -150,16 +151,25 @@ public class SolveSudoku {
 			   return false;
 			   }
 	   }   
-	   for(int j = 0; j < 9; j++){
-		   if(!isValidColumn(sBoard, j, 9)){
+	   for(int i = 0; i < 9; i++){
+		   if(!isValidColumn(sBoard, i, 9)){
 			   // columns has repetitions
 			   return false;
 		   }
 	   }   
+	   
+	   for(int i = 0; i < 9; i+=3){
+	      for(int j = 0; j < 9; j+=3){
+	        if(!isValidSubGrid(sBoard, i, j)){
+	            // columns has repetitions
+	            return false;
+	         }
+	      }
+	   }
 	   return true;
    }
    
-   private static boolean isValidSubGrid(SudokuBoard sBoard, int column, int row){
+   private static boolean isValidSubGrid(SudokuBoard sBoard, int row, int column){
       int subGridRow = row - (row % 3);
       int subGridColumn = column- (column % 3);
       for(int i = subGridRow; i < subGridRow + 3; i++){
