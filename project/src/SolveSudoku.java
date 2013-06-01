@@ -50,45 +50,27 @@ public class SolveSudoku {
 	}
 	
 	public SudokuBoard recursiveBruteForceSolver(SudokuBoard sBoard) {
-	   System.out.print("-\n");
-      sBoard.printBoard();
       int i, j;
       int[] emptyCell = findEmptyCell(sBoard);
       i = emptyCell[0];
       j = emptyCell[1];
-      
       if (i == -1 || j == -1) {
          return sBoard;
       }
-     // System.out.print("Modifying cell ("+ i+","+j+")\n");
       LinkedList<Integer> possibilities= getPossibilities(i, j, sBoard);
-      //System.out.print("possible values:{");
       for (Integer k : possibilities)
       {
-        // System.out.print(k.intValue());
-         //System.out.print(" ");
-      }
-     // System.out.print("}\n");
-      if (possibilities.size() == 0) {
-       //  System.out.print("no possibilities\n");
-      }
-      for (Integer k : possibilities)
-      {
-        // System.out.print("Trying:" + k.intValue()+ " for cell ("+ i+","+j+")\n");
          sBoard.setCellNum(k.intValue(), i, j);
-         sBoard.printBoard();
          SudokuBoard temp = copy(sBoard);
          temp = recursiveBruteForceSolver(temp);
-         if (temp == null) {
-          //  System.out.print("wrong branch\n");
-         } else {
+         if (!(temp == null)) {
             //if (isComplete(temp)) {
-            //System.out.print("full board\n");
-            //if (isValid(temp)) {
-            //System.out.print("valid \n");
+               //System.out.print("full board\n");
+               //if (isValid(temp)) {
+                  //System.out.print("valid \n");
             return temp;
-            // }
-            //System.out.print("not valid \n");
+               // }
+               //System.out.print("not valid \n");
             //}
          }
       } 
@@ -139,7 +121,6 @@ public class SolveSudoku {
             }
          }
       }
-      
       return numbers;
    }
    
@@ -199,6 +180,37 @@ public class SolveSudoku {
 	   }
 	   return true;
    }
+   
+   
+   private static boolean isComplete(SudokuBoard sBoard)
+   {
+      for (int i = 0; i < 9; i++)
+      {
+         for (int j = 0; j < 9; j++)
+         {
+            /*System.out.print(i + "," + j + ":");
+            System.out.print(sBoard.getBoard()[i][j]);
+            System.out.print("\n");*/
+            if (sBoard.getBoard()[i][j] == 0) {
+               return false;
+            }
+         }
+      }
+      return true;
+   }
+   
+   private static SudokuBoard copy(SudokuBoard sBoard)
+   {
+      int[][] newGrid = new int[9][9];
+      for (int i = 0; i < 9; i++) {
+         for (int j = 0; j < 9; j++) {
+          newGrid[i][j] = sBoard.getBoard()[i][j];
+         }
+        }
+      SudokuBoard newBoard = new SudokuBoard(newGrid);
+      return newBoard;
+   }
+   
    
    /**
     * main function checks board is valid
@@ -328,34 +340,5 @@ public class SolveSudoku {
 //	   return true;
 //   }
    
-   
-   private boolean isComplete(SudokuBoard sBoard)
-   {
-      for (int i = 0; i < 9; i++)
-      {
-         for (int j = 0; j < 9; j++)
-         {
-            /*System.out.print(i + "," + j + ":");
-            System.out.print(sBoard.getBoard()[i][j]);
-            System.out.print("\n");*/
-            if (sBoard.getBoard()[i][j] == 0) {
-               return false;
-            }
-         }
-      }
-      return true;
-   }
-   
-   private SudokuBoard copy(SudokuBoard sBoard)
-   {
-      int[][] newGrid = new int[9][9];
-      for (int i = 0; i < 9; i++) {
-         for (int j = 0; j < 9; j++) {
-          newGrid[i][j] = sBoard.getBoard()[i][j];
-         }
-        }
-      SudokuBoard newBoard = new SudokuBoard(newGrid);
-      return newBoard;
-   }
-   
+
 }
