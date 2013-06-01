@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 /* This class is where we solve the sudoku */
 public class SolveSudoku {
@@ -44,6 +45,8 @@ public class SolveSudoku {
       {
          numbers.add(i);
       }
+      ListIterator<Integer> it = numbers.listIterator();
+      /*
       for (Integer i: numbers)
       {
          for (int j = 0; j < 9; j++)
@@ -53,7 +56,18 @@ public class SolveSudoku {
                numbers.remove(i);
             }
          }
+      }*/
+      if (it.hasNext()){
+         for (int j = 0; j < 9; j++)
+         {
+            Integer temp = it.next();
+            if (sBoard.getBoard()[row][j] == temp.intValue() ||
+                sBoard.getBoard()[j][column] == temp.intValue()) {
+               numbers.remove(it);
+            }
+         }
       }
+         
       return numbers;
    }
    
@@ -191,5 +205,7 @@ public class SolveSudoku {
       }
       return true;
    }
+   
+
    
 }

@@ -13,6 +13,7 @@ public class GUIController {
 		
 		GUI g = new GUI();
 		g.initialise();
+		testSolver();
 	}
 	
 	/* Methods */
@@ -28,5 +29,15 @@ public class GUIController {
 		board.printBoard();
 		return board;
 	}
+	
+   public static void testSolver()
+   {
+      SudokuFileReader sudokuFileReader = new SudokuFileReader();
+      SudokuBoard board = new SudokuBoard();
+      board = sudokuFileReader.readInFile();
+      SolveSudoku tester = new SolveSudoku(board);
+      tester.recursiveBruteForceSolver();
+   }
+
 
 }

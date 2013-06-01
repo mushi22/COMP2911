@@ -52,4 +52,6 @@ public class SudokuBoard {
 	public void setCellNum(int newnum, int row, int column){
 		sBoard[row][column] = newnum;
 	}
+	
+	
 }
