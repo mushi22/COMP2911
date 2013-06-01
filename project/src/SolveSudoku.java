@@ -174,8 +174,8 @@ public class SolveSudoku {
       int subGridColumn = column- (column % 3);
       for(int i = subGridRow; i < subGridRow + 3; i++){
          for(int j = subGridColumn; j < subGridColumn + 3; j++){
-            for(int k = subGridRow+1; i < subGridRow + 3; i++){
-               for(int l = subGridColumn+1; j < subGridColumn + 3; j++){
+            for(int k = subGridRow+1; k < subGridRow + 3; k++){
+               for(int l = subGridColumn+1; l < subGridColumn + 3; l++){
                   if(sBoard.getBoard()[i][j] == sBoard.getBoard()[k][l]){
                      return false;
                   }
