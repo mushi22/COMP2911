@@ -1,9 +1,7 @@
-import static org.junit.Assert.*;
-import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.LinkedList;
-import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
