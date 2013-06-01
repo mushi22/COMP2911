@@ -11,25 +11,26 @@ public class SolveSudoku {
 	boolean[] digits;
 
    
-	private SudokuBoard sBoard;
+	//private SudokuBoard sBoard;
 	
 	public SolveSudoku(SudokuBoard sBoard){
-		this.sBoard = sBoard;
+		//this.sBoard = sBoard;
 	}
 	
-   public SudokuBoard recursiveBruteForceSolver() {
+   public SudokuBoard recursiveBruteForceSolver(SudokuBoard sBoard) {
       for (int i = 0; i < 9; i++)
       {
          for (int j = 0; i < 9; i++)
          {
             if (sBoard.getBoard()[j][i]==0) {
-               for (Integer k : getPossibilities(j, i))
+               for (Integer k : getPossibilities(j, i, sBoard))
                {
                   sBoard.setCellNum(k.intValue(), j, i);
                   sBoard.printBoard();
-                  sBoard = recursiveBruteForceSolver();
-                  if (isComplete() && isLegalBoard()) {
-                     return sBoard;
+                  SudokuBoard temp = copy(sBoard);
+                  temp = recursiveBruteForceSolver(temp);
+                  if (isLegalBoard(temp) && isComplete(temp)) {
+                     return temp;
                   }
                } 
             }
@@ -38,7 +39,7 @@ public class SolveSudoku {
       return null;
    }
 
-   private LinkedList<Integer> getPossibilities(int row, int column)
+   private LinkedList<Integer> getPossibilities(int row, int column, SudokuBoard sBoard)
    {
       LinkedList<Integer> numbers = new LinkedList<Integer>();
       for (int i = 1; i < 10; i++) 
@@ -75,22 +76,22 @@ public class SolveSudoku {
     * main function checks board is valid
     * @return
     */
-   private boolean isLegalBoard(){
+   private boolean isLegalBoard(SudokuBoard sBoard){
       for(int i = 0; i <9; i++ ){
-    	  if(!rowValid(i)){
+    	  if(!rowValid(i, sBoard)){
     		  return false;
     	  }
       }
       
       for(int i = 0; i < 9; i++){
-    	  if(!columnValid(i)){
+    	  if(!columnValid(i, sBoard)){
     		  return false;
     	  }
       }
       
       for(int i =0; i < 9; i++){
     	  for(int j = 0; j < 9; j += 3){
-    		  if(!smallBoxValid(i, j)){
+    		  if(!smallBoxValid(i, j, sBoard)){
     			  return false;
     		  }
     	  }
@@ -103,10 +104,10 @@ public class SolveSudoku {
     * @param row
     * @return
     */
-   public boolean rowValid (int row){
+   public boolean rowValid (int row, SudokuBoard sBoard){
 	   resetnumbers();
 	   for( int k =0; k <9; k++){
-		   if(!numbersManager( sBoard.getBoard()[row][k])){
+		   if(!numbersManager(sBoard.getBoard()[row][k])){
 			   return false;
 		   }
 	   }
@@ -118,7 +119,7 @@ public class SolveSudoku {
     * @param column
     * @return
     */
-   public boolean columnValid(int column){
+   public boolean columnValid(int column, SudokuBoard sBoard){
 	   resetnumbers();
 	   for( int k =0; k <9; k++){
 		   if(!numbersManager( sBoard.getBoard()[column][k])){
@@ -134,7 +135,7 @@ public class SolveSudoku {
     * @param column
     * @return
     */
-   public boolean smallBoxValid(int row, int column){
+   public boolean smallBoxValid(int row, int column, SudokuBoard sBoard){
 	   resetnumbers();
 	   
 	   for(int k =0; k < 3;  k++){
@@ -192,7 +193,7 @@ public class SolveSudoku {
 //   }
    
    
-   private boolean isComplete()
+   private boolean isComplete(SudokuBoard sBoard)
    {
       for (int i = 0; i < 9; i++)
       {
@@ -212,6 +213,16 @@ public class SolveSudoku {
       return true;
    }
    
-
+   private SudokuBoard copy(SudokuBoard sBoard)
+   {
+      int[][] newGrid = new int[9][9];
+      for (int i = 0; i < 9; i++) {
+         for (int j = 0; j < 9; j++) {
+          newGrid[i][j] = sBoard.getBoard()[i][j];
+         }
+        }
+      SudokuBoard newBoard = new SudokuBoard(newGrid);
+      return newBoard;
+   }
    
 }
