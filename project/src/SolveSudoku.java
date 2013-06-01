@@ -121,20 +121,22 @@ public class SolveSudoku {
    
    //public static void Validate(final int [][] sudokuBoard)
    
-   public static void Valiate(SudokuBoard sBoard){
+   public static boolean Valiate(SudokuBoard sBoard){
 	   
 	   
 	   for(int i = 0; i < 9; i ++){
 		   if(!isValidRow(sBoard, i, 9)){
 			   //row has repitions
+			   return false;
 			   }
 	   }   
 	   for(int j = 0; j < 9; j++){
 		   if(!isValidColumn(sBoard, j, 9)){
 			   // columns has repitions
+			   return false;
 		   }
 	   }   
-	   
+	   return true;
    }
    
    private static boolean isValidColumn(SudokuBoard sBoard, int column, int height){
