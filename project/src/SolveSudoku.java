@@ -85,44 +85,26 @@ public class SolveSudoku {
       {
          numbers.add(i);
       }
-      //ListIterator<Integer> it = numbers.listIterator();
-      /*
-      for (Integer i: numbers)
+      for (int j = 0; j < 9; j++)
       {
-         for (int j = 0; j < 9; j++)
-         {
-            if (sBoard.getBoard()[row][j] == i.intValue() ||
-                sBoard.getBoard()[j][column] == i.intValue()) {
-               numbers.remove(i);
+         if (numbers.contains(new Integer(sBoard.getBoard()[row][j]))) {
+            numbers.remove(new Integer(sBoard.getBoard()[row][j]));
+         }
+         if (numbers.contains(new Integer(sBoard.getBoard()[j][column]))) {
+            numbers.remove(new Integer(sBoard.getBoard()[j][column]));
+         }
+      }
+      int subGridRow = row - (row % 3);
+      int subGridColumn = column- (column % 3);
+      
+      for(int i = subGridRow; i < subGridRow + 3; i++){
+         for(int j = subGridColumn; j < subGridColumn + 3; j++){
+            if (numbers.contains(new Integer(sBoard.getBoard()[i][j]))) {
+               numbers.remove(new Integer(sBoard.getBoard()[i][j]));
             }
          }
-      }*/
-      //while (it.hasNext()){
-         for (int j = 0; j < 9; j++)
-         {
-            //Integer temp = it.next();
-            //System.out.print(temp.intValue() + " " +sBoard.getBoard()[row][j]+" \n");
-            //if (sBoard.getBoard()[row][j] == temp.intValue()) {
-            if (numbers.contains(new Integer(sBoard.getBoard()[row][j]))) {
-               numbers.remove(new Integer(sBoard.getBoard()[row][j]));
-            }
-            if (numbers.contains(new Integer(sBoard.getBoard()[j][column]))) {
-               numbers.remove(new Integer(sBoard.getBoard()[j][column]));
-            }
-         }
-      //}
-      /*
-      while (it.hasNext()){
-         for (int j = 0; j < 9; j++)
-         {
-            Integer temp = it.next();
-            System.out.print(temp.intValue() + " "+ sBoard.getBoard()[j][column] +" \n");
-            if (sBoard.getBoard()[j][column] == temp.intValue()) {
-               numbers.remove(it);
-            }
-         }
-      }*/
-         
+      }
+      
       return numbers;
    }
    
@@ -134,13 +116,13 @@ public class SolveSudoku {
 	   
 	   for(int i = 0; i < 9; i ++){
 		   if(!isValidRow(sBoard, i, 9)){
-			   //row has repitions
+			   //row has repetitions
 			   return false;
 			   }
 	   }   
 	   for(int j = 0; j < 9; j++){
 		   if(!isValidColumn(sBoard, j, 9)){
-			   // columns has repitions
+			   // columns has repetitions
 			   return false;
 		   }
 	   }   
@@ -148,8 +130,8 @@ public class SolveSudoku {
    }
    
    private static boolean isValidSubGrid(SudokuBoard sBoard, int column, int row){
-      int subGridRow = row - row%3;
-      int subGridColumn = column- column%3;
+      int subGridRow = row - (row % 3);
+      int subGridColumn = column- (column % 3);
       for(int i = subGridRow; i < subGridRow + 3; i++){
          for(int j = subGridColumn; j < subGridColumn + 3; j++){
             for(int k = subGridRow+1; i < subGridRow + 3; i++){
@@ -159,7 +141,6 @@ public class SolveSudoku {
                   }
                }
             }
-         
          }
       }
       return true;
