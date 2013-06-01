@@ -32,7 +32,7 @@ public class SudokuFileReader {
 		int nextNumber = 0;
 		
 		try { 
-			sc = new Scanner (new FileReader ("resources/input1"));
+			sc = new Scanner (new FileReader ("resources/input4"));
 			while (sc.hasNext()) { 
 				for (int row = 0; row < board.length; row++) {
 					for (int column = 0; column < board[row].length; column++) {

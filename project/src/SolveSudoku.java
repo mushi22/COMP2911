@@ -82,12 +82,12 @@ public class SolveSudoku {
             System.out.print("wrong branch\n");
          } else {
             //if (isComplete(temp)) {
-               //System.out.print("full board\n");
-               if (isValid(temp)) {
-                  System.out.print("valid \n");
-                  return temp;
-               }
-               System.out.print("not valid \n");
+            //System.out.print("full board\n");
+            //if (isValid(temp)) {
+            //System.out.print("valid \n");
+            return temp;
+            // }
+            //System.out.print("not valid \n");
             //}
          }
       } 
