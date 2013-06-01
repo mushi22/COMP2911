@@ -44,7 +44,7 @@ public class SolveSudoku {
          System.out.print("3\n");
          temp = recursiveBruteForceSolver(temp);
          System.out.print("4\n");
-         if (isLegalBoard(temp) && isComplete(temp)) {
+         if (isValid(temp) && isComplete(temp)) {
             System.out.print("5\n");
             return temp;
          }
@@ -121,7 +121,7 @@ public class SolveSudoku {
    
    //public static void Validate(final int [][] sudokuBoard)
    
-   public static boolean Valiate(SudokuBoard sBoard){
+   public static boolean isValid(SudokuBoard sBoard){
 	   
 	   
 	   for(int i = 0; i < 9; i ++){
