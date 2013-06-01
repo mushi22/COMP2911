@@ -25,15 +25,22 @@ public class SolveSudoku {
       if (i == -1 || j == -1) {
          return sBoard;
       }
-      for (Integer k : getPossibilities(j, i, sBoard))
+      System.out.print("Modifying cell ("+ i+","+j+")\n");
+      for (Integer k : getPossibilities(i, j, sBoard))
       {
-         sBoard.setCellNum(k.intValue(), j, i);
+         System.out.print("1\n");
+         sBoard.setCellNum(k.intValue(), i, j);
+         System.out.print("2\n");
          sBoard.printBoard();
          SudokuBoard temp = copy(sBoard);
+         System.out.print("3\n");
          temp = recursiveBruteForceSolver(temp);
+         System.out.print("4\n");
          if (isLegalBoard(temp) && isComplete(temp)) {
+            System.out.print("5\n");
             return temp;
          }
+         System.out.print("not valid \n");
       } 
 
       return null;
@@ -41,15 +48,15 @@ public class SolveSudoku {
    
    private int[] findEmptyCell(SudokuBoard sBoard)
    {
-      //int[] emptyCell = new int[2];
       int[] emptyCell = {-1, -1};
-      for (int i = 0; i < 9; i++)
+      for (int j = 0; j < 9; j++)
       {
-         for (int j = 0; i < 9; i++)
+         for (int i = 0; i < 9; i++)
          {
-            if (sBoard.getBoard()[j][i]==0) {
+            if (sBoard.getBoard()[i][j]==0) {
                emptyCell[0] = i;
                emptyCell[1] = j;
+               return emptyCell;
             }
          }
       }
