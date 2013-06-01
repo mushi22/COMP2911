@@ -7,6 +7,8 @@ public class SolveSudoku {
 	//		 if it doesn't work do it in the SudokuFileReader and i'll just rename the class
 	//		 daniel feel free to do some work
    private static final int SMALLBOX_SIZE = 3;
+	boolean[] digits;
+
    
 	private SudokuBoard sBoard;
 	
@@ -54,10 +56,102 @@ public class SolveSudoku {
       return numbers;
    }
    
-   private boolean isLegalBoard()
-   {
+   /**
+    * main function checks board is valid
+    * @return
+    */
+   private boolean isLegalBoard(){
+      for(int i = 0; i <9; i++ ){
+    	  if(!rowValid(i)){
+    		  return false;
+    	  }
+      }
       
+      for(int i = 0; i < 9; i++){
+    	  if(!columnValid(i)){
+    		  return false;
+    	  }
+      }
+      
+      for(int i =0; i < 9; i++){
+    	  for(int j = 0; j < 9; j += 3){
+    		  if(!smallBoxValid(i, j)){
+    			  return false;
+    		  }
+    	  }
+      }
+      return true;
    }
+   
+   /**
+    * checks a row is valid
+    * @param row
+    * @return
+    */
+   public boolean rowValid (int row){
+	   resetnumbers();
+	   for( int k =0; k <9; k++){
+		   if(!numbersManager( sBoard.getBoard()[row][k])){
+			   return false;
+		   }
+	   }
+	   return true;
+   }
+   
+   /**
+    * checks a column is valid
+    * @param column
+    * @return
+    */
+   public boolean columnValid(int column){
+	   resetnumbers();
+	   for( int k =0; k <9; k++){
+		   if(!numbersManager( sBoard.getBoard()[column][k])){
+			   return false;
+		   }
+	   }
+	   return true;
+   }
+   
+   /**
+    * checks the smallboxes in sudoku are valid
+    * @param row
+    * @param column
+    * @return
+    */
+   public boolean smallBoxValid(int row, int column){
+	   resetnumbers();
+	   
+	   for(int k =0; k < 3;  k++){
+		   for(int c = 0; c <3; c++){
+			   if(!numbersManager(sBoard.getBoard()[k + row][c + column])){
+				   return false;
+			   }
+		   }
+	   }
+	   return true;
+   }
+   /**
+    * resets numbers to false
+    */
+   public void resetnumbers(){
+	   digits = new boolean[10];
+   }
+   
+  /**
+   * keeps track of numbers used in Sudoku
+   * @param number
+   * @return
+   */
+   public boolean numbersManager(int number){
+	   if( number != 0 && digits[number]){
+		   return false;
+	   }else{
+		   digits[number] = true;
+		   return false;
+	   }
+   }
+   
    
    
    /**
@@ -67,20 +161,21 @@ public class SolveSudoku {
     * @param column
     * @return
     */
-   private boolean isLegalBoardCell(int number, int row, int column){
-	   int boardrow = (row/SMALLBOX_SIZE) * SMALLBOX_SIZE;
-	   int boardcolumn = (row/SMALLBOX_SIZE) * SMALLBOX_SIZE;
-	   
-	   for (int  i = 0; i < 9; i++){
-		   if(sBoard.getCellNum(row, i)== number ||
-			  sBoard.getCellNum(i, column) == number ||
-			  sBoard.getCellNum(boardrow + (i % SMALLBOX_SIZE), boardcolumn + (i / SMALLBOX_SIZE) ) == number){
-			   return false;
-		   }
-			   
-	   }
-	   return true;
-   }
+//   private boolean isLegalBoardCell(int number, int row, int column){
+//	   int boardrow = (row/SMALLBOX_SIZE) * SMALLBOX_SIZE;
+//	   int boardcolumn = (row/SMALLBOX_SIZE) * SMALLBOX_SIZE;
+//	   
+//	   for (int  i = 0; i < 9; i++){
+//		   if(sBoard.getCellNum(row, i)== number ||
+//			  sBoard.getCellNum(i, column) == number ||
+//			  sBoard.getCellNum(boardrow + (i % SMALLBOX_SIZE), boardcolumn + (i / SMALLBOX_SIZE) ) == number){
+//			   return false;
+//		   }
+//			   
+//	   }
+//	   return true;
+//   }
+   
    
    private boolean isComplete()
    {
