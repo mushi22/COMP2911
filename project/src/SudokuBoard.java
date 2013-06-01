@@ -6,13 +6,15 @@ public class SudokuBoard {
 	private int sBoard[][];		// this represents the 9x9 board
 	private static final int MAX_NUM_COLUMNS = 8;
 	private static final int MAX_NUM_ROWS = 8;
-	
+	public int smallbox_size;
 	/* Constructor */
 	/*
 	 * This one creates a new board
 	 */
 	public SudokuBoard() { 
 		sBoard = new int[9][9];
+        this.smallbox_size = (int) Math.sqrt(9);
+
 	}
 	
 	/*
@@ -41,5 +43,14 @@ public class SudokuBoard {
 	public int[][] getBoard() { 
 		
 		return sBoard;
+	}
+	/**
+	 */
+	public int getcellnum(int row, int column){
+		return sBoard[row][column];
+	}
+	
+	public void changecellnum(int newnum, int row, int column){
+		sBoard[row][column] = newnum;
 	}
 }
