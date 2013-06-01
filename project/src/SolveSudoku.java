@@ -37,27 +37,28 @@ public class SolveSudoku {
       System.out.print("}\n");
       if (possibilities.size() == 0) {
          System.out.print("no possibilities\n");
-         return sBoard;
+         return null;
       }
       for (Integer k : possibilities)
       {
+         System.out.print("Trying:" + k.intValue()+ " for cell ("+ i+","+j+")\n");
          sBoard.setCellNum(k.intValue(), i, j);
          sBoard.printBoard();
          SudokuBoard temp = copy(sBoard);
          temp = recursiveBruteForceSolver(temp);
-         if (isComplete(temp)) {
-            System.out.print("full board\n");
-            if (isValid(temp)) {
-               System.out.print("valid \n");
-               return temp;
+         if (temp == null) {
+            System.out.print("wrong branch\n");
+         } else {
+            if (isComplete(temp)) {
+               System.out.print("full board\n");
+               if (isValid(temp)) {
+                  System.out.print("valid \n");
+                  return temp;
+               }
+               System.out.print("not valid \n");
             }
-            System.out.print("not valid \n");
          }
-         
-        
-
       } 
-
       return null;
    }
    
@@ -68,7 +69,7 @@ public class SolveSudoku {
       {
          for (int j = 0; j < 9; j++)
          {
-            if (sBoard.getBoard()[j][i]==0) {
+            if (sBoard.getBoard()[i][j]==0) {
                emptyCell[0] = i;
                emptyCell[1] = j;
                return emptyCell;
@@ -300,9 +301,9 @@ public class SolveSudoku {
       {
          for (int j = 0; j < 9; j++)
          {
-            //System.out.print(i + "," + j + ":");
-            //System.out.print(sBoard.getBoard()[i][j]);
-            //System.out.print("\n");
+            System.out.print(i + "," + j + ":");
+            System.out.print(sBoard.getBoard()[i][j]);
+            System.out.print("\n");
             if (sBoard.getBoard()[i][j] == 0) {
                return false;
             }
