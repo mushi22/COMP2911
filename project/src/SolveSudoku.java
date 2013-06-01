@@ -190,7 +190,7 @@ public class SolveSudoku {
    private static boolean isValidRow(SudokuBoard sBoard, int row, int width){
 	   for(int i = 0; i < 9; i++){
 		   for(int j = i + 1; j < 9; j++){
-			   if(sBoard.getBoard()[row][i] == sBoard.getBoard()[row][i]){
+			   if(sBoard.getBoard()[row][i] == sBoard.getBoard()[row][j]){
 				   return false;
 			   }
 		   }
