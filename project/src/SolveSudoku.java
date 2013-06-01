@@ -6,14 +6,12 @@ public class SolveSudoku {
 	//		 daniel feel free to do some work
 	
    
-<<<<<<< HEAD
 	public SudokuBoard recursiveBruteForceSolver(SudokuBoard boardToSolve) {
 		
 		SudokuBoard board = new SudokuBoard();
 		
 		return board;
 	}
-=======
    public SudokuBoard recursiveBruteForceSolver(SudokuBoard board)
    {
       
@@ -24,5 +22,4 @@ public class SolveSudoku {
       
    }
    
->>>>>>> 63e0989f94848d3b6767a2dc70973d86cdf2d323
 }
