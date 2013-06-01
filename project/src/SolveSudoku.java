@@ -66,7 +66,7 @@ public class SolveSudoku {
       int[] emptyCell = {-1, -1};
       for (int i = 0; i < 9; i++)
       {
-         for (int j = 0; i < 9; i++)
+         for (int j = 0; j < 9; j++)
          {
             if (sBoard.getBoard()[j][i]==0) {
                emptyCell[0] = i;
@@ -95,7 +95,7 @@ public class SolveSudoku {
          }
       }
       int subGridRow = row - (row % 3);
-      int subGridColumn = column- (column % 3);
+      int subGridColumn = column - (column % 3);
       
       for(int i = subGridRow; i < subGridRow + 3; i++){
          for(int j = subGridColumn; j < subGridColumn + 3; j++){
@@ -107,9 +107,6 @@ public class SolveSudoku {
       
       return numbers;
    }
-   
-   
-   //public static void Validate(final int [][] sudokuBoard)
    
    public static boolean isValid(SudokuBoard sBoard){
 	   
@@ -299,18 +296,13 @@ public class SolveSudoku {
    
    private boolean isComplete(SudokuBoard sBoard)
    {
-      //if (sBoard == null) return false;
       for (int i = 0; i < 9; i++)
       {
          for (int j = 0; j < 9; j++)
          {
-            /*
-            if (sBoard == null) {
-               return false;
-            }*/
-            System.out.print(i + "," + j + ":");
-            System.out.print(sBoard.getBoard()[i][j]);
-            System.out.print("\n");
+            //System.out.print(i + "," + j + ":");
+            //System.out.print(sBoard.getBoard()[i][j]);
+            //System.out.print("\n");
             if (sBoard.getBoard()[i][j] == 0) {
                return false;
             }
