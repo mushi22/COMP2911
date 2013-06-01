@@ -14,45 +14,52 @@ public class SolveSudoku {
 		this.sBoard = sBoard;
 	}
 	
-   public SudokuBoard recursiveBruteForceSolver(SudokuBoard boardToSolve) {
-      int[][] board = boardToSolve.getBoard();
-      
-      for (int i = 0; i < board.length; i++)
+   public SudokuBoard recursiveBruteForceSolver() {
+      for (int i = 0; i < sBoard.getBoard().length; i++)
       {
-         for (int j = 0; i < board[i].length; i++)
+         for (int j = 0; i < sBoard.getBoard()[i].length; i++)
          {
-            if (board[i][j]==0) {
-               
+            if (sBoard.getBoard()[i][j]==0) {
+               for (Integer k : getPossibilities(i, j))
+               {
+                  sBoard.setCellNum(k.intValue(), i, j);
+                  sBoard = recursiveBruteForceSolver();
+                  if (isComplete() && isLegalBoard()) {
+                     return sBoard;
+                  }
+               } 
             }
          }
       }
       return null;
    }
 
-   private LinkedList<Integer> getPossibilities(int row, int column,SudokuBoard board)
+   private LinkedList<Integer> getPossibilities(int row, int column)
    {
       LinkedList<Integer> numbers = new LinkedList<Integer>();
-      numbers.add(1);
-      numbers.add(2);
-      numbers.add(3);
-      numbers.add(4);
-      numbers.add(5);
-      numbers.add(6);
-      numbers.add(7);
-      numbers.add(8);
-      numbers.add(9);
+      for (int i = 1; i < 10; i++) 
+      {
+         numbers.add(i);
+      }
       for (Integer i: numbers)
       {
          for (int j = 0; j < 9; j++)
          {
-            if (board.getBoard()[row][j] == i.intValue() ||
-                board.getBoard()[j][column] == i.intValue()) {
+            if (sBoard.getBoard()[row][j] == i.intValue() ||
+                sBoard.getBoard()[j][column] == i.intValue()) {
                numbers.remove(i);
             }
          }
       }
       return numbers;
    }
+   
+   private boolean isLegalBoard()
+   {
+      
+   }
+   
+   
    /**
     * checks if board is legal and according to laws of Sudoku
     * @param number
@@ -60,7 +67,7 @@ public class SolveSudoku {
     * @param column
     * @return
     */
-   private boolean isLegalBoard(int number, int row, int column){
+   private boolean isLegalBoardCell(int number, int row, int column){
 	   int boardrow = (row/SMALLBOX_SIZE) * SMALLBOX_SIZE;
 	   int boardcolumn = (row/SMALLBOX_SIZE) * SMALLBOX_SIZE;
 	   
@@ -75,13 +82,13 @@ public class SolveSudoku {
 	   return true;
    }
    
-   private boolean isComplete(SudokuBoard board)
+   private boolean isComplete()
    {
       for (int i = 0; i < 9; i++)
       {
          for (int j = 0; j < 9; j++)
          {
-            if (board.getBoard()[i][j] == 0) {
+            if (sBoard.getBoard()[i][j] == 0) {
                return false;
             }
          }
