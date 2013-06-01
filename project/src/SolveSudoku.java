@@ -13,30 +13,47 @@ public class SolveSudoku {
    
 	//private SudokuBoard sBoard;
 	
-	public SolveSudoku(SudokuBoard sBoard){
+	public SolveSudoku(){
 		//this.sBoard = sBoard;
 	}
 	
    public SudokuBoard recursiveBruteForceSolver(SudokuBoard sBoard) {
+      int i, j;
+      int[] emptyCell = findEmptyCell(sBoard);
+      i = emptyCell[0];
+      j = emptyCell[1];
+      if (i == -1 || j == -1) {
+         return sBoard;
+      }
+      for (Integer k : getPossibilities(j, i, sBoard))
+      {
+         sBoard.setCellNum(k.intValue(), j, i);
+         sBoard.printBoard();
+         SudokuBoard temp = copy(sBoard);
+         temp = recursiveBruteForceSolver(temp);
+         if (isLegalBoard(temp) && isComplete(temp)) {
+            return temp;
+         }
+      } 
+
+      return null;
+   }
+   
+   private int[] findEmptyCell(SudokuBoard sBoard)
+   {
+      //int[] emptyCell = new int[2];
+      int[] emptyCell = {-1, -1};
       for (int i = 0; i < 9; i++)
       {
          for (int j = 0; i < 9; i++)
          {
             if (sBoard.getBoard()[j][i]==0) {
-               for (Integer k : getPossibilities(j, i, sBoard))
-               {
-                  sBoard.setCellNum(k.intValue(), j, i);
-                  sBoard.printBoard();
-                  SudokuBoard temp = copy(sBoard);
-                  temp = recursiveBruteForceSolver(temp);
-                  if (isLegalBoard(temp) && isComplete(temp)) {
-                     return temp;
-                  }
-               } 
+               emptyCell[0] = i;
+               emptyCell[1] = j;
             }
          }
       }
-      return null;
+      return emptyCell;
    }
 
    private LinkedList<Integer> getPossibilities(int row, int column, SudokuBoard sBoard)
@@ -77,6 +94,7 @@ public class SolveSudoku {
     * @return
     */
    private boolean isLegalBoard(SudokuBoard sBoard){
+      //if (sBoard == null) return false;
       for(int i = 0; i <9; i++ ){
     	  if(!rowValid(i, sBoard)){
     		  return false;
@@ -107,6 +125,7 @@ public class SolveSudoku {
    public boolean rowValid (int row, SudokuBoard sBoard){
 	   resetnumbers();
 	   for( int k =0; k <9; k++){
+
 		   if(!numbersManager(sBoard.getBoard()[row][k])){
 			   return false;
 		   }
@@ -195,6 +214,7 @@ public class SolveSudoku {
    
    private boolean isComplete(SudokuBoard sBoard)
    {
+      //if (sBoard == null) return false;
       for (int i = 0; i < 9; i++)
       {
          for (int j = 0; j < 9; j++)
