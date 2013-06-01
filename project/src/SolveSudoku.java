@@ -148,7 +148,7 @@ public class SolveSudoku {
 		   return false;
 	   }else{
 		   digits[number] = true;
-		   return false;
+		   return true;
 	   }
    }
    
