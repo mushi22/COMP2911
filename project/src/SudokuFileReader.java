@@ -45,9 +45,9 @@ public class SudokuFileReader
       } catch (FileNotFoundException e) {
       } catch (NoSuchElementException e) {
       }
-      
+
       SudokuBoard sBoard = new SudokuBoard(board);
-      
+
       return sBoard;
    }
 

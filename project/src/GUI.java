@@ -108,7 +108,7 @@ public class GUI
             long endTime = System.currentTimeMillis();
 
             // create a textfield showing how long it takes to solve
-            JTextArea timeTook = new JTextArea("Time taken: "+ (endTime - startTime) + " milliseconds");
+            JTextArea timeTook = new JTextArea("Time taken: " + (endTime - startTime) + " milliseconds");
             GridBagConstraints gbc_timeTakeArea = new GridBagConstraints();
             gbc_timeTakeArea.gridx = 600;
             gbc_timeTakeArea.gridy = 500;
@@ -131,7 +131,7 @@ public class GUI
       // create an exit button and position it correctly in the pane
       JButton exit = new JButton("Exit");
       exit.addMouseListener(new MouseAdapter()
-      { 
+      {
          // exit button's functionality
          @Override
          public void mouseClicked(MouseEvent evt)
@@ -148,7 +148,7 @@ public class GUI
       // create an load sudoku button and position it correctly in the pane
       JButton loadSudoku = new JButton("Load Sudoku");
       loadSudoku.addMouseListener(new MouseAdapter()
-      { 
+      {
          // loadSudoku button's functionality
          @Override
          public void mouseClicked(MouseEvent evt)
@@ -159,8 +159,7 @@ public class GUI
             gbc_leftNineByNineWithInput.fill = GridBagConstraints.BOTH;
 
             String fileName = JOptionPane.showInputDialog(null,
-                  "Please enter a valid filename. ", "Choose a File",
-                  JOptionPane.QUESTION_MESSAGE);
+                  "Please enter a valid filename. ", "Choose a File", JOptionPane.QUESTION_MESSAGE);
             SudokuFileReader sudokuInput = new SudokuFileReader();
             // puzzle = sudokuInput.readInFile(fileName);
             left = gui.updateLeft9x9WithInput(fileName);
@@ -193,7 +192,7 @@ public class GUI
             long endTime = System.currentTimeMillis();
 
             // create a textfield showing how long it takes to generate
-            JTextArea timeTook = new JTextArea("Time taken: "+ (endTime - startTime) + " milliseconds");
+            JTextArea timeTook = new JTextArea("Time taken: " + (endTime - startTime) + " milliseconds");
             GridBagConstraints gbc_timeTakeArea = new GridBagConstraints();
             gbc_timeTakeArea.gridx = 0;
             gbc_timeTakeArea.gridy = 500;
@@ -234,13 +233,14 @@ public class GUI
          inner.setBorder(BorderFactory.createLineBorder(Color.black));
          for (int j = 0; j <= 8; j++) {
             int cellValue = 0; // create an int
-            cellValue = puzzle.getBoardArray()[3 * (i / 3) + j / 3][3 * (i % 3) + j % 3]; // to store the board number
-            Integer newInt = new Integer(cellValue); // change the type to an Integer
-            String stringCellValue = newInt.toString(); // allowing us to convert it to a string
-            inner.add(new JTextField(stringCellValue)); // add the string value
-            inner.setPreferredSize(dimSize); // set the size
+            cellValue = puzzle.getBoardArray()[3 * (i / 3) + j / 3][3 * (i % 3) + j % 3];
+            Integer newInt = new Integer(cellValue);
+            String stringCellValue = newInt.toString(); 
+            inner.add(new JTextField(stringCellValue));
+            inner.setPreferredSize(dimSize);
          }
-         for (int k = 0; k <= 8; k++) { // add the 3x3 into the big pane
+         for (int k = 0; k <= 8; k++) { 
+            // add the 3x3 into the big pane
             outer.add(inner);
          }
       }
@@ -293,11 +293,11 @@ public class GUI
          inner.setBorder(BorderFactory.createLineBorder(Color.black));
          for (int j = 0; j <= 8; j++) {
             int cellValue = 0; // create an int
-            cellValue = puzzle.getBoardArray()[3 * (i / 3) + j / 3][3 * (i % 3) + j % 3]; // to store the board number
-            Integer newInt = new Integer(cellValue); // change the type to an Integer
-            String stringCellValue = newInt.toString(); // allowing us to convert it to a string
-            inner.add(new JTextField(stringCellValue)); // add the string value
-            inner.setPreferredSize(dimSize); // set the size
+            cellValue = puzzle.getBoardArray()[3 * (i / 3) + j / 3][3 * (i % 3) + j % 3];
+            Integer newInt = new Integer(cellValue); 
+            String stringCellValue = newInt.toString();
+            inner.add(new JTextField(stringCellValue));
+            inner.setPreferredSize(dimSize);
          }
          for (int k = 0; k <= 8; k++) { // add the 3x3 into the big pane
             outer.add(inner);
@@ -330,11 +330,11 @@ public class GUI
          inner.setBorder(BorderFactory.createLineBorder(Color.black));
          for (int j = 0; j <= 8; j++) {
             int cellValue = 0; // create an int
-            cellValue = puzzle.getBoardArray()[3 * (i / 3) + j / 3][3 * (i % 3) + j % 3]; // to store the board number
-            Integer newInt = new Integer(cellValue); // change the type to an Integer
-            String stringCellValue = newInt.toString(); // allowing us to convert it to a string
-            inner.add(new JTextField(stringCellValue)); // add the string value
-            inner.setPreferredSize(dimSize); // set the size
+            cellValue = puzzle.getBoardArray()[3 * (i / 3) + j / 3][3 * (i % 3) + j % 3];
+            Integer newInt = new Integer(cellValue); 
+            String stringCellValue = newInt.toString();
+            inner.add(new JTextField(stringCellValue)); 
+            inner.setPreferredSize(dimSize); 
          }
          for (int k = 0; k <= 8; k++) {
             // add the 3x3 into the big pane
@@ -370,13 +370,13 @@ public class GUI
          inner.setBorder(BorderFactory.createLineBorder(Color.black));
          for (int j = 0; j <= 8; j++) {
             int cellValue = 0; // create an int
-            cellValue = solvedPuzzle.getBoardArray()[3 * (i / 3) + j / 3][3 * (i % 3) + j % 3]; // to store the board number
-            Integer newInt = new Integer(cellValue); // change the type to an Integer
-            String stringCellValue = newInt.toString(); // allowing us to convert it to a string
-            inner.add(new JTextField(stringCellValue)); // add the string value
-            inner.setPreferredSize(dimSize); // set the size
+            cellValue = solvedPuzzle.getBoardArray()[3 * (i / 3) + j / 3][3 * (i % 3) + j % 3]; 
+            Integer newInt = new Integer(cellValue); 
+            String stringCellValue = newInt.toString();
+            inner.add(new JTextField(stringCellValue)); 
+            inner.setPreferredSize(dimSize); 
          }
-         for (int k = 0; k <= 8; k++) { 
+         for (int k = 0; k <= 8; k++) {
             // add the 3x3 into the big pane
             outer.add(inner);
          }
