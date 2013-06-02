@@ -94,7 +94,7 @@ public class SolveSudoku {
       LinkedList<Integer> possibilities= getPossibilities(i, j, sBoard);
       for (Integer k : possibilities) {
          sBoard.setCellNum(k.intValue(), i, j);
-         SudokuBoard temp = copy(sBoard);
+         SudokuBoard temp = sBoard.copy();
          temp = recursiveBruteForceSolver(temp);
          if (!(temp == null)) {
             //if (isComplete(temp)) {
@@ -124,7 +124,7 @@ public class SolveSudoku {
 	      LinkedList<Integer> possibilities= getPossibilities(i, j, sBoard);
 	      for (Integer k : possibilities) {
 	         sBoard.setCellNum(k.intValue(), i, j);
-	         SudokuBoard temp = copy(sBoard);
+	         SudokuBoard temp = sBoard.copy();
 	         temp = recursiveBruteForceSolver(temp);
 	         if (!(temp == null)) {
 	            solutions++;
@@ -293,25 +293,7 @@ public class SolveSudoku {
 		}
 		return true;
 	}
-   
-	/**
-	 * Copys the sudoku board
-	 * @param sBoard
-	 * @return a copied sudoku board	
-	 */
-   public SudokuBoard copy(SudokuBoard sBoard) {
-      
-	   int[][] newGrid = new int[9][9];
-	   for (int i = 0; i < 9; i++) {
-		   for (int j = 0; j < 9; j++) {
-			   newGrid[i][j] = sBoard.getBoardArray()[i][j];
-		   }
-	   }
-	   SudokuBoard newBoard = new SudokuBoard(newGrid);
-	   return newBoard;
-   }
-   
-   
+
    /**
     * main function checks board is valid
     * @return

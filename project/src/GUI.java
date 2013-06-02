@@ -35,7 +35,7 @@ public class GUI {
 	   GUIController guiController = new GUIController();
 	   puzzle = guiController.getBoard();
       SolveSudoku tester = new SolveSudoku();
-      solved = tester.copy(puzzle);
+      solved = puzzle.copy();
       solved = tester.recursiveBruteForceSolver(solved);
 	}
 	

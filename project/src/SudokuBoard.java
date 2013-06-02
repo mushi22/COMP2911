@@ -77,6 +77,28 @@ public class SudokuBoard {
 		sBoard[row][column] = newnum;
 	}
 	
+   
+   /**
+    * Copys the sudoku board
+    * 
+    * @return a copied sudoku board 
+    */
+   public SudokuBoard copy() {
+      
+      int[][] newGrid = new int[9][9];
+      for (int i = 0; i < 9; i++) {
+         for (int j = 0; j < 9; j++) {
+            newGrid[i][j] = sbBoard.getBoardArray()[i][j];
+         }
+      }
+      SudokuBoard newBoard = new SudokuBoard(newGrid);
+      return newBoard;
+   }
+   
+   
+	
+	
+	
 //	public void main (String[] args) { 
 //		
 //		SudokuBoard board = new SudokuBoard();
