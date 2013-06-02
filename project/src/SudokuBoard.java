@@ -77,6 +77,11 @@ public class SudokuBoard {
 		sBoard[row][column] = newnum;
 	}
 	
+	public void setZero (int row, int column, int zero) { 
+	   
+		sBoard[row][column] = zero;
+	}
+	
 //	public void main (String[] args) { 
 //		
 //		SudokuBoard board = new SudokuBoard();

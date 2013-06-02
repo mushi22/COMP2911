@@ -9,14 +9,16 @@ import java.util.Scanner;
 
 /* This class is where we solve the sudoku */
 public class SolveSudoku {
+	
    //private static final int SMALLBOX_SIZE = 3;
 	//boolean[] digits;
    
 	/* Constructor */
 	public SolveSudoku(){
 	   //testSolver();
-	   testNoSolutions();
+	  // testNoSolutions();
 	}
+
 	
 	/* Methods */
 	/**
@@ -47,32 +49,36 @@ public class SolveSudoku {
      
 	}
 	
-	private void testNoSolutions(){
-      Scanner sc = null;
-      int[][] board = new int[9][9];
-      int nextNumber = 0;
-      
-      try { 
-         sc = new Scanner (new FileReader ("resources/input5"));
-         while (sc.hasNext()) { 
-            for (int row = 0; row < board.length; row++) {
-               for (int column = 0; column < board[row].length; column++) {
-                  nextNumber = sc.nextInt();
-                  board[row][column] = nextNumber;
-               }
-            }
-         }
-      } catch (FileNotFoundException e) {}
-        catch (NoSuchElementException e) {}
-      
-      SudokuBoard sBoard = new SudokuBoard(board);
-      sBoard.printBoard();
-      int noSolutions = noSolutions(sBoard);
-      System.out.print(noSolutions);
-      assertEquals(2,noSolutions);
-      assertTrue(isValid(sBoard));
-      
-	}
+	/**
+	 * Tests whether a the sudoku has a solution or not
+	 */
+//	private void testNoSolutions(){
+//		
+//		Scanner sc = null;
+//		int[][] board = new int[9][9];
+//		int nextNumber = 0;
+//      
+//		try { 
+//			sc = new Scanner (new FileReader ("resources/input5"));
+//			while (sc.hasNext()) { 
+//				for (int row = 0; row < board.length; row++) {
+//					for (int column = 0; column < board[row].length; column++) {
+//						nextNumber = sc.nextInt();
+//						board[row][column] = nextNumber;
+//					}
+//				}
+//			}
+//		} catch (FileNotFoundException e) {}
+//		catch (NoSuchElementException e) {}
+//      
+//		SudokuBoard sBoard = new SudokuBoard(board);
+//		sBoard.printBoard();
+//		int noSolutions = noSolutions(sBoard);
+//		System.out.print(noSolutions);
+//		assertEquals(2,noSolutions);
+//		assertTrue(isValid(sBoard));
+//
+//	}
 	
 	/**
 	 * A recursive brute force solver. 
@@ -91,7 +97,7 @@ public class SolveSudoku {
       if (i == -1 || j == -1) {
          return sBoard;
       }
-      LinkedList<Integer> possibilities= getPossibilities(i, j, sBoard);
+      LinkedList<Integer> possibilities = getPossibilities(i, j, sBoard);
       for (Integer k : possibilities) {
          sBoard.setCellNum(k.intValue(), i, j);
          SudokuBoard temp = copy(sBoard);
@@ -110,28 +116,33 @@ public class SolveSudoku {
       return null;
    }
 	
-	  public int noSolutions(SudokuBoard sBoard) {
-	      // System.out.print("-\n");
-	      //sBoard.printBoard();
-	      int solutions = 0;
-	      int i, j;
-	      int[] emptyCell = findEmptyCell(sBoard);
-	      i = emptyCell[0];
-	      j = emptyCell[1];
-	      if (i == -1 || j == -1) {
-	         return 1;
-	      }
-	      LinkedList<Integer> possibilities= getPossibilities(i, j, sBoard);
-	      for (Integer k : possibilities) {
-	         sBoard.setCellNum(k.intValue(), i, j);
-	         SudokuBoard temp = copy(sBoard);
-	         temp = recursiveBruteForceSolver(temp);
-	         if (!(temp == null)) {
-	            solutions++;
-	         }
-	      } 
-	      return solutions;
-	   }
+	/**
+	 * Checks if any solutions and returns the number of solutions if there are.
+	 * @param sBoard
+	 * @return number of sulutions
+	 */
+	public int noSolutions(SudokuBoard sBoard) {
+		// System.out.print("-\n");
+		//sBoard.printBoard();
+		int solutions = 0;
+		int i, j;
+		int[] emptyCell = findEmptyCell(sBoard);
+		i = emptyCell[0];
+		j = emptyCell[1];
+		if (i == -1 || j == -1) {
+			return 1;
+		}
+		LinkedList<Integer> possibilities = getPossibilities(i, j, sBoard);
+		for (Integer k : possibilities) {
+			sBoard.setCellNum(k.intValue(), i, j);
+			SudokuBoard temp = copy(sBoard);
+			temp = recursiveBruteForceSolver(temp);
+			if (!(temp == null)) {
+				solutions++;
+			}
+		} 
+		return solutions;
+	}
    
 	/** 
 	 * Finds and empty cell on the board.
@@ -160,7 +171,7 @@ public class SolveSudoku {
 	 * @param sBoard
 	 * @return an linked list of integers for possilities
 	 */
-	private LinkedList<Integer> getPossibilities(int row, int column, SudokuBoard sBoard) {
+	public LinkedList<Integer> getPossibilities(int row, int column, SudokuBoard sBoard) {
 	   
 	   LinkedList<Integer> numbers = new LinkedList<Integer>();
 	   for (int i = 1; i < 10; i++) {
@@ -246,9 +257,9 @@ public class SolveSudoku {
 	 */
 	private static boolean isValidColumn(SudokuBoard sBoard, int column) {
 	   
-		for(int i = 0; i < 9; i++) {
-			for(int j = i + 1; j < 9; j++) {
-				if(sBoard.getBoardArray()[i][column] == sBoard.getBoardArray()[j][column]) {
+		for (int i = 0; i < 9; i++) {
+			for (int j = i + 1; j < 9; j++) {
+				if (sBoard.getBoardArray()[i][column] == sBoard.getBoardArray()[j][column]) {
 					return false;
 				}
 			}
@@ -310,7 +321,7 @@ public class SolveSudoku {
 	   SudokuBoard newBoard = new SudokuBoard(newGrid);
 	   return newBoard;
    }
-   
+  
    
    /**
     * main function checks board is valid
