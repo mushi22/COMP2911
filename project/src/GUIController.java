@@ -30,6 +30,10 @@ public class GUIController {
 		return board;
 	}
 	
+	/**
+	 * Gets the randomly generated board.
+	 * @return board that has been randomly generated
+	 */
 	public SudokuBoard getGeneratedBoard() {
 		
 		GenerateSudoku gBoard = new GenerateSudoku();
@@ -38,26 +42,6 @@ public class GUIController {
 		//sBoard.printBoard();
 		
 		return sBoard;
-	}
-	
-	/** 
-	 * Gets the solved array.
-	 * @return the 2D solved array
-	 */
-	public SudokuBoard getSolvedBoardArray() { 
-		
-		SudokuFileReader sudokuFileReader = new SudokuFileReader();
-		SudokuBoard Board = new SudokuBoard();
-		Board = sudokuFileReader.readInFile();
-		SolveSudoku tester = new SolveSudoku();
-		Board = tester.recursiveBruteForceSolver(Board);
-		return Board;	
-	}
-	
-	public void setNewSudoku() { 
-		
-		
-		
 	}
 	 
 //   public static void testSolver()

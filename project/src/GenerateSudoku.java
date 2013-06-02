@@ -1,11 +1,9 @@
-import java.util.HashSet;
 import java.util.Random;
 
 /* This class is designed to generate sudokus */
 public class GenerateSudoku {
 	
 	/* Constants defined here for clarity */
-	private final int NUMBER_ZERO = 0;
 	private final int MAX_NUM_COLUMNS = 9;
 	private final int MAX_NUM_ROWS = 9;
 
@@ -35,22 +33,16 @@ public class GenerateSudoku {
 				if (solver.isValid(randomBoard) == false) { 
 					randomBoard.setCellNum(0, rows, columns);
 				}
-				/*if (solver.isValid(randomBoard)) { 
-					System.out.println("yes");
-				}*/
 			}
 		}
 		SudokuBoard test = randomBoard.copy();
 		SudokuBoard test2 = randomBoard.copy();
 		test = solver.recursiveBruteForceSolver(test);
-      test2 = solver.recursiveBruteForceSolverRev(test2);		
+		test2 = solver.recursiveBruteForceSolverRev(test2);		
 		if (test != null && test2 != null && test.equals(test2) && test2.equals(test)) {
-		   //randomBoard.printBoard();
-		   //test.printBoard();
-		   return randomBoard;
-		   
+			return randomBoard;
 		} else {
-		   return generateRandomBoard();
+			return generateRandomBoard();
 		}
 	}
 	

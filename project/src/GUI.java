@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -40,6 +41,7 @@ public class GUI {
        solvedPuzzle = tester.recursiveBruteForceSolver(solvedPuzzle);
 	}
 	
+	/* Methods */
 	/**
 	 * Initialise the elements of the frame 
 	 */
@@ -66,7 +68,7 @@ public class GUI {
 		GridBagConstraints gbc_leftNineByNine = new GridBagConstraints();
 		gbc_leftNineByNine.gridx = 0;
 		gbc_leftNineByNine.gridy = 1;
-		gbc_leftNineByNine.fill = GridBagConstraints.BOTH;
+		//gbc_leftNineByNine.fill = GridBagConstraints.BOTH;
 		left = gui.createLeft9x9();
 		gui.pane.add(left, gbc_leftNineByNine);
 		
@@ -85,13 +87,6 @@ public class GUI {
 		gbc_rightNineByNine.fill = GridBagConstraints.BOTH;
 		right = gui.createRight9x9();
 		gui.pane.add(right, gbc_rightNineByNine);
-
-//		JTextArea timeTook = new JTextArea("Time taken: ");
-//		GridBagConstraints gbc_timeTakeArea = new GridBagConstraints();
-//		gbc_timeTakeArea.gridx = 0;
-//		gbc_timeTakeArea.gridy = 500;
-//		gbc_timeTakeArea.fill = 100;
-//		gui.pane.add(timeTook, gbc_timeTakeArea);
 		
 		// create a solve button and position it correctly in the pane
 		JButton solve = new JButton("Solve");
@@ -104,7 +99,18 @@ public class GUI {
 			   gbc_rightNineByNine.gridx = 600;
 			   gbc_rightNineByNine.gridy = 1;
 			   gbc_rightNineByNine.fill = GridBagConstraints.BOTH;
+			   
+			   long startTime = System.currentTimeMillis();
 			   right = gui.updateRight9x9();
+			   long endTime = System.currentTimeMillis();
+			   
+			   // create a textfield showing how long it takes to solve 
+			   JTextArea timeTook = new JTextArea("Time taken: " + (endTime - startTime) + " milliseconds");
+			   GridBagConstraints gbc_timeTakeArea = new GridBagConstraints();
+			   gbc_timeTakeArea.gridx = 600;
+			   gbc_timeTakeArea.gridy = 500;
+			   gbc_timeTakeArea.fill = 100;
+			   gui.pane.add(timeTook, gbc_timeTakeArea);		
 			   
 			   gui.pane.add(right, gbc_rightNineByNine);
 			   gui.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -113,15 +119,9 @@ public class GUI {
 			   
 		   }
 		});
-//		JTextArea timeTook = new JTextArea("Time taken: " + (endTime - startTime));
-//		GridBagConstraints gbc_timeTakeArea = new GridBagConstraints();
-//		gbc_timeTakeArea.gridx = 0;
-//		gbc_timeTakeArea.gridy = 500;
-//		gbc_timeTakeArea.fill = 100;
-//		gui.pane.add(timeTook, gbc_timeTakeArea);
 		
 		GridBagConstraints gbc_solveButton = new GridBagConstraints();
-		gbc_solveButton.gridx = 400;
+		gbc_solveButton.gridx = 600;
 		gbc_solveButton.gridy = 100;
 		gui.pane.add(solve, gbc_solveButton);
 		
@@ -140,6 +140,23 @@ public class GUI {
 		gbc_exitButton.fill = GridBagConstraints.BOTH;
 		gui.pane.add(exit, gbc_exitButton);
 		
+		// create an load sudoku button and position it correctly in the pane
+		JButton loadSudoku = new JButton("Load Sudoku");
+		loadSudoku.addMouseListener(new MouseAdapter() {			// loadSudoku button's functionality 
+			@Override				
+			public void mouseClicked(MouseEvent evt){		// on mouse click
+				String fileName = JOptionPane.showInputDialog(null, "Please enter a valid filename. ", "Choose a File", JOptionPane.QUESTION_MESSAGE);
+				SudokuFileReader sudokuInput = new SudokuFileReader();
+				 = sudokuInput.readInFile(fileName);
+			}
+		});
+		GridBagConstraints gbc_loadSudokuButton = new GridBagConstraints();
+		gbc_loadSudokuButton.gridx = 400;
+		gbc_loadSudokuButton.gridy = 100;
+		gbc_loadSudokuButton.fill = GridBagConstraints.BOTH;
+		gui.pane.add(loadSudoku, gbc_loadSudokuButton);
+		
+		
 		// create a button that generates a new sudoku
 		JButton generate = new JButton("Generate Sudoku");
 		generate.addMouseListener(new MouseAdapter() {
@@ -153,8 +170,8 @@ public class GUI {
 				   left = gui.updateLeft9x9();
 				   long endTime = System.currentTimeMillis();
 				   
-				   // create a textfield checking how long it takes to generate 
-				   JTextArea timeTook = new JTextArea("Time taken: " + (endTime - startTime));
+				   // create a textfield showing how long it takes to generate 
+				   JTextArea timeTook = new JTextArea("Time taken: " + (endTime - startTime) + " milliseconds");
 				   GridBagConstraints gbc_timeTakeArea = new GridBagConstraints();
 				   gbc_timeTakeArea.gridx = 0;
 				   gbc_timeTakeArea.gridy = 500;
@@ -172,7 +189,7 @@ public class GUI {
 		GridBagConstraints gbc_generateButton = new GridBagConstraints();
 		gbc_generateButton.gridx = 0;
 		gbc_generateButton.gridy = 100;
-		gbc_generateButton.fill = GridBagConstraints.BOTH;
+		//gbc_generateButton.fill = GridBagConstraints.BOTH;
 		gui.pane.add(generate, gbc_generateButton);
 		
 		gui.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -180,6 +197,10 @@ public class GUI {
 		gui.frame.setVisible(true);
 	}
 	
+	/**
+	 * Creates the grid for the left side of the window.
+	 * @return the created grid
+	 */
 	public JPanel createLeft9x9() { 
 		
 		JPanel inner = null;
@@ -203,6 +224,11 @@ public class GUI {
 		}
 		return outer;
 	}
+	
+	/**
+	 * Creates the grid for the right side of the window.
+	 * @return the created grid
+	 */
 	public JPanel createRight9x9() { 
 		
 		JPanel inner = null;
@@ -224,15 +250,47 @@ public class GUI {
 		}
 		return outer;
 	}
+	
+	/**
+	 * Updates the left side grid which contains the new sudoku.
+	 * @return updated grid with correct solution
+	 */
+	public JPanel updateLeft9x9() { 
+		
+		GUIController guiController = new GUIController();
+		puzzle = guiController.getGeneratedBoard();
+		
+		JPanel inner = null;
+		JPanel outer =  new JPanel(new GridLayout(3,3));
+		Dimension dimSize = new Dimension (100, 100);
+		
+		for (int i = 0; i < 9; i++) {	
+			inner = new JPanel(new GridLayout(3, 3));
+			inner.setBorder(BorderFactory.createLineBorder(Color.black));
+			for(int j = 0; j <= 8; j++) {
+				int cellValue = 0;							// create an int 
+				cellValue = puzzle.getBoardArray()[3*(i / 3) + j/3][3*(i % 3) + j%3];					// to store the board number
+				Integer newInt = new Integer(cellValue);	// change the type to an Integer
+				String stringCellValue = newInt.toString();	// allowing us to convert it to a string
+				inner.add(new JTextField(stringCellValue));	// add the string value 
+				inner.setPreferredSize(dimSize);			// set the size 
+			}
+			for(int k = 0; k <=8; k++) {		// add the 3x3 into the big pane
+				outer.add(inner);
+			}
+		}
+		return outer;
+	}
 
+	/**
+	 * Updates the right side grid which contains the solved solution.
+	 * @return updated grid with correct solution
+	 */
 	public JPanel updateRight9x9() { 
 
       SolveSudoku tester = new SolveSudoku();
       solvedPuzzle = puzzle.copy();
-      long startTime = System.currentTimeMillis();
       solvedPuzzle = tester.recursiveBruteForceSolver(solvedPuzzle);
-      long endTime = System.currentTimeMillis();
-      System.out.println("Time taken to solve: " + (endTime - startTime));
       
 		JPanel inner = null;
 		JPanel outer =  new JPanel(new GridLayout(3,3));
@@ -254,46 +312,6 @@ public class GUI {
 			}
 		}
 		return outer;
-	}
-	
-	public JPanel updateLeft9x9() { 
-		
-		long startTime = System.currentTimeMillis();
-		GUIController guiController = new GUIController();
-		puzzle = guiController.getGeneratedBoard();
-		long endTime = System.currentTimeMillis();
-		System.out.println("Time taken to generate: " + (endTime - startTime));
-		
-//		JTextArea timeTook = new JTextArea("Time took: " + (endTime - startTime));
-//		GridBagConstraints gbc_exitButton = new GridBagConstraints();
-//		gbc_exitButton.gridx = 500;
-//		gbc_exitButton.gridy = 200;
-//		gbc_exitButton.fill = GridBagConstraints.BOTH;
-//		gui.pane.add(timeTook, gbc_exitButton);
-		
-		
-		JPanel inner = null;
-		JPanel outer =  new JPanel(new GridLayout(3,3));
-		Dimension dimSize = new Dimension (100, 100);
-		
-		for (int i = 0; i < 9; i++) {	
-			inner = new JPanel(new GridLayout(3, 3));
-			inner.setBorder(BorderFactory.createLineBorder(Color.black));
-			for(int j = 0; j <= 8; j++) {
-				int cellValue = 0;							// create an int 
-				cellValue = puzzle.getBoardArray()[3*(i / 3) + j/3][3*(i % 3) + j%3];					// to store the board number
-				Integer newInt = new Integer(cellValue);	// change the type to an Integer
-				String stringCellValue = newInt.toString();	// allowing us to convert it to a string
-				inner.add(new JTextField(stringCellValue));	// add the string value 
-				inner.setPreferredSize(dimSize);			// set the size 
-			}
-			for(int k = 0; k <=8; k++) {		// add the 3x3 into the big pane
-				outer.add(inner);
-			}
-		}
-
-		return outer;
-		
 	}
 }
 		

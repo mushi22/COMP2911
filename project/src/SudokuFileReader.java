@@ -49,4 +49,30 @@ public class SudokuFileReader {
 		
 		return sBoard;
 	}
+	
+	public SudokuBoard readInFile(String fileName) { 
+		
+		Scanner sc = null;
+		board = new int[MAX_NUM_ROWS][MAX_NUM_COLUMNS];
+		int nextNumber = 0;
+		String toReadFileName = "resources/" + fileName;
+		
+		try { 
+			sc = new Scanner (new FileReader (toReadFileName));
+			while (sc.hasNext()) { 
+				for (int row = 0; row < board.length; row++) {
+					for (int column = 0; column < board[row].length; column++) {
+						nextNumber = sc.nextInt();
+						board[row][column] = nextNumber;
+					}
+				}
+			}
+			sc.close();
+		} catch (FileNotFoundException e) {}
+		  catch (NoSuchElementException e) {}
+		
+		SudokuBoard sBoard = new SudokuBoard(board);
+		
+		return sBoard;
+	}
 }

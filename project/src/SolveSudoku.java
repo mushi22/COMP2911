@@ -89,68 +89,68 @@ public class SolveSudoku {
 	  // System.out.print("-\n");
       //sBoard.printBoard();
 
-      int i, j;
-      int[] emptyCell = findEmptyCell(sBoard);
-      i = emptyCell[0];
-      j = emptyCell[1];
-      if (i == -1 || j == -1) {
-         return sBoard;
-      }
-      LinkedList<Integer> possibilities = getPossibilities(i, j, sBoard);
-      for (Integer k : possibilities) {
-         sBoard.setCellNum(k.intValue(), i, j);
-         SudokuBoard temp = sBoard.copy();
-         temp = recursiveBruteForceSolver(temp);
-         if (!(temp == null)) {
-            //if (isComplete(temp)) {
-               //System.out.print("full board\n");
-               //if (isValid(temp)) {
-                  //System.out.print("valid \n");
-            return temp;
-               // }
-               //System.out.print("not valid \n");
-            //}
-         }
-      }
-      return null;
-   }
+		int i, j;
+		int[] emptyCell = findEmptyCell(sBoard);
+		i = emptyCell[0];
+		j = emptyCell[1];
+		if (i == -1 || j == -1) {
+			return sBoard;
+		}
+		LinkedList<Integer> possibilities = getPossibilities(i, j, sBoard);
+		for (Integer k : possibilities) {
+			sBoard.setCellNum(k.intValue(), i, j);
+			SudokuBoard temp = sBoard.copy();
+			temp = recursiveBruteForceSolver(temp);
+			if (!(temp == null)) {
+				//if (isComplete(temp)) {
+				//System.out.print("full board\n");
+				//if (isValid(temp)) {
+				//System.out.print("valid \n");
+				return temp;
+				// }
+				//System.out.print("not valid \n");
+				//}
+			}
+		}
+		return null;
+	}
 	
 	  
-   /**
-    * A recursive brute force solver. 
-    * @param sBoard
-    * @return solved board
-    */
-   public SudokuBoard recursiveBruteForceSolverRev(SudokuBoard sBoard) {
+	/**
+	 * A recursive brute force solver. 
+	 * @param sBoard
+	 * @return solved board
+	 */
+	public SudokuBoard recursiveBruteForceSolverRev(SudokuBoard sBoard) {
 
      // System.out.print("-\n");
       //sBoard.printBoard();
 
-      int i, j;
-      int[] emptyCell = findEmptyCell(sBoard);
-      i = emptyCell[0];
-      j = emptyCell[1];
-      if (i == -1 || j == -1) {
-         return sBoard;
-      }
-      LinkedList<Integer> possibilities = getPossibilitiesRev(i, j, sBoard);
-      for (Integer k : possibilities) {
-         sBoard.setCellNum(k.intValue(), i, j);
-         SudokuBoard temp = sBoard.copy();
-         temp = recursiveBruteForceSolver(temp);
-         if (!(temp == null)) {
-            //if (isComplete(temp)) {
-               //System.out.print("full board\n");
-               //if (isValid(temp)) {
-                  //System.out.print("valid \n");
-            return temp;
-               // }
-               //System.out.print("not valid \n");
-            //}
-         }
-      } 
-      return null;
-   }
+		int i, j;
+		int[] emptyCell = findEmptyCell(sBoard);
+		i = emptyCell[0];
+		j = emptyCell[1];
+		if (i == -1 || j == -1) {
+			return sBoard;
+		}
+		LinkedList<Integer> possibilities = getPossibilitiesRev(i, j, sBoard);
+		for (Integer k : possibilities) {
+			sBoard.setCellNum(k.intValue(), i, j);
+			SudokuBoard temp = sBoard.copy();
+			temp = recursiveBruteForceSolver(temp);
+			if (!(temp == null)) {
+				//if (isComplete(temp)) {
+				//System.out.print("full board\n");
+				//if (isValid(temp)) {
+                  	//System.out.print("valid \n");
+				return temp;
+				// }
+				//System.out.print("not valid \n");
+				//}
+			}
+		} 
+		return null;
+	}
 	
 	/**
 	 * Checks if any solutions and returns the number of solutions if there are.
@@ -158,6 +158,7 @@ public class SolveSudoku {
 	 * @return number of solutions
 	 */
 	public int noSolutions(SudokuBoard sBoard) {
+		
 		// System.out.print("-\n");
 		//sBoard.printBoard();
 		int solutions = 0;
@@ -165,6 +166,7 @@ public class SolveSudoku {
 		int[] emptyCell = findEmptyCell(sBoard);
 		i = emptyCell[0];
 		j = emptyCell[1];
+		
 		if (i == -1 || j == -1) {
 			return 1;
 		}
@@ -235,40 +237,40 @@ public class SolveSudoku {
 	   return numbers;
    }
    
-	  /**
-    * Providing a row, column, and a board we get the possibilities for a cell (in reverse order). 
-    * @param row
-    * @param column
-    * @param sBoard
-    * @return an linked list of integers for possibilities
-    */
+	/**
+	 * Providing a row, column, and a board we get the possibilities for a cell (in reverse order). 
+	 * @param row
+	 * @param column
+	 * @param sBoard
+	 * @return an linked list of integers for possibilities
+	 */
 	public LinkedList<Integer> getPossibilitiesRev(int row, int column, SudokuBoard sBoard) {
       
-      LinkedList<Integer> numbers = new LinkedList<Integer>();
-      for (int i = 9; i > 0; i--) {
-         numbers.add(i);
-      }
-      for (int j = 0; j < 9; j++) {
-         if (numbers.contains(new Integer(sBoard.getBoardArray()[row][j]))) {
-            numbers.remove(new Integer(sBoard.getBoardArray()[row][j]));
-         }
-         if (numbers.contains(new Integer(sBoard.getBoardArray()[j][column]))) {
-            numbers.remove(new Integer(sBoard.getBoardArray()[j][column]));
-         }
-      }
+		LinkedList<Integer> numbers = new LinkedList<Integer>();
+		for (int i = 9; i > 0; i--) {
+			numbers.add(i);
+		}
+		for (int j = 0; j < 9; j++) {
+			if (numbers.contains(new Integer(sBoard.getBoardArray()[row][j]))) {
+				numbers.remove(new Integer(sBoard.getBoardArray()[row][j]));
+			}
+			if (numbers.contains(new Integer(sBoard.getBoardArray()[j][column]))) {
+				numbers.remove(new Integer(sBoard.getBoardArray()[j][column]));
+			}
+		}
       
-      int subGridRow = row - (row % 3);
-      int subGridColumn = column - (column % 3);
+		int subGridRow = row - (row % 3);
+		int subGridColumn = column - (column % 3);
       
-      for(int i = subGridRow; i < subGridRow + 3; i++){
-         for(int j = subGridColumn; j < subGridColumn + 3; j++){
-            if (numbers.contains(new Integer(sBoard.getBoardArray()[i][j]))) {
-               numbers.remove(new Integer(sBoard.getBoardArray()[i][j]));
-            }
-         }
-      }
-      return numbers;
-   }
+		for(int i = subGridRow; i < subGridRow + 3; i++){
+			for(int j = subGridColumn; j < subGridColumn + 3; j++){
+				if (numbers.contains(new Integer(sBoard.getBoardArray()[i][j]))) {
+					numbers.remove(new Integer(sBoard.getBoardArray()[i][j]));
+				}
+			}
+		}
+		return numbers;
+	}
 	
 	
 	/**
@@ -278,22 +280,22 @@ public class SolveSudoku {
 	 */
 	public boolean isValid(SudokuBoard sBoard){
 	   
-	   for(int i = 0; i < 9; i ++) {
-		   if(!isValidRow(sBoard, i) || !isValidColumn(sBoard, i)) {
-			   //row or column has repetitions
-			   return false;
-		   }
-	   }   
-	   for(int i = 0; i < 9; i+=3) {
-		   for(int j = 0; j < 9; j+=3) {
-			   if(!isValidSubGrid(sBoard, i, j)) {
+		for(int i = 0; i < 9; i ++) {
+			if(!isValidRow(sBoard, i) || !isValidColumn(sBoard, i)) {
+			    //row or column has repetitions
+				return false;
+			}
+		}   
+		for(int i = 0; i < 9; i+=3) {
+			for(int j = 0; j < 9; j+=3) {
+				if(!isValidSubGrid(sBoard, i, j)) {
 				   // subGrid has repetitions
-				   return false;
-			   }
-		   }
-	   }
-	   return true;
-   }
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 	
 	/** 
 	 * Checks if the 3x3 sub grid is valid.
