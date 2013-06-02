@@ -12,8 +12,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
@@ -61,7 +61,6 @@ public class GUI {
 		GridBagConstraints gbc_originalLabel = new GridBagConstraints();
 		gbc_originalLabel.gridx = 0;
 		gbc_originalLabel.gridy = 0;
-		//gbc_originalLabel.fill = GridBagConstraints.HORIZONTAL;
 		gui.pane.add(original, gbc_originalLabel);
 	
 		// create a 9x9 grid on the left panel under the Original label
@@ -87,7 +86,14 @@ public class GUI {
 		gbc_rightNineByNine.fill = GridBagConstraints.BOTH;
 		right = gui.createRight9x9();
 		gui.pane.add(right, gbc_rightNineByNine);
-	
+
+//		JTextArea timeTook = new JTextArea("Time taken: ");
+//		GridBagConstraints gbc_timeTakeArea = new GridBagConstraints();
+//		gbc_timeTakeArea.gridx = 0;
+//		gbc_timeTakeArea.gridy = 500;
+//		gbc_timeTakeArea.fill = 100;
+//		gui.pane.add(timeTook, gbc_timeTakeArea);
+		
 		// create a solve button and position it correctly in the pane
 		JButton solve = new JButton("Solve");
 		solve.addMouseListener(new MouseAdapter() {
@@ -100,17 +106,27 @@ public class GUI {
 			   gbc_rightNineByNine.gridy = 1;
 			   gbc_rightNineByNine.fill = GridBagConstraints.BOTH;
 			   right = gui.updateRight9x9();
+			   
 			   gui.pane.add(right, gbc_rightNineByNine);
 			   gui.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			   gui.frame.add(gui.pane);
 			   gui.frame.setVisible(true);
+			   
 		   }
 		});
+//		JTextArea timeTook = new JTextArea("Time taken: " + (endTime - startTime));
+//		GridBagConstraints gbc_timeTakeArea = new GridBagConstraints();
+//		gbc_timeTakeArea.gridx = 0;
+//		gbc_timeTakeArea.gridy = 500;
+//		gbc_timeTakeArea.fill = 100;
+//		gui.pane.add(timeTook, gbc_timeTakeArea);
+		
 		GridBagConstraints gbc_solveButton = new GridBagConstraints();
 		gbc_solveButton.gridx = 400;
 		gbc_solveButton.gridy = 100;
 		gui.pane.add(solve, gbc_solveButton);
-
+		
+		
 		// create an exit button and position it correctly in the pane
 		JButton exit = new JButton("Exit");
 		exit.addMouseListener(new MouseAdapter() {			// exit button's functionality 
@@ -134,25 +150,35 @@ public class GUI {
 				   gbc_leftNineByNine.gridx = 0;
 				   gbc_leftNineByNine.gridy = 1;
 				   gbc_leftNineByNine.fill = GridBagConstraints.BOTH;
+				   long startTime = System.currentTimeMillis();
 				   left = gui.updateLeft9x9();
+				   long endTime = System.currentTimeMillis();
+				   
+				   // create a textfield checking how long it takes to generate 
+				   JTextArea timeTook = new JTextArea("Time taken: " + (endTime - startTime));
+				   GridBagConstraints gbc_timeTakeArea = new GridBagConstraints();
+				   gbc_timeTakeArea.gridx = 0;
+				   gbc_timeTakeArea.gridy = 500;
+				   gbc_timeTakeArea.fill = 100;
+				   gui.pane.add(timeTook, gbc_timeTakeArea);		   
+				   
 				   gui.pane.add(left, gbc_leftNineByNine);
 				   gui.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				   gui.frame.add(gui.pane);
 				   gui.frame.setVisible(true);
 			   }
 		});
+		
+		
 		GridBagConstraints gbc_generateButton = new GridBagConstraints();
 		gbc_generateButton.gridx = 0;
 		gbc_generateButton.gridy = 100;
 		gbc_generateButton.fill = GridBagConstraints.BOTH;
 		gui.pane.add(generate, gbc_generateButton);
 		
-		
 		gui.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gui.frame.add(gui.pane);
 		gui.frame.setVisible(true);
-		
-		
 	}
 	
 	public JPanel createLeft9x9() { 
@@ -204,7 +230,10 @@ public class GUI {
 
       SolveSudoku tester = new SolveSudoku();
       solvedPuzzle = puzzle.copy();
+      long startTime = System.currentTimeMillis();
       solvedPuzzle = tester.recursiveBruteForceSolver(solvedPuzzle);
+      long endTime = System.currentTimeMillis();
+      System.out.println("Time taken to solve: " + (endTime - startTime));
       
 		JPanel inner = null;
 		JPanel outer =  new JPanel(new GridLayout(3,3));
@@ -229,9 +258,20 @@ public class GUI {
 	}
 	
 	public JPanel updateLeft9x9() { 
-      
-      GUIController guiController = new GUIController();
-      puzzle = guiController.getGeneratedBoard();
+		
+		long startTime = System.currentTimeMillis();
+		GUIController guiController = new GUIController();
+		puzzle = guiController.getGeneratedBoard();
+		long endTime = System.currentTimeMillis();
+		System.out.println("Time taken to generate: " + (endTime - startTime));
+		
+//		JTextArea timeTook = new JTextArea("Time took: " + (endTime - startTime));
+//		GridBagConstraints gbc_exitButton = new GridBagConstraints();
+//		gbc_exitButton.gridx = 500;
+//		gbc_exitButton.gridy = 200;
+//		gbc_exitButton.fill = GridBagConstraints.BOTH;
+//		gui.pane.add(timeTook, gbc_exitButton);
+		
 		
 		JPanel inner = null;
 		JPanel outer =  new JPanel(new GridLayout(3,3));

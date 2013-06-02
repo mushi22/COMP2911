@@ -86,7 +86,6 @@ public class SolveSudoku {
 	 * @return solved board
 	 */
 	public SudokuBoard recursiveBruteForceSolver(SudokuBoard sBoard) {
-
 	  // System.out.print("-\n");
       //sBoard.printBoard();
 
@@ -112,7 +111,7 @@ public class SolveSudoku {
                //System.out.print("not valid \n");
             //}
          }
-      } 
+      }
       return null;
    }
 	
