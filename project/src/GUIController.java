@@ -41,7 +41,13 @@ public class GUIController {
 		SolveSudoku tester = new SolveSudoku();
 		Board = tester.recursiveBruteForceSolver(Board);
 		return Board;	
-	 }
+	}
+	
+	public void setNewSudoku() { 
+		
+		
+		
+	}
 	 
 //   public static void testSolver()
 //   {

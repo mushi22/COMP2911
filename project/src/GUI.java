@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -89,7 +90,7 @@ public class GUI {
 		gbc_rightNineByNine.gridx = 600;
 		gbc_rightNineByNine.gridy = 1;
 		gbc_rightNineByNine.fill = GridBagConstraints.BOTH;
-                right=gui.updateRight9x9();
+                right = gui.updateRight9x9();
 		gui.pane.add(right, gbc_rightNineByNine);
                 gui.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gui.frame.add(gui.pane);
@@ -114,9 +115,31 @@ public class GUI {
 		gbc_exitButton.gridy = 200;
 		gbc_exitButton.fill = GridBagConstraints.BOTH;
 		gui.pane.add(exit, gbc_exitButton);
+		
+//		// create a load input and position it correctly in the pane
+//		JButton loadSudoku = new JButton("Load Sudoku File");
+//		loadSudoku.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent arg0) {
+//
+//				String fileName = JOptionPane.showInputDialog(null, "Please enter a valid filename. input1", "Choose a File", JOptionPane.QUESTION_MESSAGE);
+//				//controller.setOrderbook(fileName);
+//			}
+//		});
+//		GridBagConstraints gbc_loadSudoku = new GridBagConstraints();
+//		gbc_loadSudoku.anchor = GridBagConstraints.SOUTH;
+//		gbc_loadSudoku.fill = GridBagConstraints.HORIZONTAL;
+//		gbc_loadSudoku.insets = new Insets(0, 0, 5, 5);
+//		gbc_loadSudoku.gridx = 0;
+//		gbc_loadSudoku.gridy = 2;
+//		gui.pane.add (loadSudoku, gbc_loadSudoku);
+		
+		
 		gui.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gui.frame.add(gui.pane);
 		gui.frame.setVisible(true);
+		
+		
 	}
 	
 	public JPanel createLeft9x9() { 
