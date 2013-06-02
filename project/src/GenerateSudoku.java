@@ -35,6 +35,9 @@ public class GenerateSudoku {
 				if (sBoard.isValid(randomBoard) == false) { 
 					randomBoard.setCellNum(0, rows, columns);
 				}
+				if (sBoard.isValid(randomBoard)) { 
+					System.out.println("yes");
+				}
 			}
 		}
 		return randomBoard; 
