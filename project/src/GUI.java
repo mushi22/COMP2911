@@ -91,16 +91,16 @@ public class GUI {
 		solve.addMouseListener(new MouseAdapter() {
 		   @Override
 		   public void mouseClicked(MouseEvent evt){
-                       gui.pane.remove(right);
-		      GridBagConstraints gbc_rightNineByNine = new GridBagConstraints();
-		gbc_rightNineByNine.gridx = 600;
-		gbc_rightNineByNine.gridy = 1;
-		gbc_rightNineByNine.fill = GridBagConstraints.BOTH;
-                right = gui.updateRight9x9();
-		gui.pane.add(right, gbc_rightNineByNine);
-                gui.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gui.frame.add(gui.pane);
-		gui.frame.setVisible(true);
+			   gui.pane.remove(right);
+			   GridBagConstraints gbc_rightNineByNine = new GridBagConstraints();
+			   gbc_rightNineByNine.gridx = 600;
+			   gbc_rightNineByNine.gridy = 1;
+			   gbc_rightNineByNine.fill = GridBagConstraints.BOTH;
+			   right = gui.updateRight9x9();
+			   gui.pane.add(right, gbc_rightNineByNine);
+			   gui.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			   gui.frame.add(gui.pane);
+			   gui.frame.setVisible(true);
 		   }
 		});
 		GridBagConstraints gbc_solveButton = new GridBagConstraints();
@@ -122,23 +122,27 @@ public class GUI {
 		gbc_exitButton.fill = GridBagConstraints.BOTH;
 		gui.pane.add(exit, gbc_exitButton);
 		
-//		// create a load input and position it correctly in the pane
-//		JButton loadSudoku = new JButton("Load Sudoku File");
-//		loadSudoku.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent arg0) {
-//
-//				String fileName = JOptionPane.showInputDialog(null, "Please enter a valid filename. input1", "Choose a File", JOptionPane.QUESTION_MESSAGE);
-//				//controller.setOrderbook(fileName);
-//			}
-//		});
-//		GridBagConstraints gbc_loadSudoku = new GridBagConstraints();
-//		gbc_loadSudoku.anchor = GridBagConstraints.SOUTH;
-//		gbc_loadSudoku.fill = GridBagConstraints.HORIZONTAL;
-//		gbc_loadSudoku.insets = new Insets(0, 0, 5, 5);
-//		gbc_loadSudoku.gridx = 0;
-//		gbc_loadSudoku.gridy = 2;
-//		gui.pane.add (loadSudoku, gbc_loadSudoku);
+		// create a button that generates a new sudoku
+		JButton generate = new JButton("Generate Sudoku");
+		generate.addMouseListener(new MouseAdapter() {
+			   @Override
+			   public void mouseClicked(MouseEvent evt){
+				   GridBagConstraints gbc_leftNineByNine = new GridBagConstraints();
+				   gbc_leftNineByNine.gridx = 0;
+				   gbc_leftNineByNine.gridy = 1;
+				   gbc_leftNineByNine.fill = GridBagConstraints.BOTH;
+				   left = gui.updateLeft9x9();
+				   gui.pane.add(left, gbc_leftNineByNine);
+				   gui.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				   gui.frame.add(gui.pane);
+				   gui.frame.setVisible(true);
+			   }
+		});
+		GridBagConstraints gbc_generateButton = new GridBagConstraints();
+		gbc_generateButton.gridx = 0;
+		gbc_generateButton.gridy = 100;
+		gbc_generateButton.fill = GridBagConstraints.BOTH;
+		gui.pane.add(generate, gbc_generateButton);
 		
 		
 		gui.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -215,7 +219,30 @@ public class GUI {
 			}
 		}
 		return outer;
+	}
 	
+	public JPanel updateLeft9x9() { 
+		
+		JPanel inner = null;
+		JPanel outer =  new JPanel(new GridLayout(3,3));
+		Dimension dimSize = new Dimension (100, 100);
+		
+		for (int i = 0; i < 9; i++) {	
+			inner = new JPanel(new GridLayout(3, 3));
+			inner.setBorder(BorderFactory.createLineBorder(Color.black));
+			for(int j = 0; j <= 8; j++) {
+				int cellValue = 0;							// create an int 
+				cellValue = puzzle.getBoardArray()[3*(i / 3) + j/3][3*(i % 3) + j%3];					// to store the board number
+				Integer newInt = new Integer(cellValue);	// change the type to an Integer
+				String stringCellValue = newInt.toString();	// allowing us to convert it to a string
+				inner.add(new JTextField(stringCellValue));	// add the string value 
+				inner.setPreferredSize(dimSize);			// set the size 
+			}
+			for(int k = 0; k <=8; k++) {		// add the 3x3 into the big pane
+				outer.add(inner);
+			}
+		}
+		return outer;
 	}
 }
 		
