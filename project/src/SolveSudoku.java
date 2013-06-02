@@ -49,8 +49,8 @@ public class SolveSudoku {
 	}
 	
 	public SudokuBoard recursiveBruteForceSolver(SudokuBoard sBoard) {
-	   System.out.print("-\n");
-      sBoard.printBoard();
+	  // System.out.print("-\n");
+      //sBoard.printBoard();
       int i, j;
       int[] emptyCell = findEmptyCell(sBoard);
       i = emptyCell[0];

@@ -23,8 +23,9 @@ public class GUI {
 	private Container pane = new Container();
 	private Dimension frameSize = new Dimension(800, 500);
 	private Insets gridInsets = new Insets(10, 10, 10, 10);
-	
-	
+	private GUI gui;
+	private JPanel left;
+        private JPanel right;
 	/* Constructors */
 	public GUI() { 
 		
@@ -33,9 +34,9 @@ public class GUI {
 	/**
 	 * Initialise the elements of the frame 
 	 */
-	public void initialise() { 
+	public void initialise() throws InterruptedException { 
 		
-		GUI gui = new GUI();
+		gui = new GUI();
 		
 		gui.frame.setSize(gui.frameSize);
 		
@@ -50,7 +51,7 @@ public class GUI {
 		GridBagConstraints gbc_originalLabel = new GridBagConstraints();
 		gbc_originalLabel.gridx = 0;
 		gbc_originalLabel.gridy = 0;
-		gbc_originalLabel.fill = gbc_originalLabel.HORIZONTAL;
+		gbc_originalLabel.fill = GridBagConstraints.HORIZONTAL;
 //		gbc_originalLabel.
 		gui.pane.add(original, gbc_originalLabel);
 	
@@ -59,7 +60,8 @@ public class GUI {
 		gbc_leftNineByNine.gridx = 0;
 		gbc_leftNineByNine.gridy = 1;
 		gbc_leftNineByNine.fill = GridBagConstraints.BOTH;
-		gui.pane.add(gui.createLeft9x9(), gbc_leftNineByNine);
+                left=gui.createLeft9x9();
+		gui.pane.add(left, gbc_leftNineByNine);
 		
 		// create a "Solved" label and position it correctly in the pane
 		JLabel solved = new JLabel("Solved");
@@ -74,21 +76,31 @@ public class GUI {
 		gbc_rightNineByNine.gridx = 600;
 		gbc_rightNineByNine.gridy = 1;
 		gbc_rightNineByNine.fill = GridBagConstraints.BOTH;
-		gui.pane.add(gui.createRight9x9(), gbc_rightNineByNine);
-
-		// create a solve button and position it correctly in the pane
+                right=gui.createRight9x9();
+		gui.pane.add(right, gbc_rightNineByNine);
+	
+                // create a solve button and position it correctly in the pane
 		JButton solve = new JButton("Solve");
 		solve.addMouseListener(new MouseAdapter() {
 		   @Override
 		   public void mouseClicked(MouseEvent evt){
-		      //TODO
+                       gui.pane.remove(right);
+		      GridBagConstraints gbc_rightNineByNine = new GridBagConstraints();
+		gbc_rightNineByNine.gridx = 600;
+		gbc_rightNineByNine.gridy = 1;
+		gbc_rightNineByNine.fill = GridBagConstraints.BOTH;
+                right=gui.updateRight9x9();
+		gui.pane.add(right, gbc_rightNineByNine);
+                gui.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		gui.frame.add(gui.pane);
+		gui.frame.setVisible(true);
 		   }
 		});
 		GridBagConstraints gbc_solveButton = new GridBagConstraints();
 		gbc_solveButton.gridx = 400;
 		gbc_solveButton.gridy = 100;
 		gui.pane.add(solve, gbc_solveButton);
-	
+
 		// create an exit button and position it correctly in the pane
 		JButton exit = new JButton("Exit");
 		exit.addMouseListener(new MouseAdapter() {			// exit button's functionality 
@@ -135,20 +147,37 @@ public class GUI {
 		}
 		return outer;
 	}
-	
 	public JPanel createRight9x9() { 
 		
 		JPanel inner = null;
 		JPanel outer =  new JPanel(new GridLayout(3,3));
+		JTextField[][] numbers = new JTextField[9][9];
 		Dimension dimSize = new Dimension (100, 100);
-		SudokuFileReader sudokuFileReader = new SudokuFileReader();
-      SudokuBoard Board = new SudokuBoard();
-      Board = sudokuFileReader.readInFile();
-      SolveSudoku tester = new SolveSudoku();
-      Board = tester.recursiveBruteForceSolver(Board);
+		
+		for (int k = 0; k < 9; k++) {
+			inner = new JPanel(new GridLayout(3,3));
+			inner.setBorder(BorderFactory.createLineBorder(Color.black));
+			for(int i = 0; i <= 8; i++){
+//				inner.add(new JTextField(1));
+				numbers[i][k] = new JTextField();
+				inner.add(numbers[i][k]);
+				inner.setPreferredSize(dimSize);
+			}
+			for(int i = 0; i <=8; i++){
+				outer.add(inner);
+			}
+		}
+		return outer;
+	}
+
+	public JPanel updateRight9x9() { 
+		
+		JPanel inner = null;
+		JPanel outer =  new JPanel(new GridLayout(3,3));
+		Dimension dimSize = new Dimension (100, 100);
+		
 		GUIController guiController = new GUIController();
-		int[][] board = guiController.getBoardArray().getBoard();
-		board = Board.getBoard();
+		int[][] board = guiController.getSolvedBoardArray().getBoard();
 		for (int i = 0; i < 9; i++) {	
 			inner = new JPanel(new GridLayout(3, 3));
 			inner.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -165,6 +194,7 @@ public class GUI {
 			}
 		}
 		return outer;
-		}
-		
+	
+	}
 }
+		
