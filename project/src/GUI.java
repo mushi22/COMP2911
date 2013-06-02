@@ -29,7 +29,6 @@ public class GUI {
 	private JPanel right;
 	private SudokuBoard puzzle;
 	private SudokuBoard solvedPuzzle;
-	//private SudokuBoard generatedPuzzle;
 	
 	/* Constructors */
 	public GUI() { 
