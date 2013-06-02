@@ -130,7 +130,14 @@ public class GUI {
 		generate.addMouseListener(new MouseAdapter() {
 			   @Override
 			   public void mouseClicked(MouseEvent evt){
-
+			      
+			      
+			      GUIController guiController = new GUIController();
+			      puzzle = guiController.getGeneratedBoard();
+			      SolveSudoku tester = new SolveSudoku();
+			      solvedPuzzle = puzzle.copy();
+			      solvedPuzzle = tester.recursiveBruteForceSolver(solvedPuzzle);
+			      
 			      
 				   GridBagConstraints gbc_leftNineByNine = new GridBagConstraints();
 				   gbc_leftNineByNine.gridx = 0;
