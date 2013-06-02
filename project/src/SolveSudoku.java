@@ -11,10 +11,15 @@ public class SolveSudoku {
    //private static final int SMALLBOX_SIZE = 3;
 	//boolean[] digits;
    
+	/* Constructor */
 	public SolveSudoku(){
 	   //testIsValid();
 	}
 	
+	/* Methods */
+	/**
+	 * Tests if the board is valid 
+	 */
 	private void testIsValid(){
 	     
       Scanner sc = null;
@@ -40,6 +45,11 @@ public class SolveSudoku {
      
 	}
 	
+	/**
+	 * A recursive brute force solver. 
+	 * @param sBoard
+	 * @return solved board
+	 */
 	public SudokuBoard recursiveBruteForceSolver(SudokuBoard sBoard) {
 
 	  // System.out.print("-\n");
@@ -53,8 +63,7 @@ public class SolveSudoku {
          return sBoard;
       }
       LinkedList<Integer> possibilities= getPossibilities(i, j, sBoard);
-      for (Integer k : possibilities)
-      {
+      for (Integer k : possibilities) {
          sBoard.setCellNum(k.intValue(), i, j);
          SudokuBoard temp = copy(sBoard);
          temp = recursiveBruteForceSolver(temp);
@@ -72,138 +81,182 @@ public class SolveSudoku {
       return null;
    }
    
-   private int[] findEmptyCell(SudokuBoard sBoard)
-   {
-      int[] emptyCell = {-1, -1};
-      for (int i = 0; i < 9; i++)
-      {
-         for (int j = 0; j < 9; j++)
-         {
-            if (sBoard.getBoard()[i][j]==0) {
-               emptyCell[0] = i;
-               emptyCell[1] = j;
-               return emptyCell;
-            }
-         }
-      }
-      return emptyCell;
-   }
-
-   private LinkedList<Integer> getPossibilities(int row, int column, SudokuBoard sBoard)
-   {
-      LinkedList<Integer> numbers = new LinkedList<Integer>();
-      for (int i = 1; i < 10; i++) 
-      {
-         numbers.add(i);
-      }
-      for (int j = 0; j < 9; j++)
-      {
-         if (numbers.contains(new Integer(sBoard.getBoard()[row][j]))) {
-            numbers.remove(new Integer(sBoard.getBoard()[row][j]));
-         }
-         if (numbers.contains(new Integer(sBoard.getBoard()[j][column]))) {
-            numbers.remove(new Integer(sBoard.getBoard()[j][column]));
-         }
-      }
-      
-      int subGridRow = row - (row % 3);
-      int subGridColumn = column - (column % 3);
-      
-      for(int i = subGridRow; i < subGridRow + 3; i++){
-         for(int j = subGridColumn; j < subGridColumn + 3; j++){
-            if (numbers.contains(new Integer(sBoard.getBoard()[i][j]))) {
-               numbers.remove(new Integer(sBoard.getBoard()[i][j]));
-            }
-         }
-      }
-      return numbers;
+	/** 
+	 * Finds and empty cell on the board.
+	 * @param sBoard
+	 * @return emptyCell which is an array of areas
+	 */
+	private int[] findEmptyCell(SudokuBoard sBoard) {
+		
+		int[] emptyCell = {-1, -1};
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				if (sBoard.getBoard()[i][j]==0) {
+					emptyCell[0] = i;
+					emptyCell[1] = j;
+					return emptyCell;
+				}
+			}
+		}
+		return emptyCell;
+	}
+	
+	/**
+	 * Providing a row, column, and a board we get the possibilities for a cell. 
+	 * @param row
+	 * @param column
+	 * @param sBoard
+	 * @return an linked list of integers for possilities
+	 */
+	private LinkedList<Integer> getPossibilities(int row, int column, SudokuBoard sBoard) {
+	   
+	   LinkedList<Integer> numbers = new LinkedList<Integer>();
+	   for (int i = 1; i < 10; i++) {
+		   numbers.add(i);
+	   }
+	   for (int j = 0; j < 9; j++) {
+		   if (numbers.contains(new Integer(sBoard.getBoard()[row][j]))) {
+			   numbers.remove(new Integer(sBoard.getBoard()[row][j]));
+		   }
+		   if (numbers.contains(new Integer(sBoard.getBoard()[j][column]))) {
+			   numbers.remove(new Integer(sBoard.getBoard()[j][column]));
+		   }
+	   }
+	   
+	   int subGridRow = row - (row % 3);
+	   int subGridColumn = column - (column % 3);
+	   
+	   for(int i = subGridRow; i < subGridRow + 3; i++){
+		   for(int j = subGridColumn; j < subGridColumn + 3; j++){
+			   if (numbers.contains(new Integer(sBoard.getBoard()[i][j]))) {
+				   numbers.remove(new Integer(sBoard.getBoard()[i][j]));
+			   }
+		   }
+	   }
+	   return numbers;
    }
    
-   public static boolean isValid(SudokuBoard sBoard){
-	   for(int i = 0; i < 9; i ++){
-		   if(!isValidRow(sBoard, i) || !isValidColumn(sBoard, i)){
+	/**
+	 * Checks if the board is valid. Uses a helper function to check inner 3x3 grids.
+	 * @param sBoard
+	 * @return early exits a boolean
+	 */
+	public boolean isValid(SudokuBoard sBoard){
+	   
+	   for(int i = 0; i < 9; i ++) {
+		   if(!isValidRow(sBoard, i) || !isValidColumn(sBoard, i)) {
 			   //row or column has repetitions
 			   return false;
-			   }
+		   }
 	   }   
-	   for(int i = 0; i < 9; i+=3){
-	      for(int j = 0; j < 9; j+=3){
-	        if(!isValidSubGrid(sBoard, i, j)){
-	            // subGrid has repetitions
-	            return false;
-	         }
-	      }
-	   }
-	   return true;
-   }
-   
-   private static boolean isValidSubGrid(SudokuBoard sBoard, int row, int column){
-      int subGridRow = row - (row % 3);
-      int subGridColumn = column - (column % 3);
-      for(int i = subGridRow; i < subGridRow + 3; i++){
-         for(int j = subGridColumn; j < subGridColumn + 3; j++){
-            for(int k = subGridRow; k < subGridRow + 3; k++){
-               for(int l = subGridColumn; l < subGridColumn + 3; l++){
-                  if ((i!=k || j!=l) && sBoard.getBoard()[i][j] == sBoard.getBoard()[k][l]) {
-                     return false;
-                  }
-               }
-            }
-         }
-      }
-      return true;
-   }
-   
-   private static boolean isValidColumn(SudokuBoard sBoard, int column){
-	   for(int i = 0; i < 9; i++){
-		   for(int j = i + 1; j < 9; j++){
-			   if(sBoard.getBoard()[i][column] == sBoard.getBoard()[j][column]){
+	   for(int i = 0; i < 9; i+=3) {
+		   for(int j = 0; j < 9; j+=3) {
+			   if(!isValidSubGrid(sBoard, i, j)) {
+				   // subGrid has repetitions
 				   return false;
 			   }
 		   }
 	   }
 	   return true;
    }
+	
+	/** 
+	 * Checks if the 3x3 sub grid is valid.
+	 * @param sBoard
+	 * @param row
+	 * @param column
+	 * @return boolean whether it is valid or not
+	 */
+	private static boolean isValidSubGrid(SudokuBoard sBoard, int row, int column) {
+	   
+		int subGridRow = row - (row % 3);
+		int subGridColumn = column - (column % 3);
+	   
+		for(int i = subGridRow; i < subGridRow + 3; i++) {
+			for(int j = subGridColumn; j < subGridColumn + 3; j++) {
+				for(int k = subGridRow; k < subGridRow + 3; k++) {
+					for(int l = subGridColumn; l < subGridColumn + 3; l++) {
+						if ((i!=k || j!=l) && sBoard.getBoard()[i][j] == sBoard.getBoard()[k][l]) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
+	}
+	
+	/** 
+	 * Checks whether a column is valid or not
+	 * @param sBoard
+	 * @param column
+	 * @return boolean
+	 */
+	private static boolean isValidColumn(SudokuBoard sBoard, int column) {
+	   
+		for(int i = 0; i < 9; i++) {
+			for(int j = i + 1; j < 9; j++) {
+				if(sBoard.getBoard()[i][column] == sBoard.getBoard()[j][column]) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
    
-   private static boolean isValidRow(SudokuBoard sBoard, int row){
-	   for(int i = 0; i < 9; i++){
-		   for(int j = i + 1; j < 9; j++){
-			   if(sBoard.getBoard()[row][i] == sBoard.getBoard()[row][j]){
-				   return false;
-			   }
+	/**
+	 * Checks whether a row is valid or not
+	 * @param sBoard
+	 * @param row
+	 * @return
+	 */
+	private static boolean isValidRow(SudokuBoard sBoard, int row){
+		
+		for(int i = 0; i < 9; i++){
+			for(int j = i + 1; j < 9; j++){
+				if(sBoard.getBoard()[row][i] == sBoard.getBoard()[row][j]){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Checks if the board is complete seaching for any 0's.
+	 * @param sBoard
+	 * @return boolean
+	 */
+	private static boolean isComplete(SudokuBoard sBoard) {
+		
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				/*System.out.print(i + "," + j + ":");
+				System.out.print(sBoard.getBoard()[i][j]);
+				System.out.print("\n");*/
+				if (sBoard.getBoard()[i][j] == 0) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+   
+	/**
+	 * Copys the sudoku board
+	 * @param sBoard
+	 * @return a copied sudoku board	
+	 */
+	private static SudokuBoard copy(SudokuBoard sBoard) {
+      
+	   int[][] newGrid = new int[9][9];
+	   for (int i = 0; i < 9; i++) {
+		   for (int j = 0; j < 9; j++) {
+			   newGrid[i][j] = sBoard.getBoard()[i][j];
 		   }
 	   }
-	   return true;
-   }
-   
-   
-   private static boolean isComplete(SudokuBoard sBoard)
-   {
-      for (int i = 0; i < 9; i++)
-      {
-         for (int j = 0; j < 9; j++)
-         {
-            /*System.out.print(i + "," + j + ":");
-            System.out.print(sBoard.getBoard()[i][j]);
-            System.out.print("\n");*/
-            if (sBoard.getBoard()[i][j] == 0) {
-               return false;
-            }
-         }
-      }
-      return true;
-   }
-   
-   private static SudokuBoard copy(SudokuBoard sBoard)
-   {
-      int[][] newGrid = new int[9][9];
-      for (int i = 0; i < 9; i++) {
-         for (int j = 0; j < 9; j++) {
-          newGrid[i][j] = sBoard.getBoard()[i][j];
-         }
-        }
-      SudokuBoard newBoard = new SudokuBoard(newGrid);
-      return newBoard;
+	   SudokuBoard newBoard = new SudokuBoard(newGrid);
+	   return newBoard;
    }
    
    

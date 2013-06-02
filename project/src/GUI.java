@@ -25,7 +25,8 @@ public class GUI {
 	private Insets gridInsets = new Insets(10, 10, 10, 10);
 	private GUI gui;
 	private JPanel left;
-        private JPanel right;
+	private JPanel right;
+	
 	/* Constructors */
 	public GUI() { 
 		
@@ -52,7 +53,6 @@ public class GUI {
 		gbc_originalLabel.gridx = 0;
 		gbc_originalLabel.gridy = 0;
 		gbc_originalLabel.fill = GridBagConstraints.HORIZONTAL;
-//		gbc_originalLabel.
 		gui.pane.add(original, gbc_originalLabel);
 	
 		// create a 9x9 grid on the left panel under the Original label
@@ -60,7 +60,7 @@ public class GUI {
 		gbc_leftNineByNine.gridx = 0;
 		gbc_leftNineByNine.gridy = 1;
 		gbc_leftNineByNine.fill = GridBagConstraints.BOTH;
-                left=gui.createLeft9x9();
+		left = gui.createLeft9x9();
 		gui.pane.add(left, gbc_leftNineByNine);
 		
 		// create a "Solved" label and position it correctly in the pane
@@ -76,10 +76,10 @@ public class GUI {
 		gbc_rightNineByNine.gridx = 600;
 		gbc_rightNineByNine.gridy = 1;
 		gbc_rightNineByNine.fill = GridBagConstraints.BOTH;
-                right=gui.createRight9x9();
+		right = gui.createRight9x9();
 		gui.pane.add(right, gbc_rightNineByNine);
 	
-                // create a solve button and position it correctly in the pane
+		// create a solve button and position it correctly in the pane
 		JButton solve = new JButton("Solve");
 		solve.addMouseListener(new MouseAdapter() {
 		   @Override
@@ -114,11 +114,9 @@ public class GUI {
 		gbc_exitButton.gridy = 200;
 		gbc_exitButton.fill = GridBagConstraints.BOTH;
 		gui.pane.add(exit, gbc_exitButton);
-		
 		gui.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gui.frame.add(gui.pane);
 		gui.frame.setVisible(true);
-
 	}
 	
 	public JPanel createLeft9x9() { 
@@ -158,7 +156,6 @@ public class GUI {
 			inner = new JPanel(new GridLayout(3,3));
 			inner.setBorder(BorderFactory.createLineBorder(Color.black));
 			for(int i = 0; i <= 8; i++){
-//				inner.add(new JTextField(1));
 				numbers[i][k] = new JTextField();
 				inner.add(numbers[i][k]);
 				inner.setPreferredSize(dimSize);

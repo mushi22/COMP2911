@@ -29,16 +29,20 @@ public class GUIController {
 		return board;
 	}
 	
-
-	
-	 public SudokuBoard getSolvedBoardArray() { 
-	      SudokuFileReader sudokuFileReader = new SudokuFileReader();
-	      SudokuBoard Board = new SudokuBoard();
-	      Board = sudokuFileReader.readInFile();
-	      SolveSudoku tester = new SolveSudoku();
-	      Board = tester.recursiveBruteForceSolver(Board);
-	      return Board;
-	        }
+	/** 
+	 * Gets the solved array.
+	 * @return the 2D solved array
+	 */
+	public SudokuBoard getSolvedBoardArray() { 
+		
+		SudokuFileReader sudokuFileReader = new SudokuFileReader();
+		SudokuBoard Board = new SudokuBoard();
+		Board = sudokuFileReader.readInFile();
+		SolveSudoku tester = new SolveSudoku();
+		Board = tester.recursiveBruteForceSolver(Board);
+		return Board;	
+	 }
+	 
 //   public static void testSolver()
 //   {
 //      SudokuFileReader sudokuFileReader = new SudokuFileReader();

@@ -24,7 +24,6 @@ public class SudokuBoard {
 	}
 	
 	/* Methods */
-	
 	/**
 	 * Prints the sudoku board
 	 */
@@ -39,17 +38,34 @@ public class SudokuBoard {
       System.out.print("\n");
 	}
 	
+	/**
+	 * Gets the board 
+	 * @return
+	 */
 	public int[][] getBoard() { 
 		
 		return sBoard;
 	}
+	
 	/**
+	 * Gets the cell number
+	 * @param row
+	 * @param column
+	 * @return provide the number at the given row and column
 	 */
 	public int getCellNum(int row, int column){
+		
 		return sBoard[row][column];
 	}
 	
+	/**
+	 * Sets the cell number 
+	 * @param newnum
+	 * @param row
+	 * @param column
+	 */
 	public void setCellNum(int newnum, int row, int column){
+		
 		sBoard[row][column] = newnum;
 	}
 	
