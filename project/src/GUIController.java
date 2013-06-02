@@ -13,15 +13,7 @@ public class GUIController {
 		
 		GUI g = new GUI();
 		g.initialise();
-		
-		GenerateSudoku gBoard = new GenerateSudoku();
-		SudokuBoard sBoard = new SudokuBoard();
-		sBoard = gBoard.generateRandomBoard();
-		sBoard.printBoard();
 
-		
-//		board = board.generateRandomBoard();
-//		board.printBoard();
 	}
 	
 	/* Methods */
@@ -36,6 +28,16 @@ public class GUIController {
 		board = sudokuFileReader.readInFile();
 		//board.printBoard();
 		return board;
+	}
+	
+	public SudokuBoard getGeneratedBoard() {
+		
+		GenerateSudoku gBoard = new GenerateSudoku();
+		SudokuBoard sBoard = new SudokuBoard();
+		sBoard = gBoard.generateRandomBoard();
+		sBoard.printBoard();
+		
+		return sBoard;
 	}
 	
 	/** 

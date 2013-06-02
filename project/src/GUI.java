@@ -29,14 +29,16 @@ public class GUI {
 	private JPanel right;
 	private SudokuBoard puzzle;
 	private SudokuBoard solved;
+	private SudokuBoard generatedPuzzle;
 	
 	/* Constructors */
 	public GUI() { 
 	   GUIController guiController = new GUIController();
 	   puzzle = guiController.getBoard();
-      SolveSudoku tester = new SolveSudoku();
-      solved = puzzle.copy();
-      solved = tester.recursiveBruteForceSolver(solved);
+	   //generatedPuzzle = guiController.getGeneratedBoard();
+       SolveSudoku tester = new SolveSudoku();
+       solved = puzzle.copy();
+       solved = tester.recursiveBruteForceSolver(solved);
 	}
 	
 	/**
@@ -91,6 +93,7 @@ public class GUI {
 		solve.addMouseListener(new MouseAdapter() {
 		   @Override
 		   public void mouseClicked(MouseEvent evt){
+			   
 			   gui.pane.remove(right);
 			   GridBagConstraints gbc_rightNineByNine = new GridBagConstraints();
 			   gbc_rightNineByNine.gridx = 600;
@@ -232,7 +235,7 @@ public class GUI {
 			inner.setBorder(BorderFactory.createLineBorder(Color.black));
 			for(int j = 0; j <= 8; j++) {
 				int cellValue = 0;							// create an int 
-				cellValue = puzzle.getBoardArray()[3*(i / 3) + j/3][3*(i % 3) + j%3];					// to store the board number
+				cellValue = generatedPuzzle.getBoardArray()[3*(i / 3) + j/3][3*(i % 3) + j%3];					// to store the board number
 				Integer newInt = new Integer(cellValue);	// change the type to an Integer
 				String stringCellValue = newInt.toString();	// allowing us to convert it to a string
 				inner.add(new JTextField(stringCellValue));	// add the string value 
