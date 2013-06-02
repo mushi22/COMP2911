@@ -41,6 +41,7 @@ public class SudokuFileReader {
 					}
 				}
 			}
+			sc.close();
 		} catch (FileNotFoundException e) {}
 		  catch (NoSuchElementException e) {}
 		

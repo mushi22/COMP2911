@@ -25,10 +25,11 @@ public class GUIController {
 		SudokuFileReader sudokuFileReader = new SudokuFileReader();
 		SudokuBoard board = new SudokuBoard();
 		board = sudokuFileReader.readInFile();
-		board.printBoard();
+		//board.printBoard();
 		return board;
 	}
 	
+
 	
 	 public SudokuBoard getSolvedBoardArray() { 
 	      SudokuFileReader sudokuFileReader = new SudokuFileReader();
@@ -47,6 +48,17 @@ public class GUIController {
 //      board = tester.recursiveBruteForceSolver(board);
 //      //System.out.print("solved\n");
 //      //board.printBoard();
+//   }
+
+//   public static void testSolver()
+//   {
+//      SudokuFileReader sudokuFileReader = new SudokuFileReader();
+//      SudokuBoard board = new SudokuBoard();
+//      board = sudokuFileReader.readInFile();
+//      SolveSudoku tester = new SolveSudoku();
+//      board = tester.recursiveBruteForceSolver(board);
+//      System.out.print("solved\n");
+//      board.printBoard();
 //   }
 
 
