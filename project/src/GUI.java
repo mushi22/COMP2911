@@ -27,8 +27,8 @@ public class GUI {
 	private GUI gui;
 	private JPanel left;
 	private JPanel right;
-   private SudokuBoard puzzle;
-   private SudokuBoard solved;
+	private SudokuBoard puzzle;
+	private SudokuBoard solved;
 	
 	/* Constructors */
 	public GUI() { 

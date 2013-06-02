@@ -13,6 +13,16 @@ public class GUIController {
 		
 		GUI g = new GUI();
 		g.initialise();
+		
+		GenerateSudoku gBoard = new GenerateSudoku();
+		SudokuBoard sBoard = new SudokuBoard();
+		sBoard = gBoard.generateRandomBoard();
+		sBoard.printBoard();
+		
+	
+		
+//		board = board.generateRandomBoard();
+//		board.printBoard();
 	}
 	
 	/* Methods */

@@ -1,11 +1,14 @@
+import java.util.Random;
+
 
 /* This class defines a plain sudoku board for values to be added */
 public class SudokuBoard {
 
 	/* Constants defined here for clarity */
 	private int sBoard[][];		// this represents the 9x9 board
-	//private static final int MAX_NUM_COLUMNS = 8;
-	//private static final int MAX_NUM_ROWS = 8;
+	private SudokuBoard sbBoard;
+	private static final int MAX_NUM_COLUMNS = 9;
+	private static final int MAX_NUM_ROWS = 9;
 
 	/* Constructor */
 	/*
@@ -21,6 +24,11 @@ public class SudokuBoard {
 	public SudokuBoard(int board[][]) { 
 		
 		this.sBoard = board;
+	}
+	
+	public SudokuBoard(SudokuBoard board) { 
+		
+		this.sbBoard = board;
 	}
 	
 	/* Methods */
@@ -69,5 +77,12 @@ public class SudokuBoard {
 		sBoard[row][column] = newnum;
 	}
 	
+//	public void main (String[] args) { 
+//		
+//		SudokuBoard board = new SudokuBoard();
+//		board.generateRandomBoard();
+//		board.printBoard();
+//		
+//	}
 	
 }
