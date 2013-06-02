@@ -26,21 +26,27 @@ public class GenerateSudoku {
 	public SudokuBoard generateRandomBoard() { 
 		
 		SudokuBoard randomBoard = new SudokuBoard();
-		SolveSudoku sBoard = new SolveSudoku();
+		SolveSudoku solver = new SolveSudoku();
 		Random rand = new Random();
 		
 		for (int rows = 0; rows < MAX_NUM_ROWS; rows++) {
 			for (int columns = 0; columns < MAX_NUM_COLUMNS; columns++) {
 				randomBoard.setCellNum(rand.nextInt(9), rows, columns);
-				if (sBoard.isValid(randomBoard) == false) { 
+				if (solver.isValid(randomBoard) == false) { 
 					randomBoard.setCellNum(0, rows, columns);
 				}
-				if (sBoard.isValid(randomBoard)) { 
+				if (solver.isValid(randomBoard)) { 
 					System.out.println("yes");
 				}
 			}
 		}
-		return randomBoard; 
+		SudokuBoard test = randomBoard.copy();
+		test = solver.recursiveBruteForceSolver(test);
+		if (test != null) {
+		   return randomBoard;
+		} else {
+		   return generateRandomBoard();
+		}
 	}
 	
 //	public boolean noDupes(SudokuBoard sBoard) {
