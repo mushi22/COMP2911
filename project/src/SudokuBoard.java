@@ -6,7 +6,6 @@ public class SudokuBoard {
 
 	/* Constants defined here for clarity */
 	private int sBoard[][];		// this represents the 9x9 board
-	private SudokuBoard sbBoard;
 	private static final int MAX_NUM_COLUMNS = 9;
 	private static final int MAX_NUM_ROWS = 9;
 
@@ -24,11 +23,6 @@ public class SudokuBoard {
 	public SudokuBoard(int board[][]) { 
 		
 		this.sBoard = board;
-	}
-	
-	public SudokuBoard(SudokuBoard board) { 
-		
-		this.sbBoard = board;
 	}
 	
 	/* Methods */
@@ -92,14 +86,13 @@ public class SudokuBoard {
       int[][] newGrid = new int[9][9];
       for (int i = 0; i < 9; i++) {
          for (int j = 0; j < 9; j++) {
-            newGrid[i][j] = sbBoard.getBoardArray()[i][j];
+            newGrid[i][j] = sBoard[i][j];
          }
       }
       SudokuBoard newBoard = new SudokuBoard(newGrid);
       return newBoard;
    }
-   
-	
+   	
 //	public void main (String[] args) { 
 //		
 //		SudokuBoard board = new SudokuBoard();

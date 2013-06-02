@@ -121,28 +121,28 @@ public class SolveSudoku {
 	 * @param sBoard
 	 * @return number of sulutions
 	 */
-	public int noSolutions(SudokuBoard sBoard) {
-		// System.out.print("-\n");
-		//sBoard.printBoard();
-		int solutions = 0;
-		int i, j;
-		int[] emptyCell = findEmptyCell(sBoard);
-		i = emptyCell[0];
-		j = emptyCell[1];
-		if (i == -1 || j == -1) {
-			return 1;
-		}
-		LinkedList<Integer> possibilities = getPossibilities(i, j, sBoard);
-		for (Integer k : possibilities) {
-			sBoard.setCellNum(k.intValue(), i, j);
-			SudokuBoard temp = copy(sBoard);
-			temp = recursiveBruteForceSolver(temp);
-			if (!(temp == null)) {
-				solutions++;
-			}
-		} 
-		return solutions;
-	}
+//	public int noSolutions(SudokuBoard sBoard) {
+//		// System.out.print("-\n");
+//		//sBoard.printBoard();
+//		int solutions = 0;
+//		int i, j;
+//		int[] emptyCell = findEmptyCell(sBoard);
+//		i = emptyCell[0];
+//		j = emptyCell[1];
+//		if (i == -1 || j == -1) {
+//			return 1;
+//		}
+//		LinkedList<Integer> possibilities = getPossibilities(i, j, sBoard);
+//		for (Integer k : possibilities) {
+//			sBoard.setCellNum(k.intValue(), i, j);
+//			SudokuBoard temp = copy(sBoard);
+//			temp = recursiveBruteForceSolver(temp);
+//			if (!(temp == null)) {
+//				solutions++;
+//			}
+//		} 
+//		return solutions;
+//	}
    
 	/** 
 	 * Finds and empty cell on the board.
@@ -304,26 +304,7 @@ public class SolveSudoku {
 		}
 		return true;
 	}
-   
-	/**
-	 * Copys the sudoku board
-	 * @param sBoard
-	 * @return a copied sudoku board	
-	 */
-   public SudokuBoard copy(SudokuBoard sBoard) {
-      
-	   int[][] newGrid = new int[9][9];
-	   for (int i = 0; i < 9; i++) {
-		   for (int j = 0; j < 9; j++) {
-			   newGrid[i][j] = sBoard.getBoardArray()[i][j];
-		   }
-	   }
-	   SudokuBoard newBoard = new SudokuBoard(newGrid);
-	   return newBoard;
-   }
-  
-   
-
+	
    /**
     * main function checks board is valid
     * @return
