@@ -20,7 +20,7 @@ public class GUIController {
 	 * Gets the read in numbers as a 2D array
 	 * @return the 2D array with the sudoku values
 	 */
-	public SudokuBoard getBoardArray() { 
+	public SudokuBoard getBoard() { 
 		
 		SudokuFileReader sudokuFileReader = new SudokuFileReader();
 		SudokuBoard board = new SudokuBoard();

@@ -91,7 +91,7 @@ public class SolveSudoku {
 		int[] emptyCell = {-1, -1};
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
-				if (sBoard.getBoard()[i][j]==0) {
+				if (sBoard.getBoardArray()[i][j]==0) {
 					emptyCell[0] = i;
 					emptyCell[1] = j;
 					return emptyCell;
@@ -115,11 +115,11 @@ public class SolveSudoku {
 		   numbers.add(i);
 	   }
 	   for (int j = 0; j < 9; j++) {
-		   if (numbers.contains(new Integer(sBoard.getBoard()[row][j]))) {
-			   numbers.remove(new Integer(sBoard.getBoard()[row][j]));
+		   if (numbers.contains(new Integer(sBoard.getBoardArray()[row][j]))) {
+			   numbers.remove(new Integer(sBoard.getBoardArray()[row][j]));
 		   }
-		   if (numbers.contains(new Integer(sBoard.getBoard()[j][column]))) {
-			   numbers.remove(new Integer(sBoard.getBoard()[j][column]));
+		   if (numbers.contains(new Integer(sBoard.getBoardArray()[j][column]))) {
+			   numbers.remove(new Integer(sBoard.getBoardArray()[j][column]));
 		   }
 	   }
 	   
@@ -128,8 +128,8 @@ public class SolveSudoku {
 	   
 	   for(int i = subGridRow; i < subGridRow + 3; i++){
 		   for(int j = subGridColumn; j < subGridColumn + 3; j++){
-			   if (numbers.contains(new Integer(sBoard.getBoard()[i][j]))) {
-				   numbers.remove(new Integer(sBoard.getBoard()[i][j]));
+			   if (numbers.contains(new Integer(sBoard.getBoardArray()[i][j]))) {
+				   numbers.remove(new Integer(sBoard.getBoardArray()[i][j]));
 			   }
 		   }
 	   }
@@ -176,7 +176,7 @@ public class SolveSudoku {
 			for(int j = subGridColumn; j < subGridColumn + 3; j++) {
 				for(int k = subGridRow; k < subGridRow + 3; k++) {
 					for(int l = subGridColumn; l < subGridColumn + 3; l++) {
-						if ((i!=k || j!=l) && sBoard.getBoard()[i][j] == sBoard.getBoard()[k][l]) {
+						if ((i!=k || j!=l) && sBoard.getBoardArray()[i][j] == sBoard.getBoardArray()[k][l]) {
 							return false;
 						}
 					}
@@ -196,7 +196,7 @@ public class SolveSudoku {
 	   
 		for(int i = 0; i < 9; i++) {
 			for(int j = i + 1; j < 9; j++) {
-				if(sBoard.getBoard()[i][column] == sBoard.getBoard()[j][column]) {
+				if(sBoard.getBoardArray()[i][column] == sBoard.getBoardArray()[j][column]) {
 					return false;
 				}
 			}
@@ -214,7 +214,7 @@ public class SolveSudoku {
 		
 		for(int i = 0; i < 9; i++){
 			for(int j = i + 1; j < 9; j++){
-				if(sBoard.getBoard()[row][i] == sBoard.getBoard()[row][j]){
+				if(sBoard.getBoardArray()[row][i] == sBoard.getBoardArray()[row][j]){
 					return false;
 				}
 			}
@@ -234,7 +234,7 @@ public class SolveSudoku {
 				/*System.out.print(i + "," + j + ":");
 				System.out.print(sBoard.getBoard()[i][j]);
 				System.out.print("\n");*/
-				if (sBoard.getBoard()[i][j] == 0) {
+				if (sBoard.getBoardArray()[i][j] == 0) {
 					return false;
 				}
 			}
@@ -247,12 +247,12 @@ public class SolveSudoku {
 	 * @param sBoard
 	 * @return a copied sudoku board	
 	 */
-	private static SudokuBoard copy(SudokuBoard sBoard) {
+   public SudokuBoard copy(SudokuBoard sBoard) {
       
 	   int[][] newGrid = new int[9][9];
 	   for (int i = 0; i < 9; i++) {
 		   for (int j = 0; j < 9; j++) {
-			   newGrid[i][j] = sBoard.getBoard()[i][j];
+			   newGrid[i][j] = sBoard.getBoardArray()[i][j];
 		   }
 	   }
 	   SudokuBoard newBoard = new SudokuBoard(newGrid);

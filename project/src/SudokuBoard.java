@@ -42,7 +42,7 @@ public class SudokuBoard {
 	 * Gets the board 
 	 * @return
 	 */
-	public int[][] getBoard() { 
+	public int[][] getBoardArray() { 
 		
 		return sBoard;
 	}
