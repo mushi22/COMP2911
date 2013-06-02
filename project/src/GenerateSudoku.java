@@ -46,7 +46,7 @@ public class GenerateSudoku {
 		}
 	}
 	
-//	public boolean noDupes(SudokuBoard sBoard) {
+//	public boolean checkForDuplicates(SudokuBoard sBoard) {
 //		
 //		int sBoardArray[][] = sBoard.getBoardArray();
 //		

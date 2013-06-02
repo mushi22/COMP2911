@@ -152,7 +152,7 @@ public class GUI {
 				
 				String fileName = JOptionPane.showInputDialog(null, "Please enter a valid filename. ", "Choose a File", JOptionPane.QUESTION_MESSAGE);
 				SudokuFileReader sudokuInput = new SudokuFileReader();
-				puzzle = sudokuInput.readInFile(fileName);
+				//puzzle = sudokuInput.readInFile(fileName);
 				left = gui.updateLeft9x9WithInput(fileName);
 				
 				gui.pane.add(left, gbc_leftNineByNineWithInput);
@@ -218,7 +218,7 @@ public class GUI {
 		JPanel outer =  new JPanel(new GridLayout(3,3));
 		Dimension dimSize = new Dimension (100, 100);
 		
-		for (int i = 0; i < 9; i++) {	
+		for(int i = 0; i < 9; i++) {	
 			inner = new JPanel(new GridLayout(3, 3));
 			inner.setBorder(BorderFactory.createLineBorder(Color.black));
 			for(int j = 0; j <= 8; j++) {
@@ -247,7 +247,7 @@ public class GUI {
 		JTextField[][] numbers = new JTextField[9][9];
 		Dimension dimSize = new Dimension (100, 100);
 		
-		for (int k = 0; k < 9; k++) {
+		for(int k = 0; k < 9; k++) {
 			inner = new JPanel(new GridLayout(3,3));
 			inner.setBorder(BorderFactory.createLineBorder(Color.black));
 			for(int i = 0; i <= 8; i++){
@@ -275,7 +275,7 @@ public class GUI {
 		JPanel outer =  new JPanel(new GridLayout(3,3));
 		Dimension dimSize = new Dimension (100, 100);
 		
-		for (int i = 0; i < 9; i++) {	
+		for(int i = 0; i < 9; i++) {	
 			inner = new JPanel(new GridLayout(3, 3));
 			inner.setBorder(BorderFactory.createLineBorder(Color.black));
 			for(int j = 0; j <= 8; j++) {
@@ -293,20 +293,24 @@ public class GUI {
 		return outer;
 	}
 	
+	/**
+	 * Updates the left grid with the input which is inputted.
+	 * @param fileName
+	 * @return
+	 */
 	public JPanel updateLeft9x9WithInput(String fileName) { 
 		
 		SudokuFileReader sudokuInput = new SudokuFileReader();
 		SudokuBoard boardInput = new SudokuBoard();
 		boardInput = sudokuInput.readInFile(fileName);
 		
-		//setPuzzle(boardInput);
-		puzzle = boardInput;
+		setPuzzle(boardInput);
 		
 		JPanel inner = null;
 		JPanel outer =  new JPanel(new GridLayout(3,3));
 		Dimension dimSize = new Dimension (100, 100);
 		
-		for (int i = 0; i < 9; i++) {	
+		for(int i = 0; i < 9; i++) {	
 			inner = new JPanel(new GridLayout(3, 3));
 			inner.setBorder(BorderFactory.createLineBorder(Color.black));
 			for(int j = 0; j <= 8; j++) {
