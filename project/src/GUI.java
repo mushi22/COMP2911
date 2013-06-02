@@ -61,7 +61,7 @@ public class GUI {
 		GridBagConstraints gbc_originalLabel = new GridBagConstraints();
 		gbc_originalLabel.gridx = 0;
 		gbc_originalLabel.gridy = 0;
-		gbc_originalLabel.fill = GridBagConstraints.HORIZONTAL;
+		//gbc_originalLabel.fill = GridBagConstraints.HORIZONTAL;
 		gui.pane.add(original, gbc_originalLabel);
 	
 		// create a 9x9 grid on the left panel under the Original label
