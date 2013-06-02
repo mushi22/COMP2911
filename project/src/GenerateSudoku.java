@@ -43,7 +43,10 @@ public class GenerateSudoku {
 		SudokuBoard test = randomBoard.copy();
 		test = solver.recursiveBruteForceSolver(test);
 		if (test != null) {
+		   randomBoard.printBoard();
+		   test.printBoard();
 		   return randomBoard;
+		   
 		} else {
 		   return generateRandomBoard();
 		}

@@ -16,7 +16,7 @@ public class SolveSudoku {
 	/* Constructor */
 	public SolveSudoku(){
 	   //testSolver();
-	   testNoSolutions();
+	   //testNoSolutions();
 	}
 
 	
