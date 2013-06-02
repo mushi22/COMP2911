@@ -43,17 +43,6 @@ public class GUIController {
 		
 		return sBoard;
 	}
-	 
-//   public static void testSolver()
-//   {
-//      SudokuFileReader sudokuFileReader = new SudokuFileReader();
-//      SudokuBoard board = new SudokuBoard();
-//      board = sudokuFileReader.readInFile();
-//      SolveSudoku tester = new SolveSudoku();
-//      board = tester.recursiveBruteForceSolver(board);
-//      //System.out.print("solved\n");
-//      //board.printBoard();
-//   }
 
 //   public static void testSolver()
 //   {
