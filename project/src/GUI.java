@@ -130,15 +130,6 @@ public class GUI {
 		generate.addMouseListener(new MouseAdapter() {
 			   @Override
 			   public void mouseClicked(MouseEvent evt){
-			      
-			      
-			      GUIController guiController = new GUIController();
-			      puzzle = guiController.getGeneratedBoard();
-			      SolveSudoku tester = new SolveSudoku();
-			      solvedPuzzle = puzzle.copy();
-			      solvedPuzzle = tester.recursiveBruteForceSolver(solvedPuzzle);
-			      
-			      
 				   GridBagConstraints gbc_leftNineByNine = new GridBagConstraints();
 				   gbc_leftNineByNine.gridx = 0;
 				   gbc_leftNineByNine.gridy = 1;
@@ -210,6 +201,11 @@ public class GUI {
 	}
 
 	public JPanel updateRight9x9() { 
+
+      SolveSudoku tester = new SolveSudoku();
+      solvedPuzzle = puzzle.copy();
+      solvedPuzzle = tester.recursiveBruteForceSolver(solvedPuzzle);
+      
 		
 		JPanel inner = null;
 		JPanel outer =  new JPanel(new GridLayout(3,3));
@@ -234,6 +230,9 @@ public class GUI {
 	}
 	
 	public JPanel updateLeft9x9() { 
+      
+      GUIController guiController = new GUIController();
+      puzzle = guiController.getGeneratedBoard();
 		
 		JPanel inner = null;
 		JPanel outer =  new JPanel(new GridLayout(3,3));
