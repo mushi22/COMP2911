@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.LinkedList;
@@ -13,14 +14,15 @@ public class SolveSudoku {
    
 	/* Constructor */
 	public SolveSudoku(){
-	   //testIsValid();
+	   //testSolver();
+	   testNoSolutions();
 	}
 	
 	/* Methods */
 	/**
 	 * Tests if the board is valid 
 	 */
-	private void testIsValid(){
+	private void testSolver(){
 	     
       Scanner sc = null;
       int[][] board = new int[9][9];
@@ -43,6 +45,33 @@ public class SolveSudoku {
       sBoard.printBoard();
       assertTrue(isValid(sBoard));
      
+	}
+	
+	private void testNoSolutions(){
+      Scanner sc = null;
+      int[][] board = new int[9][9];
+      int nextNumber = 0;
+      
+      try { 
+         sc = new Scanner (new FileReader ("resources/input5"));
+         while (sc.hasNext()) { 
+            for (int row = 0; row < board.length; row++) {
+               for (int column = 0; column < board[row].length; column++) {
+                  nextNumber = sc.nextInt();
+                  board[row][column] = nextNumber;
+               }
+            }
+         }
+      } catch (FileNotFoundException e) {}
+        catch (NoSuchElementException e) {}
+      
+      SudokuBoard sBoard = new SudokuBoard(board);
+      sBoard.printBoard();
+      int noSolutions = noSolutions(sBoard);
+      System.out.print(noSolutions);
+      assertEquals(2,noSolutions);
+      assertTrue(isValid(sBoard));
+      
 	}
 	
 	/**
@@ -80,6 +109,29 @@ public class SolveSudoku {
       } 
       return null;
    }
+	
+	  public int noSolutions(SudokuBoard sBoard) {
+	      // System.out.print("-\n");
+	      //sBoard.printBoard();
+	      int solutions = 0;
+	      int i, j;
+	      int[] emptyCell = findEmptyCell(sBoard);
+	      i = emptyCell[0];
+	      j = emptyCell[1];
+	      if (i == -1 || j == -1) {
+	         return 1;
+	      }
+	      LinkedList<Integer> possibilities= getPossibilities(i, j, sBoard);
+	      for (Integer k : possibilities) {
+	         sBoard.setCellNum(k.intValue(), i, j);
+	         SudokuBoard temp = copy(sBoard);
+	         temp = recursiveBruteForceSolver(temp);
+	         if (!(temp == null)) {
+	            solutions++;
+	         }
+	      } 
+	      return solutions;
+	   }
    
 	/** 
 	 * Finds and empty cell on the board.
