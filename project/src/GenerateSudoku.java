@@ -7,11 +7,15 @@ public class GenerateSudoku {
 	private final int MAX_NUM_COLUMNS = 9;
 	private final int MAX_NUM_ROWS = 9;
 
+	private SudokuBoard board = new SudokuBoard();
 	/* Constructor */
 	public GenerateSudoku() { 
 		
 	}
 	
+	public SudokuBoard getBoard(){
+		return this.board;
+	}
 	/* Methods */
 	/**
 	 * Generates a 2D array of random numbers
@@ -33,6 +37,29 @@ public class GenerateSudoku {
 		return randomBoard; 
 	}
 	
+	private void digging (int number){
+		//Random random = new Random();
+		
+		int c = 0;
+		int depth = 0;
+		
+		while(depth < number){
+			int a = randomNumber();
+			int b = randomNumber();
+			if(board.getCellNum(a, b) == null || !board.getCellNum(a, b).equals(0)) {
+				if(board.getCellNum(a, b) == null){
+					c=0;
+				}
+			}
+		}
+		
+		
+	}
+	
+	private int randomNumber(){
+		Random random = new Random();
+		return random.nextInt(9);
+	}
 	
 	
 }
