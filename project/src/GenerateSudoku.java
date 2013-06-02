@@ -1,4 +1,4 @@
-import java.util.LinkedList;
+import java.util.HashSet;
 import java.util.Random;
 
 /* This class is designed to generate sudokus */
@@ -33,30 +33,29 @@ public class GenerateSudoku {
 			for (int columns = 0; columns < MAX_NUM_COLUMNS; columns++) {
 				randomBoard.setCellNum(rand.nextInt(9), rows, columns);
 				if (sBoard.isValid(randomBoard) == false) { 
-					if ()
-					randomBoard.setCellNum(rand.nextInt(9), rows, columns);
+					randomBoard.setCellNum(0, rows, columns);
 				}
 			}
 		}
-
-		
 		return randomBoard; 
 	}
 	
-	public boolean noDupes(SudokuBoard sBoard) {
-		
-		
-		
-	    for (int i=0; i < MAX_NUM_ROWS ; i++) {
-	        HashSet<Integer> set = new HashSet<Integer>();
-	        for (int j=0; j < array.length; j++) {
-	            if (set.contains(array[j][i])) return false;
-	            set.add(array[j][i]);
-	        }
-	    }
-	    return true;
-	}
-	
+//	public boolean noDupes(SudokuBoard sBoard) {
+//		
+//		int sBoardArray[][] = sBoard.getBoardArray();
+//		
+//		for (int rows = 0; rows < sBoardArray.length; rows++) {
+//			HashSet<Integer> set = new HashSet<Integer>();
+//			for (int columns = 0; columns < sBoardArray[rows].length; columns++) {
+//				if (set.contains(sBoardArray[rows][columns])) { 
+//					return false;
+//				}
+//				set.add(sBoardArray[columns][rows]);
+//			}
+//		}
+//	    return true;
+//	}
+//	
 //	public void checkGeneratedBoard (SudokuBoard gBoard) { 
 //		
 //		LinkedList<Integer> possibilities = null;
