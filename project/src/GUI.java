@@ -26,10 +26,16 @@ public class GUI {
 	private GUI gui;
 	private JPanel left;
 	private JPanel right;
+   private SudokuBoard puzzle;
+   private SudokuBoard solved;
 	
 	/* Constructors */
 	public GUI() { 
-		
+	   GUIController guiController = new GUIController();
+	   puzzle = guiController.getBoard();
+      SolveSudoku tester = new SolveSudoku();
+      solved = tester.copy(puzzle);
+      solved = tester.recursiveBruteForceSolver(solved);
 	}
 	
 	/**
@@ -125,15 +131,12 @@ public class GUI {
 		JPanel outer =  new JPanel(new GridLayout(3,3));
 		Dimension dimSize = new Dimension (100, 100);
 		
-		GUIController guiController = new GUIController();
-		int[][] board = guiController.getBoardArray().getBoard();
-		
 		for (int i = 0; i < 9; i++) {	
 			inner = new JPanel(new GridLayout(3, 3));
 			inner.setBorder(BorderFactory.createLineBorder(Color.black));
 			for(int j = 0; j <= 8; j++) {
 				int cellValue = 0;							// create an int 
-				cellValue = board[3*(i / 3) + j/3][3*(i % 3) + j%3];					// to store the board number
+				cellValue = puzzle.getBoardArray()[3*(i / 3) + j/3][3*(i % 3) + j%3];					// to store the board number
 				Integer newInt = new Integer(cellValue);	// change the type to an Integer
 				String stringCellValue = newInt.toString();	// allowing us to convert it to a string
 				inner.add(new JTextField(stringCellValue));	// add the string value 
@@ -173,14 +176,12 @@ public class GUI {
 		JPanel outer =  new JPanel(new GridLayout(3,3));
 		Dimension dimSize = new Dimension (100, 100);
 		
-		GUIController guiController = new GUIController();
-		int[][] board = guiController.getSolvedBoardArray().getBoard();
 		for (int i = 0; i < 9; i++) {	
 			inner = new JPanel(new GridLayout(3, 3));
 			inner.setBorder(BorderFactory.createLineBorder(Color.black));
 			for(int j = 0; j <= 8; j++) {
 				int cellValue = 0;							// create an int 
-				cellValue = board[3*(i / 3) + j/3][3*(i % 3) + j%3];					// to store the board number
+				cellValue = solved.getBoardArray()[3*(i / 3) + j/3][3*(i % 3) + j%3];					// to store the board number
 				Integer newInt = new Integer(cellValue);	// change the type to an Integer
 				String stringCellValue = newInt.toString();	// allowing us to convert it to a string
 				inner.add(new JTextField(stringCellValue));	// add the string value 
