@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="SudokuBoard" project="project" file="/project/src/SudokuBoard.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="189" y="598"/>    
+    <position height="-1" width="-1" x="94" y="537"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="SolveSudoku" project="project" file="/project/src/SolveSudoku.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="278" width="334" x="866" y="2"/>    
+    <position height="-1" width="-1" x="623" y="460"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
