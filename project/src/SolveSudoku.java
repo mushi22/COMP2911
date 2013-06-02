@@ -239,7 +239,11 @@ public class SolveSudoku {
 			for(int j = subGridColumn; j < subGridColumn + 3; j++) {
 				for(int k = subGridRow; k < subGridRow + 3; k++) {
 					for(int l = subGridColumn; l < subGridColumn + 3; l++) {
-						if ((i!=k || j!=l) && sBoard.getBoardArray()[i][j] == sBoard.getBoardArray()[k][l]) {
+						if ((i!=k || j!=l)
+						      && sBoard.getBoardArray()[i][j] == sBoard.getBoardArray()[k][l]
+						            && sBoard.getBoardArray()[i][j] != 0
+						            && sBoard.getBoardArray()[k][l] != 0
+						            ) {
 							return false;
 						}
 					}
@@ -259,7 +263,9 @@ public class SolveSudoku {
 	   
 		for (int i = 0; i < 9; i++) {
 			for (int j = i + 1; j < 9; j++) {
-				if (sBoard.getBoardArray()[i][column] == sBoard.getBoardArray()[j][column]) {
+				if (sBoard.getBoardArray()[i][column] == sBoard.getBoardArray()[j][column]
+				      && sBoard.getBoardArray()[i][column] != 0
+				      && sBoard.getBoardArray()[j][column] != 0) {
 					return false;
 				}
 			}
@@ -277,7 +283,9 @@ public class SolveSudoku {
 		
 		for(int i = 0; i < 9; i++){
 			for(int j = i + 1; j < 9; j++){
-				if(sBoard.getBoardArray()[row][i] == sBoard.getBoardArray()[row][j]){
+				if(sBoard.getBoardArray()[row][i] == sBoard.getBoardArray()[row][j]
+				      && sBoard.getBoardArray()[row][i] != 0
+				      && sBoard.getBoardArray()[row][j] != 0){
 					return false;
 				}
 			}
