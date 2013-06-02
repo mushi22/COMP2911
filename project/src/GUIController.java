@@ -35,7 +35,7 @@ public class GUIController {
 		GenerateSudoku gBoard = new GenerateSudoku();
 		SudokuBoard sBoard = new SudokuBoard();
 		sBoard = gBoard.generateRandomBoard();
-		sBoard.printBoard();
+		//sBoard.printBoard();
 		
 		return sBoard;
 	}

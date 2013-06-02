@@ -35,16 +35,16 @@ public class GenerateSudoku {
 				if (solver.isValid(randomBoard) == false) { 
 					randomBoard.setCellNum(0, rows, columns);
 				}
-				if (solver.isValid(randomBoard)) { 
+				/*if (solver.isValid(randomBoard)) { 
 					System.out.println("yes");
-				}
+				}*/
 			}
 		}
 		SudokuBoard test = randomBoard.copy();
 		test = solver.recursiveBruteForceSolver(test);
 		if (test != null) {
-		   randomBoard.printBoard();
-		   test.printBoard();
+		   //randomBoard.printBoard();
+		   //test.printBoard();
 		   return randomBoard;
 		   
 		} else {

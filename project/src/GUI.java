@@ -206,7 +206,6 @@ public class GUI {
       solvedPuzzle = puzzle.copy();
       solvedPuzzle = tester.recursiveBruteForceSolver(solvedPuzzle);
       
-		
 		JPanel inner = null;
 		JPanel outer =  new JPanel(new GridLayout(3,3));
 		Dimension dimSize = new Dimension (100, 100);
