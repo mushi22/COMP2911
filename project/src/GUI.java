@@ -28,17 +28,17 @@ public class GUI {
 	private JPanel left;
 	private JPanel right;
 	private SudokuBoard puzzle;
-	private SudokuBoard solved;
-	private SudokuBoard generatedPuzzle;
+	private SudokuBoard solvedPuzzle;
+	//private SudokuBoard generatedPuzzle;
 	
 	/* Constructors */
 	public GUI() { 
 	   GUIController guiController = new GUIController();
-	   puzzle = guiController.getBoard();
-	   //generatedPuzzle = guiController.getGeneratedBoard();
+	   //puzzle = guiController.getBoard();
+	   puzzle = guiController.getGeneratedBoard();
        SolveSudoku tester = new SolveSudoku();
-       solved = puzzle.copy();
-       solved = tester.recursiveBruteForceSolver(solved);
+       solvedPuzzle = puzzle.copy();
+       solvedPuzzle = tester.recursiveBruteForceSolver(solvedPuzzle);
 	}
 	
 	/**
@@ -130,6 +130,8 @@ public class GUI {
 		generate.addMouseListener(new MouseAdapter() {
 			   @Override
 			   public void mouseClicked(MouseEvent evt){
+
+			      
 				   GridBagConstraints gbc_leftNineByNine = new GridBagConstraints();
 				   gbc_leftNineByNine.gridx = 0;
 				   gbc_leftNineByNine.gridy = 1;
@@ -211,7 +213,7 @@ public class GUI {
 			inner.setBorder(BorderFactory.createLineBorder(Color.black));
 			for(int j = 0; j <= 8; j++) {
 				int cellValue = 0;							// create an int 
-				cellValue = solved.getBoardArray()[3*(i / 3) + j/3][3*(i % 3) + j%3];					// to store the board number
+				cellValue = solvedPuzzle.getBoardArray()[3*(i / 3) + j/3][3*(i % 3) + j%3];					// to store the board number
 				Integer newInt = new Integer(cellValue);	// change the type to an Integer
 				String stringCellValue = newInt.toString();	// allowing us to convert it to a string
 				inner.add(new JTextField(stringCellValue));	// add the string value 
@@ -235,7 +237,7 @@ public class GUI {
 			inner.setBorder(BorderFactory.createLineBorder(Color.black));
 			for(int j = 0; j <= 8; j++) {
 				int cellValue = 0;							// create an int 
-				cellValue = generatedPuzzle.getBoardArray()[3*(i / 3) + j/3][3*(i % 3) + j%3];					// to store the board number
+				cellValue = puzzle.getBoardArray()[3*(i / 3) + j/3][3*(i % 3) + j%3];					// to store the board number
 				Integer newInt = new Integer(cellValue);	// change the type to an Integer
 				String stringCellValue = newInt.toString();	// allowing us to convert it to a string
 				inner.add(new JTextField(stringCellValue));	// add the string value 
@@ -245,7 +247,9 @@ public class GUI {
 				outer.add(inner);
 			}
 		}
+
 		return outer;
+		
 	}
 }
 		
