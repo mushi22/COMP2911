@@ -116,7 +116,6 @@ public class SolveSudoku {
       return null;
    }
 	
-<<<<<<< HEAD
 	/**
 	 * Checks if any solutions and returns the number of solutions if there are.
 	 * @param sBoard
@@ -144,30 +143,6 @@ public class SolveSudoku {
 		} 
 		return solutions;
 	}
-=======
-	  public int noSolutions(SudokuBoard sBoard) {
-	      // System.out.print("-\n");
-	      //sBoard.printBoard();
-	      int solutions = 0;
-	      int i, j;
-	      int[] emptyCell = findEmptyCell(sBoard);
-	      i = emptyCell[0];
-	      j = emptyCell[1];
-	      if (i == -1 || j == -1) {
-	         return 1;
-	      }
-	      LinkedList<Integer> possibilities= getPossibilities(i, j, sBoard);
-	      for (Integer k : possibilities) {
-	         sBoard.setCellNum(k.intValue(), i, j);
-	         SudokuBoard temp = sBoard.copy();
-	         temp = recursiveBruteForceSolver(temp);
-	         if (!(temp == null)) {
-	            solutions++;
-	         }
-	      } 
-	      return solutions;
-	   }
->>>>>>> caf57a481a6c0041c37e94ced0ef65d861f9e6e3
    
 	/** 
 	 * Finds and empty cell on the board.
@@ -329,7 +304,6 @@ public class SolveSudoku {
 		}
 		return true;
 	}
-<<<<<<< HEAD
    
 	/**
 	 * Copys the sudoku board
@@ -349,9 +323,7 @@ public class SolveSudoku {
    }
   
    
-=======
 
->>>>>>> caf57a481a6c0041c37e94ced0ef65d861f9e6e3
    /**
     * main function checks board is valid
     * @return

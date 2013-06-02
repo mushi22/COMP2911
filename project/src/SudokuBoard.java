@@ -99,10 +99,6 @@ public class SudokuBoard {
       return newBoard;
    }
    
-   
-	
-	
->>>>>>> caf57a481a6c0041c37e94ced0ef65d861f9e6e3
 	
 //	public void main (String[] args) { 
 //		
