@@ -145,9 +145,20 @@ public class GUI {
 		loadSudoku.addMouseListener(new MouseAdapter() {			// loadSudoku button's functionality 
 			@Override				
 			public void mouseClicked(MouseEvent evt){		// on mouse click
+				GridBagConstraints gbc_leftNineByNineWithInput = new GridBagConstraints();
+				gbc_leftNineByNineWithInput.gridx = 0;
+				gbc_leftNineByNineWithInput.gridy = 1;
+				gbc_leftNineByNineWithInput.fill = GridBagConstraints.BOTH;
+				
 				String fileName = JOptionPane.showInputDialog(null, "Please enter a valid filename. ", "Choose a File", JOptionPane.QUESTION_MESSAGE);
 				SudokuFileReader sudokuInput = new SudokuFileReader();
-				 = sudokuInput.readInFile(fileName);
+				puzzle = sudokuInput.readInFile(fileName);
+				left = gui.updateLeft9x9WithInput(fileName);
+				
+				gui.pane.add(left, gbc_leftNineByNineWithInput);
+				gui.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				gui.frame.add(gui.pane);
+				gui.frame.setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_loadSudokuButton = new GridBagConstraints();
@@ -280,6 +291,42 @@ public class GUI {
 			}
 		}
 		return outer;
+	}
+	
+	public JPanel updateLeft9x9WithInput(String fileName) { 
+		
+		SudokuFileReader sudokuInput = new SudokuFileReader();
+		SudokuBoard boardInput = new SudokuBoard();
+		boardInput = sudokuInput.readInFile(fileName);
+		
+		//setPuzzle(boardInput);
+		puzzle = boardInput;
+		
+		JPanel inner = null;
+		JPanel outer =  new JPanel(new GridLayout(3,3));
+		Dimension dimSize = new Dimension (100, 100);
+		
+		for (int i = 0; i < 9; i++) {	
+			inner = new JPanel(new GridLayout(3, 3));
+			inner.setBorder(BorderFactory.createLineBorder(Color.black));
+			for(int j = 0; j <= 8; j++) {
+				int cellValue = 0;							// create an int 
+				cellValue = puzzle.getBoardArray()[3*(i / 3) + j/3][3*(i % 3) + j%3];					// to store the board number
+				Integer newInt = new Integer(cellValue);	// change the type to an Integer
+				String stringCellValue = newInt.toString();	// allowing us to convert it to a string
+				inner.add(new JTextField(stringCellValue));	// add the string value 
+				inner.setPreferredSize(dimSize);			// set the size 
+			}
+			for(int k = 0; k <=8; k++) {		// add the 3x3 into the big pane
+				outer.add(inner);
+			}
+		}
+		return outer;
+	}
+	
+	public void setPuzzle (SudokuBoard board){ 
+		
+		this.puzzle = board;
 	}
 
 	/**
